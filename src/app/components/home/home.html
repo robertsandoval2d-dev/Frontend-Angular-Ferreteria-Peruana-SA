@@ -1,0 +1,97 @@
+<section class="busqueda">
+    <div class="barra-busqueda">
+        <input type="text" placeholder="Busca un producto">
+        <div>
+            <button type="submit">🔍</button>
+        </div>  
+    </div>
+</section>
+    
+<section class="banner-principal">
+    <div class="slider">
+        <button onclick="changeImage(0)" aria-label="Anterior">&lt;</button>
+        <ul>
+            <li><img src="images/img-banner1.png" alt="imagen-main1" class="active"></li>
+            <li><img src="images/img-banner2.png" alt="imagen-main2" class=""></li>
+            <li><img src="images/img-banner3.png" alt="imagen-main3" class=""></li>
+            <li><img src="images/img-banner4.png" alt="imagen-main4" class=""></li>
+        </ul>
+        <button onclick="changeImage(1)" aria-label="Siguiente">&gt;</button>
+    </div>
+</section>
+
+<section class="productos-destacados">
+    <h2>Productos Destacados</h2>
+    <div class="contenedor-cards">   
+        <div class="card-custom">
+            <img src="images/PINTURA-AMERICAN-COLORS.jpg" alt="Pintura American Colors Látex Interior Premium">
+
+            <div class="card-info">
+                <h3>American Colors Látex Interior Premium</h3>
+                <p>Pintura de alta cobertura y secado rápido, ideal para interiores. Ofrece acabado uniforme, resistencia al desgaste y variedad de colores modernos.</p>
+            </div>
+        </div>
+
+        <div class="card-custom">
+            <img src="images/PISO-CELIMA.jpg" alt="Piso Celima Madera Natural Roble">
+
+            <div class="card-info">
+                <h3>Piso Celima Madera Natural Roble</h3>
+                <p>Cerámico con acabado tipo madera que brinda calidez y elegancia. Resistente a la humedad, fácil de limpiar y perfecto para salas y dormitorios.</p>
+            </div>
+        </div>
+
+        <div class="card-custom">
+            <img src="images/INODORO-VAINSA.jpg" alt="Inodoro Vainsa One Piece Moderno">
+
+            <div class="card-info">
+                <h3>Inodoro Vainsa One Piece Moderno</h3>
+                <p>Diseño compacto y elegante de una sola pieza, con sistema de descarga eficiente que ahorra agua. Fácil limpieza y gran durabilidad.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="proveedores">
+    <h2>Nuestros Proveedores</h2>
+    <div class="contenedor-logos">
+        <img src="images/AMERICAN-COLORS-LOGO.webp" alt="AMERICAN-COLORS-LOGO">
+        <img src="images/CELIMA-LOGO.png" alt="CELIMA-LOGO">
+        <img src="images/CEMENTO-ANDINO-LOGO.png" alt="CEMENTO-ANDINO-LOGO">
+        <img src="images/CPP-LOGO.webp" alt="CPP-LOGO">
+        <img src="images/FRANZ-VIEGENER-LOGO.png" alt="FRANZ-VIEGENER-LOGO">
+        <img src="images/GRAYMAR-LOGO.png" alt="GRAYMAR-LOGO">
+        <img src="images/ITALGRIF-LOGO.png" alt="ITALGRIF-LOGO">
+        <img src="images/KANTU-LOGO.png" alt="KANTU-LOGO">
+        <img src="images/ROCA-LOGO.jpg" alt="ROCA-LOGO">
+        <img src="images/TREBOL-LOGO.jpg" alt="TREBOL-LOGO">
+        <img src="images/VAINSA-LOGO.jpg" alt="VAINSA-LOGO">
+    </div>
+</section>
+
+<section class="contactanos">
+    <h2>Contáctanos</h2>
+    <div class="contenedor-contacto">           
+        <div class="contacto-img">
+            <img src="images/UBICACION.png" alt="ubicacion">
+        </div>
+        <div class="contacto-form">
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+            </div>
+
+            <div class="campo">
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="correo" placeholder="Tu correo" required>
+            </div>
+
+            <div class="campo">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje" required></textarea>
+            </div>
+            <button type="submit" onclick="enviarDatos()">Enviar</button>
+        </div>
+    </div>
+</section>
