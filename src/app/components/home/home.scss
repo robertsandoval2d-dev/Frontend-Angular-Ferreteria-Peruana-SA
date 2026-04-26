@@ -1,3 +1,4 @@
+/* === BARRA BÚSQUEDA === */
 .busqueda {
   display: flex;
   align-items: center;
@@ -116,14 +117,11 @@
   padding-bottom: 30px;
 
   .contenedor-cards {
-    display: flex;
-    flex-wrap: nowrap;
     gap: 60px;
-    justify-content: center;
     padding: 10px;
     width: 100%;
 
-    .card-custom {
+    .card {
       display: flex;
       background-color: var(--header-secondary-color);
       border: 1px solid #ddd;
@@ -131,7 +129,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 10px;
       width: 350px;
-      height: 180px;
+      min-height: 180px;
       transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
       box-sizing: content-box;
@@ -143,15 +141,16 @@
 
       img {
         flex: 1;
-        max-width: 120px;
+        width: 120px;
         object-fit: contain;
       }
 
-      .card-info {
+      .card-body {
         flex: 2;
         padding: 10px;
+        width: 230px;
 
-        h3 {
+        h5 {
           font-family: Verdana, Geneva, Tahoma, sans-serif;
           font-size: 1rem;
           color: var(--background-color);
@@ -209,12 +208,8 @@
   padding: 0 0 30px 0;
 
   .contenedor-contacto {
-    display: flex;
     gap: 30px;
     padding: 10px;
-    align-items: center;
-    justify-content: center;
-
     .contacto-img {
       img {
         width: 450px;
