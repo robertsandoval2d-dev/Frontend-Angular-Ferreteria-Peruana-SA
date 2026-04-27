@@ -1,124 +1,69 @@
-header {
-  background-color: var(--header-primary-color);
-  color: var(--white);
+$color-fondo-header: #0A323E;
+$color-dark: #000000;
+$color-white: #ffffff;
+$color-principal: #f1695f;
+$color-secundario: #DF5551;
 
-  .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 4.5rem;
-    padding: 0 2rem;
-    font-size: 19px;
-    max-width: 1150px;
-    margin: 0 auto;
-    width: 100%;
+.navbar{
+  background-color: $color-fondo-header;
 
-    .logo-empresa {
-      flex: 1;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      img {
-        display: flex;
-        height: 3.5rem;
-      }
+  .nav-link{
+    color: $color-white;
+    font-weight: 500;
+    &:hover{
+      color: $color-secundario;
     }
+  }
 
-    .homepage-secciones {
-      display: flex;
-      justify-content: center;
+  .navbar-brand img {
+    height: 50px;
+    width: auto;
+  }
+}
 
-      > ul {
-        display: flex;
-        align-items: center;
-        list-style: none;
-        gap: 5.5rem;
-        width: 100%;
+.icono-hamburguesa {
+  color: $color-principal;
+  font-size: 2rem;
+  &:hover {
+    color: $color-secundario;
+  }
+}
 
-        > li {
-          position: relative;
+.navbar-toggler {
+  border: none;
+  &:focus {
+    box-shadow: none;
+  }
+}
 
-          &:hover .submenu {
-            display: block;
-          }
-        }
-      }
+.btn-ferreteria {
+  background-color: $color-principal;
+  color: $color-white;
+  font-weight: bold;
+  &:hover{
+    background-color: $color-secundario;
+    color: $color-white;
+  }
+} 
 
-      a {
-        color: var(--white);
-        text-decoration: none;
-
-        &:hover {
-          color: var(--secondary-color);
-        }
-      }
-
-      .submenu {
-        position: absolute;
-        display: none;
-        top: 100%;
-        left: 0;
-
-        width: 25rem;
-        height: 16rem;
-        border-radius: 0 0 10px 10px;
-
-        background-color: var(--button-secondary-color);
-        color: var(--white);
-        padding: 0.7rem 1rem;
-
-        .categoria-titulo {
-          font-weight: bold;
-          margin-bottom: 8px;
-        }
-
-        ul {
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-        }
-
-        li {
-          padding: 2px;
-          display: flex;
-          flex-direction: column;
-          padding-left: 13px;
-
-          &:hover {
-            background-color: var(--button-primary-color);
-            border-radius: 5px;
-            transition: background-color 0.4s ease;
-          }
-        }
-
-        p {
-          font-size: 1rem;
-          font-family: cursive;
-          color: var(--white);
-          padding-left: 10px;
-        }
-      }
+.dropdown-menu {
+  background-color: $color-principal;
+  .dropdown-header{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: $color-dark; 
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .dropdown-item{
+    color: $color-dark;
+    font-weight: bold; 
+    &:hover {
+      background-color: $color-secundario;
+      color: $color-white;
     }
-
-    .boton-logeo {
-      flex: 1;
-      display: flex;
-      justify-content: flex-end;
-      background-color: var(--secondary-color);
-      color: var(--white);
-      padding: 10px 30px;
-      border-radius: 5px;
-      margin-left: auto;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background-color 0.4s ease;
-      cursor: pointer;
-
-      &:hover {
-        background-color: var(--button-secondary-color);
-      }
-    }
+  }
+  p {
+    font-weight: lighter;  
+    margin: 0;
   }
 }
