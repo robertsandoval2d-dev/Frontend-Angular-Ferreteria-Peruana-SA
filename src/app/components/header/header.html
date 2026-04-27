@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="homepage.html">
+        <a class="navbar-brand" routerLink="/">
             <img src="images/logo_ferrreteria.png" alt="logo-ferreteria">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
                 </li>
             </ul>
             <form class="d-flex" role="search">
-                <button class="btn btn-ferreteria me-3" type="button">Iniciar Sesión</button>
+                <button class="btn btn-ferreteria me-3" type="button" (click)="irALogin()">Iniciar Sesión</button>
             </form>
         </div>
     </div>
