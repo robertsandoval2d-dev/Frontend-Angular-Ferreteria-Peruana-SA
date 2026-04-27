@@ -6,7 +6,6 @@ $color-secundario: #DF5551;
 
 .navbar{
   background-color: $color-fondo-header;
-
   .nav-link{
     color: $color-white;
     font-weight: 500;
@@ -14,10 +13,11 @@ $color-secundario: #DF5551;
       color: $color-secundario;
     }
   }
-
-  .navbar-brand img {
-    height: 50px;
-    width: auto;
+  .navbar-brand {
+    img {
+      height: 45px;
+      width: auto;
+    }
   }
 }
 
@@ -48,6 +48,7 @@ $color-secundario: #DF5551;
 
 .dropdown-menu {
   background-color: $color-principal;
+  width: 350px;
   .dropdown-header{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: $color-dark; 
