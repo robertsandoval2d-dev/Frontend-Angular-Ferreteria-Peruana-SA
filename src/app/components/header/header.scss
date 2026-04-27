@@ -6,65 +6,69 @@ $color-secundario: #DF5551;
 
 .navbar{
   background-color: $color-fondo-header;
+  font-size: 18px;
+  .navbar-brand img {
+    height: 48px;
+    width: auto;
+    pointer-events: none;
+  }
+
   .nav-link{
     color: $color-white;
-    font-weight: 500;
     &:hover{
       color: $color-secundario;
     }
   }
 
-  .navbar-brand img {
-    height: 45px;
-    width: auto;
-    pointer-events: none;
+  .navbar-toggler {
+    border: none;
+    &:focus {
+      box-shadow: none;
+    }
+    .icono-hamburguesa {
+      color: $color-principal;
+      font-size: 2rem;
+      &:hover {
+        color: $color-secundario;
+      }
+    }
   }
-}
 
-.icono-hamburguesa {
-  color: $color-principal;
-  font-size: 2rem;
-  &:hover {
-    color: $color-secundario;
-  }
-}
-
-.navbar-toggler {
-  border: none;
-  &:focus {
-    box-shadow: none;
-  }
-}
-
-.btn-ferreteria {
-  background-color: $color-principal;
-  color: $color-white;
-  font-weight: bold;
-  &:hover{
-    background-color: $color-secundario;
+  .btn-ferreteria {
+    background-color: $color-principal;
     color: $color-white;
-  }
-} 
-
-.dropdown-menu {
-  background-color: $color-principal;
-  width: 350px;
-  .dropdown-header{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: $color-dark; 
-    font-size: 20px;
     font-weight: bold;
-  }
-  .dropdown-item{
-    color: $color-dark;
-    font-weight: bold; 
-    &:hover {
+    font-size: 16px;
+    padding: 8px 20px;
+    &:hover{
       background-color: $color-secundario;
       color: $color-white;
     }
-  }
-  p {
-    font-weight: lighter;  
-    margin: 0;
+  } 
+
+  .dropdown-menu {
+    background-color: $color-principal;
+    width: 350px;
+    .dropdown-header{
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      color: $color-dark; 
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .dropdown-item{
+      color: $color-dark;
+      font-weight: bold; 
+      &:hover {
+        background-color: $color-secundario;
+        color: $color-white;
+      }
+    }
+    p {
+      font-weight: lighter;  
+      margin: 0;
+    }
   }
 }
+
+
+
