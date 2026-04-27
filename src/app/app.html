@@ -1,3 +1,9 @@
-<app-header/>
-<router-outlet />
-<app-footer/>
+<div class="layout" [class.login-layout]="isLoginRoute">
+  <app-header></app-header>
+
+  <main class="content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-footer></app-footer>
+</div>

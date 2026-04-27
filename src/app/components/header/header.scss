@@ -13,11 +13,11 @@ $color-secundario: #DF5551;
       color: $color-secundario;
     }
   }
-  .navbar-brand {
-    img {
-      height: 45px;
-      width: auto;
-    }
+
+  .navbar-brand img {
+    height: 45px;
+    width: auto;
+    pointer-events: none;
   }
 }
 
