@@ -5,13 +5,13 @@
         <form>
         <div class="mb-3">
             <label for="username" class="form-label">Usario</label>
-            <input type="text" class="form-control"  id="username" placeholder="Escribe tu nombre de usuario">
+            <input type="text" name="username"[(ngModel)]="credenciales.username" class="form-control"  id="username" placeholder="Escribe tu nombre de usuario"> //ADDED ngmodel y name
         </div>
         <div class="mb-4">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" placeholder="Escribe tu contraseña">
+            <input type="password" name="password" [(ngModel)]="credenciales.password" class="form-control" id="password" placeholder="Escribe tu contraseña"> //ADDED ngmodel y name
         </div>
-        <button type="submit" class="btn btn-primary mb-3">Iniciar Sesión</button>
+        <button type="submit" class="btn btn-primary mb-3" (click)="iniciarSesion()">Iniciar Sesión</button> //agregado metodo
         <label class="form-label-recover-pwd">¿Olvidaste tu contraseña?</label>
         </form>
   </div>
