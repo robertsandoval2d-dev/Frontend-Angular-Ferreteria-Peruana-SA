@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- VITAL para que los inputs funcionen
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service'; // (Ajusta la ruta si es necesario)
-import { LoginRequest } from '../../models/auth.models'; //ADDED
+import { AuthService } from '../../../services/auth.service'; // (Ajusta la ruta si es necesario)
+import { LoginRequest } from '../../../models/auth.models'; //ADDED
 
 @Component({
   selector: 'app-login',
