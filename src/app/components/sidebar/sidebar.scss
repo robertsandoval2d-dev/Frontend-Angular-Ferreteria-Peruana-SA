@@ -1,0 +1,29 @@
+.sidebar{
+    background-color: #e2edef;
+    width: 300px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    
+    .sidebar-title-text{
+        .main-name{
+            font-size: 1.50rem;
+        }
+        .main-detail{
+            font-size: 0.95rem;
+        }
+    }
+
+    .btn{
+        transition: all 0.2s ease;
+        background-color: transparent;
+        white-space: normal;
+        word-break: break-word;
+        text-align: left;
+        &:hover{
+            background-color: #ffffff;
+            color: #f16359;
+            transform: translateX(5px);
+            -webkit-text-stroke: 0.5px #f16359;
+        }
+    }
+
+}

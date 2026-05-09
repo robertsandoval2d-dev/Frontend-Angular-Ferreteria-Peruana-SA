@@ -21,6 +21,7 @@ export const routes: Routes = [
     {
         path: 'logistica', component: PrivateLayout,
         children: [
+            {path: '', redirectTo: 'dashboard',pathMatch: 'full'},
             {path: 'dashboard', component: Dashboard},
             // {path: '', component:   },
             // {path: '', component:   },
