@@ -1,1 +1,48 @@
-<p>form-generar-cronograma works!</p>
+<div class="form-generar-cronograma-container shadow-sm">
+    <table class="table table-striped table-bordered">
+    <thead class="custom-thead">
+        <tr class="header-principal">
+            <th colspan="3" class="titulo-linea align-middle ps-4">
+                Generar cronograma de órden de compra
+            </th>
+            <th colspan="1"></th>
+        </tr>
+        <tr class="header-columnas text-center align-middle">
+            <th scope="col">Proveedor</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Fecha de Referencia</th>
+        </tr>
+    </thead>
+    <tbody class="text-center align-middle">
+        <tr>
+            <td>
+                <select class="form-select">
+                    <option selected>Proveedor</option>
+                    <option value="1">MENDOZA IMPORTACIONES</option>
+                    <option value="2">SEGURA?</option>
+                    <option value="3">wazaa</option>
+                </select>
+            </td>
+            <td>
+                <select class="form-select">
+                    <option selected>Producto</option>
+                    <option value="1">Ventanas</option>
+                    <option value="2">Garruchas</option>
+                    <option value="3">Pisos</option>
+                </select>
+            </td>
+            <td>
+                <div class="input-group">
+                    <input type="number" class="form-control" placeholder="cantidad">
+                </div>
+            </td>
+            <td>
+                <div class="input-group">
+                    <input type="date" class="form-control" placeholder="fecha">
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+</div>
