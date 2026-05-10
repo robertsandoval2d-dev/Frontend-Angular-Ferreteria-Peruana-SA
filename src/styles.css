@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #0a1723;
+  --secondary-color: #f16359;
+  --background-color: #f0f0f0;
+  --background-secondary-color: #E4ECEF;
+  --header-primary-color: #0A323E;
+  --header-secondary-color: #094854;
+  --footer-color: #7f3744;
+  --white: #ffffff;
+  --button-primary-color: #b84642;
+  --button-secondary-color: #DF5551;
+  font-size: 16px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}/*# sourceMappingURL=styles.css.map */
