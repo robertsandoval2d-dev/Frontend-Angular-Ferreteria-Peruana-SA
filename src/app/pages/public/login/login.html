@@ -2,16 +2,16 @@
 
   <div class="card p-4 shadow">
         <h4 class="text-center mb-3">Iniciar Sesión con tus credenciales</h4>
-        <form>
+        <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
         <div class="mb-3">
             <label for="username" class="form-label">Usario</label>
-            <input type="text" name="username"[(ngModel)]="credenciales.username" class="form-control"  id="username" placeholder="Escribe tu nombre de usuario"> //ADDED ngmodel y name
+            <input type="text" name="username" class="form-control"  id="username" placeholder="Escribe tu nombre de usuario" formControlName="username">
         </div>
         <div class="mb-4">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" name="password" [(ngModel)]="credenciales.password" class="form-control" id="password" placeholder="Escribe tu contraseña"> //ADDED ngmodel y name
+            <input type="password" name="password" class="form-control" id="password" placeholder="Escribe tu contraseña" formControlName="password">
         </div>
-        <button type="submit" class="btn btn-primary mb-3" (click)="iniciarSesion()">Iniciar Sesión</button> //agregado metodo
+        <button type="submit" class="btn btn-primary mb-3">Iniciar Sesión</button>
         <label class="form-label-recover-pwd">¿Olvidaste tu contraseña?</label>
         </form>
   </div>

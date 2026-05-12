@@ -1,40 +1,52 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // <-- VITAL para que los inputs funcionen
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service'; // (Ajusta la ruta si es necesario)
-import { LoginRequest } from '../../../models/auth.models'; //ADDED
+import { AuthService } from '../../../core/auth/services/auth.service';
+import { SessionService } from '../../../core/auth/services/session.service';
+import { LoginRequest } from '../../../core/auth/models/request/login-request';
+import { LoginResponse } from '../../../core/auth/models/response/login-response';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule], //ADDED
+  imports: [ReactiveFormsModule], 
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 
 
-export class Login { //ADDED
-  credenciales: LoginRequest = {
-    username: '',
-    password: ''
-  };
+export class Login { 
+  private authService = inject(AuthService);
+  private sessionService = inject(SessionService);
+  private router = inject(Router);
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  loginRequest: LoginRequest = {} as LoginRequest;
+  loginResponse: LoginResponse = {} as LoginResponse; 
 
-  iniciarSesion() { //ADDED
-    // El .subscribe() es el que "aprieta el gatillo". Sin él, la petición no viaja.
-    console.log('Enviando al backend:', this.credenciales);
+  form = new FormGroup({
+    username: new FormControl('',[Validators.required]),
+    password: new FormControl('',[Validators.required]),
+  })
 
-    this.authService.login(this.credenciales).subscribe({
-      next: (respuesta) => {
+  iniciarSesion() { 
+    if(this.form.invalid) return;
+
+    const{username,password} = this.form.value;
+    if(!username || !password) return;
+    //console.log('Enviando al backend:', this.loginRequest);
+
+    this.loginRequest.username=username;
+    this.loginRequest.password=password;
+
+    this.authService.login(this.loginRequest).subscribe({
+      next: (respuesta: LoginResponse) => {
         // Si el backend dice "Todo OK"
-        console.log('¡Login exitoso!', respuesta.token);
+        this.loginResponse = respuesta;
+        console.log('¡Login exitoso!', this.loginResponse);
         
         // Guardamos la "llave" en el navegador
-        localStorage.setItem('token', respuesta.token);
+        this.authService.setToken(this.loginResponse.token);
+        console.log(this.sessionService.getInfoSession());
         
         // Lo mandamos a la página principal
         this.router.navigate(['/']); 

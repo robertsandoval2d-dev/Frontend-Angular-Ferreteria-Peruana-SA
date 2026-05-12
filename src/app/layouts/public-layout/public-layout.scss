@@ -1,5 +1,5 @@
 .public-layout-container {
-    min-height: 100vh;
+    height: 100vh; //fuerza el alto, si los elementos lo exceden genera scroll vertical
     display: flex;
     flex-direction: column;
 
