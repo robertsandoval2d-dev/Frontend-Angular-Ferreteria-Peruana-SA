@@ -1,8 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { AuthService } from '../../../core/auth/services/auth.service';
 import { SessionService } from '../../../core/auth/services/session.service';
+import { ToastService } from '../../../core/services/toast.service';
+
 import { LoginRequest } from '../../../core/auth/models/request/login-request';
 import { LoginResponse } from '../../../core/auth/models/response/login-response';
 
@@ -18,6 +21,7 @@ import { LoginResponse } from '../../../core/auth/models/response/login-response
 export class Login { 
   private authService = inject(AuthService);
   private sessionService = inject(SessionService);
+  private toastService = inject(ToastService);
   private router = inject(Router);
 
   loginRequest: LoginRequest = {} as LoginRequest;
@@ -47,14 +51,37 @@ export class Login {
         // Guardamos la "llave" en el navegador
         this.authService.setToken(this.loginResponse.token);
         console.log(this.sessionService.getInfoSession());
-        
-        // Lo mandamos a la página principal
-        this.router.navigate(['/']); 
+        this.toastService.success('Ingreso exitoso');
+
+        // Obtenemos rol
+        const rol = this.sessionService.getRole();
+
+        switch(rol){
+          case'ADMIN':
+            this.router.navigate(['/']);
+            break;
+
+          case'JEFE_DE_LINEA':
+            this.router.navigate(['/logistica/dashboard']);
+            break;
+
+          case'ADMINISTRADOR_DE_TIENDA':
+            this.router.navigate(['/']);
+            break;
+
+          case'ALMACENERO':
+            this.router.navigate(['/']);
+            break;
+
+          default:
+            this.router.navigate(['/']);
+            break;
+        }
       },
       error: (err) => {
         // Si el backend dice "Contraseña incorrecta" o hay error
         console.error('Error al iniciar sesión', err);
-        alert('Usuario o contraseña incorrectos');
+        this.toastService.error('Usuario o contraseña incorrectos');
       }
     });
   }

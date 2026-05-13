@@ -30,4 +30,8 @@ export class SessionService {
     };
   }
 
+  getRole(): string{
+    const session = this.getInfoSession();
+    return session?.rol ??'';
+  }
 }

@@ -28,6 +28,10 @@ export class AuthService {
     this._isLoggedIn.set(true);
   }
 
+  isAuthenticated(): boolean{
+    return !!localStorage.getItem('token');
+  }
+
   logout() {
     localStorage.removeItem('token');
     this._isLoggedIn.set(false);

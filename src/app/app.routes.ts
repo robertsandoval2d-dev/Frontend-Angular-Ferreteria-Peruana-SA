@@ -1,5 +1,8 @@
 import { Routes } from '@angular/router';
 
+import { authGuard } from './core/guard/auth.guard';
+import { roleGuard } from './core/guard/role.guard';
+
 import { PublicLayout } from './layouts/public-layout/public-layout';
 import { Home } from './pages/public/home/home';
 import { Login } from './pages/public/login/login';
@@ -20,7 +23,11 @@ export const routes: Routes = [
     },
     //Zona Privada
     {
-        path: 'logistica', component: PrivateLayout,
+        path: 'logistica', component: PrivateLayout, 
+        canActivate:[authGuard,roleGuard],
+        data:{
+            roles:['JEFE_DE_LINEA']
+        },
         children: [
             {path: '', redirectTo: 'dashboard',pathMatch: 'full'},
             {path: 'dashboard', component: Dashboard},
