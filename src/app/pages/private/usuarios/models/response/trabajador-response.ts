@@ -1,5 +1,5 @@
 export interface TrabajadorResponse {
-    nombre: String,
-    username: String,
-    rol: String
+    nombre: string,
+    username: string,
+    rol: string
 }

@@ -5,7 +5,6 @@ import { TrabajadorRequest } from '../../models/request/trabajador-request';
 import { UserService } from '../../services/user.service';
 import { ToastService } from '../../../../../core/services/toast.service';
 
-
 @Component({
   selector: 'app-form-registro-usuario',
   imports: [ReactiveFormsModule, JsonPipe],
@@ -68,6 +67,9 @@ export class FormRegistroUsuario implements OnInit{
           // alert('¡Trabajador registrado correctamente!');
           this.registroForm.reset();
           // Aquí podrías mostrar un Toast de éxito o cerrar el Modal
+          
+          this.usuariosService.notifyRefresh();
+
         },
         error: (errorBackend) => {
           console.error('El backend rechazó la petición:', errorBackend);

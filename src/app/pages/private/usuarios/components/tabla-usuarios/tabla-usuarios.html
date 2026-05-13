@@ -1,1 +1,22 @@
-<p>tabla-usuarios works!</p>
+<table class="table table-success table-striped">
+  <thead class="table-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">DNI</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      @for (trabajador of listaTrabajadores; track trabajador.trabajadorId){
+        <tr>
+          <td scope="row" class="col-1">#{{trabajador.trabajadorId}}</td>
+          <td class="col-md-2">{{trabajador.rol}}</td>
+          <td class="col-md-2">{{trabajador.username}}</td>
+          <td class="col-md-2">{{trabajador.nombre}}</td>
+          <td class="col-md-2">{{trabajador.dni}}</td>
+        </tr>
+      }
+    </tbody>
+</table>
