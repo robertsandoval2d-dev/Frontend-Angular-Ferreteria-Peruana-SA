@@ -1,0 +1,76 @@
+$color-fondo-header: #0A323E;
+$color-dark: #000000;
+$color-white: #ffffff;
+$color-principal: #f1695f;
+$color-secundario: #DF5551;
+
+
+
+.navbar{
+    .container-fluid{
+        padding-left: 1rem;
+        padding-right: 1rem;
+        @media (min-width: 1200px) {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem;
+        }
+    }
+    background-color: $color-fondo-header;
+    font-size: 18px;
+    .navbar-brand img {
+        height: 48px;
+        width: auto;
+        pointer-events: none;
+    }
+
+    .nav-link{
+        color: $color-white;
+        &:hover{
+        color: $color-secundario;
+        }
+    }
+
+    .navbar-toggler {
+        border: none;
+        &:focus {
+            box-shadow: none;
+            }
+                .icono-hamburguesa {
+                    color: $color-principal;
+                    font-size: 2rem;
+                &:hover {
+                    color: $color-secundario;
+                }
+            }
+    }
+
+    .btn-sesion {
+        background-color: $color-principal;
+        color: $color-white;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 8px 20px;
+        &:hover{
+            background-color: $color-secundario;
+            color: $color-white;
+        }
+    } 
+
+    .navbar-user{
+        font-family: "Inter", sans-serif;
+        img{
+            height: 45px;
+            width: auto;
+            pointer-events: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .navbar-user-description {
+            color: $color-white;
+        }
+    }
+
+}
+
+
+
