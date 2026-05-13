@@ -12,17 +12,23 @@
         }
     }
 
+    .btn-router{
+        background-color: #ffffff;
+        color: #f16359;
+        border: none;
+        -webkit-text-stroke: 1px #f16359;
+    }
     .btn{
         transition: all 0.2s ease;
-        background-color: transparent;
         white-space: normal;
         word-break: break-word;
         text-align: left;
+        border: none;
         &:hover{
             background-color: #ffffff;
             color: #f16359;
             transform: translateX(5px);
-            -webkit-text-stroke: 0.5px #f16359;
+            -webkit-text-stroke: 1px #f16359;
         }
     }
 

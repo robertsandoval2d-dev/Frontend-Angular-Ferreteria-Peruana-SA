@@ -10,11 +10,23 @@
         </div>
     </div>
     <div class="d-grid gap-3 row-gap-3 w-100" role="group" aria-label="Vertical button group">
-        <button type="button" class="btn text-start rounded">Resumen</button>
-        <button type="button" class="btn text-start rounded">Abastecimiento de Línea</button>
-        <button type="button" class="btn text-start rounded">Seguimiento de Órdenes</button>
-        <button type="button" class="btn text-start rounded">Análisis y Evaluación de Inventario</button>
-        <button type="button" class="btn text-start rounded">Gestionar Exhibición</button>
-        <button type="button" class="btn text-start rounded">Devoluciones y Compensaciones</button>
+        <a [routerLink]="getRutaDashboard()" routerLinkActive="btn-router" class="btn text-start rounded">Resumen (Dashboard)</a>
+        @if (role === 'JEFE_DE_LINEA') {
+            <a routerLink="/logistica/jefelinea/abastecimiento" routerLinkActive="btn-router" class="btn text-start rounded">Abastecimiento de Línea</a>
+            <a routerLink="/logistica/jefelinea/seguimiento" routerLinkActive="btn-router" class="btn text-start rounded">Seguimiento de Órdenes</a>
+            <a routerLink="/logistica/jefelinea/analisis" routerLinkActive="btn-router" class="btn text-start rounded">Análisis y Evaluación de Inventario</a>
+            <a routerLink="/logistica/jefelinea/exhibicion" routerLinkActive="btn-router" class="btn text-start rounded">Gestionar Exhibición</a>
+            <a routerLink="/logistica/jefelinea/devoluciones" routerLinkActive="btn-router" class="btn text-start rounded">Devoluciones y Compensaciones</a>
+        }
+
+
+        @if (role === 'ADMIN') {
+            <a routerLink="/logistica/admin/usuarios" routerLinkActive="btn-router" class="btn text-start rounded">Gestión de Usuarios</a>
+            }
+
+
+        @if (role === 'ALMACENERO' || role === 'ADMINISTRADOR_DE_TIENDA') {
+            <a routerLink="/logistica/almacenero/stock" routerLinkActive="btn-router" class="btn text-start rounded">Control de Stock</a>
+        }
     </div>
 </aside>
