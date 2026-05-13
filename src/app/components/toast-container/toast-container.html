@@ -1,0 +1,35 @@
+<!-- @for (toast of toastService.toasts; track toast) {
+
+  <ngb-toast
+    [class]="getToastClass(toast.type)"
+    [autohide]="true"
+    [delay]="toast.delay || 2000"
+    (hidden)="toastService.remove(toast)"
+  >
+    {{ toast.message }}
+  </ngb-toast>
+
+} -->
+@for (toast of toastService.toasts; track toast) {
+  <ngb-toast
+    [class]="getToastClass(toast.type)"
+    [autohide]="true"
+    [delay]="toast.delay || 2000"
+    (hidden)="toastService.remove(toast)"
+  >
+    <!-- 1. EL HEADER (Cabecera) -->
+    <!-- ng-bootstrap usa <ng-template ngbToastHeader> para reemplazar el div class="toast-header" -->
+    <ng-template ngbToastHeader>
+      <img [src]="getToastIcon(toast.type)" class="rounded me-2" alt="toast icon" width="20" height="20">
+      <strong class="me-auto">Notificación</strong>
+      <small class="text-muted">Justo ahora</small>
+      
+      <!-- OJO: No necesitas poner el botón de cerrar (btn-close) aquí. 
+           ng-bootstrap lo agrega automáticamente por ti. -->
+    </ng-template>
+
+    <!-- 2. EL BODY (Cuerpo) -->
+    <!-- Lo que pongas aquí suelto, ng-bootstrap lo envolverá en un div class="toast-body" -->
+    {{ toast.message }}
+  </ngb-toast>
+}
