@@ -34,4 +34,9 @@ export class SessionService {
     const session = this.getInfoSession();
     return session?.rol ??'';
   }
+
+  getFullname(): string{
+    const session = this.getInfoSession();
+    return session?.fullName??'';
+  }
 }

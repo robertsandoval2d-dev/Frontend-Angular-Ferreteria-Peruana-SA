@@ -3,6 +3,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from "@angula
 import { JsonPipe } from '@angular/common';
 import { TrabajadorRequest } from '../../models/request/trabajador-request';
 import { UserService } from '../../services/user.service';
+import { ToastService } from '../../../../../core/services/toast.service';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { UserService } from '../../services/user.service';
   styleUrl: './form-registro-usuario.scss',
 })
 export class FormRegistroUsuario implements OnInit{
+  private toastService = inject(ToastService);
   private fb = inject(FormBuilder);
   private usuariosService = inject(UserService);
 
@@ -62,7 +64,8 @@ export class FormRegistroUsuario implements OnInit{
       this.usuariosService.registrarTrabajador(requestParaSpringBoot).subscribe({
         next: (respuestaBackend) => {
           console.log('¡Éxito total! Spring Boot dice:', respuestaBackend);
-          alert('¡Trabajador registrado correctamente!');
+          this.toastService.success('¡Trabajador registrado correctamente!');
+          // alert('¡Trabajador registrado correctamente!');
           this.registroForm.reset();
           // Aquí podrías mostrar un Toast de éxito o cerrar el Modal
         },
