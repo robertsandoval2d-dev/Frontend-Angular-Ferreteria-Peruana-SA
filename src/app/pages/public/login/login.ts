@@ -58,23 +58,23 @@ export class Login {
 
         switch(rol){
           case'ADMIN':
-            this.router.navigate(['/']);
+            this.router.navigate(['/logistica/admin']);
             break;
 
           case'JEFE_DE_LINEA':
-            this.router.navigate(['/logistica/dashboard']);
+            this.router.navigate(['/logistica/jefelinea']);
             break;
 
           case'ADMINISTRADOR_DE_TIENDA':
-            this.router.navigate(['/']);
+            this.router.navigate(['/logistica/admin-tienda']);
             break;
 
           case'ALMACENERO':
-            this.router.navigate(['/']);
+            this.router.navigate(['/logistica/almacenero']);
             break;
 
           default:
-            this.router.navigate(['/']);
+            this.router.navigate(['/logistica/admin']);
             break;
         }
       },

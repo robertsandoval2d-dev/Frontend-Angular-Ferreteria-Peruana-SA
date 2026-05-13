@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router , RouterLink} from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router , RouterLink} from '@angular/router';
   styleUrl: './header-public.scss',
 })
 export class HeaderPublic {
-  constructor(private router: Router) {}
+  private router = inject(Router);
 
   irALogin() {
     this.router.navigate(['/login']);
