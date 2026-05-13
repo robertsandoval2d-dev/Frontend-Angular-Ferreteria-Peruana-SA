@@ -14,12 +14,11 @@ export class Sidebar {
   role: string = '';
 
   ngOnInit() {
-    // Obtenemos el rol una sola vez al cargar
     this.role = this.sessionService.getRole();
   }
   getNombreDelRol(): string {
     switch(this.role) {
-      case 'ADMIN': return 'Administrador General';
+      case 'ADMIN': return 'Administrador';
       case 'JEFE_DE_LINEA': return 'Jefe de Línea';
       case 'ADMINISTRADOR_DE_TIENDA': return 'Admin de Tienda';
       case 'ALMACENERO': return 'Almacenero';
@@ -27,7 +26,6 @@ export class Sidebar {
     }
   }
 
-  // Ayudante 2: Para saber a qué dashboard enviarlo
   getRutaDashboard(): string {
     switch(this.role) {
       case 'ADMIN': return '/logistica/admin/dashboard';
