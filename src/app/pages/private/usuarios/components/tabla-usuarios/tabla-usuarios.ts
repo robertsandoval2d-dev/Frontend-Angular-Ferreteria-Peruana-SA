@@ -1,6 +1,7 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { TrabajadorListResponse } from '../../models/response/trabajador-list-response';
+import { InvokeFunctionExpr } from '@angular/compiler';
 
 @Component({
   selector: 'app-tabla-usuarios',
@@ -39,5 +40,12 @@ export class TablaUsuarios implements OnInit{
       }
 
     });
+  }
+
+
+  @Output() onRegistrarClick = new EventEmitter<void>();
+
+  abrirRegistro(){
+    this.onRegistrarClick.emit();
   }
 }

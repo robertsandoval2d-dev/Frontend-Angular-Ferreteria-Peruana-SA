@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { JsonPipe } from '@angular/common';
 import { TrabajadorRequest } from '../../models/request/trabajador-request';
@@ -70,6 +70,8 @@ export class FormRegistroUsuario implements OnInit{
           
           this.usuariosService.notifyRefresh();
 
+          this.onCerrar.emit();
+
         },
         error: (errorBackend) => {
           console.error('El backend rechazó la petición:', errorBackend);
@@ -82,5 +84,11 @@ export class FormRegistroUsuario implements OnInit{
       this.registroForm.markAllAsTouched();
       console.log('Faltan campos por llenar')
     }
+  }
+
+  @Output() onCerrar = new EventEmitter<void>();
+
+  cancelarRegistro() {
+    this.onCerrar.emit();
   }
 }

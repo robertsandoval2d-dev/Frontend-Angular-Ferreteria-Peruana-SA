@@ -1,0 +1,81 @@
+.tabla-usuarios{
+    border: 1px solid #000000;
+    background-color: #ffffff;
+    
+    .table-usuarios-head{
+            background-color: #cccec7;
+            border-bottom: 2px solid #dee2e6;
+
+        @media (min-width: 992px){
+            .btn-filtrar{
+                max-width: 100px;
+            }
+            .btn-registrar{
+                max-width: 200px;
+            }
+        }
+        @media (min-width: 1200px){
+            .btn-registrar{
+                max-width: 275px;
+            }
+        }
+        
+
+        .table-name{
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .btn-filtrar{
+            background-color: rgb(40, 130, 209);
+            border: none;
+            &:hover{
+                background-color: rgb(85, 119, 151);
+            }
+        }
+        .btn-registrar{
+            background-color: rgb(40, 135, 218);
+            border: none;
+            &:hover{
+                background-color: rgb(184, 216, 245);
+            }
+        }
+    }
+
+    .table {
+    table-layout: fixed;
+    width: 100%;
+
+        .th-id{
+
+            width: 35px;
+            text-align: center;
+        }
+        .th-rol{
+            width: 26%;
+        }
+        .th-user{
+            width: 20%;
+        }
+        .th-name{
+            width: 25%;
+        }
+        .th-dni{
+            width: 70px;
+            text-align: center;
+        }
+
+        tbody tr td {
+            vertical-align: middle;
+            padding: 6px 12px;
+            
+            &:first-child, &:last-child {
+                text-align: center;
+            }
+        }
+    }
+
+    
+}
+
+

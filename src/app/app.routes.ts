@@ -49,7 +49,7 @@ export const routes: Routes = [
                 {path: 'dashboard', component: Dashboard},
             ]},
 
-            // 2. ZONA: ALMACENERO
+            // 3. ZONA: ALMACENERO
             {path: 'almacenero',
             canActivate:[authGuard,roleGuard],
             data:{
@@ -60,7 +60,7 @@ export const routes: Routes = [
                 {path: 'dashboard', component: Dashboard},
             ]},
 
-            // 2. ZONA: ADMIN
+            // 4. ZONA: ADMIN
             {path: 'admin',
             canActivate:[authGuard,roleGuard],
             data:{

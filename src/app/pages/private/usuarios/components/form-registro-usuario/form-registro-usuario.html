@@ -1,48 +1,50 @@
-<form [formGroup]="registroForm" (ngSubmit)="guardarUsuario()" class="row g-3">
-    <div class="col-12">
-        <label for="name" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="name" formControlName="nombre">
+<div class="form-registro-usuario rounded-3 overflow-hidden px-4 py-3">
+    <div class="d-flex flex-row w-100 justify-content-between mt-0 mb-3 align-items-center">
+        <p class="fs-5 fw-bold m-0">Registrar Nuevo Trabajador</p>
+        <i class="btn p-0 bi bi-x fs-4" (click)="cancelarRegistro()"></i>
     </div>
-    <div class="col-12">
-        <label for="dni" class="form-label">Dni</label>
-        <input type="text" class="form-control" id="dni" formControlName="dni">
-    </div>
-    <div class="col-12">
-        <label for="username" class="form-label">Usuario</label>
-        <input type="text" class="form-control" id="username" formControlName="username">
-    </div>
-    <div class="col-12">
-        <label for="password" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="password" formControlName="password">
-    </div>
-    <div class="col-md-4">
-        <label for="rol" class="form-label">Rol</label>
-        <select id="rol" class="form-select" formControlName="rol">
-            <option value="" disabled selected>Seleccione un rol...</option>
-            <option value="JEFE_DE_LINEA">Jefe de Línea</option>
-            <option value="ALMACENERO">Almacenero</option>
-            <option value="ADMINISTRADOR_DE_TIENDA">Administrador de Tienda</option>
-            <option value="ADMIN">ADMIN</option>
-        </select>
-    </div>
-    @if (registroForm.get('rol')?.value !== 'ADMIN' && registroForm.get('rol')?.value !== '') {
-        <div class="col-md-4">
-            <label for="store" class="form-label">ID de Tienda</label>
-            <input type="text" class="form-control" id="store" formControlName="tiendaId">
+    <form [formGroup]="registroForm" (ngSubmit)="guardarUsuario()" class="row g-3">
+        <div class="col-12">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" formControlName="nombre">
         </div>
-    }
-        
-    @if (registroForm.get('rol')?.value === 'JEFE_DE_LINEA') {
-        <div class="col-md-4">
-            <label for="line" class="form-label">ID de Línea</label>
-            <input type="text" class="form-control" id="line" formControlName="lineaId">
+        <div class="col-12">
+            <label for="dni" class="form-label">Dni</label>
+            <input type="text" class="form-control" id="dni" formControlName="dni">
         </div>
-    }
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Registrar</button>
-    </div>
-</form>
-<hr>
-<h5>Estado en vivo del formulario:</h5>
-<pre>{{ registroForm.value | json}}</pre>
-<p>¿Es válido el formulario para enviarlo? <b>{{ registroForm.valid }}</b></p>
+        <div class="col-12">
+            <label for="username" class="form-label">Usuario</label>
+            <input type="text" class="form-control" id="username" formControlName="username">
+        </div>
+        <div class="col-12">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+        <div class="col-md-4">
+            <label for="rol" class="form-label">Rol</label>
+            <select id="rol" class="form-select" formControlName="rol">
+                <option value="" disabled selected>Seleccione un rol...</option>
+                <option value="JEFE_DE_LINEA">Jefe de Línea</option>
+                <option value="ALMACENERO">Almacenero</option>
+                <option value="ADMINISTRADOR_DE_TIENDA">Administrador de Tienda</option>
+                <option value="ADMIN">ADMIN</option>
+            </select>
+        </div>
+        @if (registroForm.get('rol')?.value !== 'ADMIN' && registroForm.get('rol')?.value !== '') {
+            <div class="col-md-4">
+                <label for="store" class="form-label">ID de Tienda</label>
+                <input type="text" class="form-control" id="store" formControlName="tiendaId">
+            </div>
+        }
+
+        @if (registroForm.get('rol')?.value === 'JEFE_DE_LINEA') {
+            <div class="col-md-4">
+                <label for="line" class="form-label">ID de Línea</label>
+                <input type="text" class="form-control" id="line" formControlName="lineaId">
+            </div>
+        }
+        <div class="col-12">
+            <button type="submit" class="btn-registrar btn">Registrar</button>
+        </div>
+    </form>
+</div>

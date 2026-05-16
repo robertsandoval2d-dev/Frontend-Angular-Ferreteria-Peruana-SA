@@ -8,4 +8,14 @@ import { TablaUsuarios } from '../../components/tabla-usuarios/tabla-usuarios';
   templateUrl: './gestion-usuarios.html',
   styleUrl: './gestion-usuarios.scss',
 })
-export class GestionUsuarios {}
+export class GestionUsuarios {
+  
+  mostrarFormulario: boolean = false;
+  
+  abrirFormulario() {
+    this.mostrarFormulario = true;
+  }
+  cerrarFormulario() {
+    this.mostrarFormulario = false;
+  }
+}
