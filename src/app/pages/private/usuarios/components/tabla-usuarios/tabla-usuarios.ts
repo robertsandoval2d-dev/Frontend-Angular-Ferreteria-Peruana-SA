@@ -44,8 +44,28 @@ export class TablaUsuarios implements OnInit{
 
 
   @Output() onRegistrarClick = new EventEmitter<void>();
+  @Output() onModificarClick = new EventEmitter<any>();
 
   abrirRegistro(){
     this.onRegistrarClick.emit();
   }
+
+  modificarTrabajador(trabajador: any){
+    this.onModificarClick.emit(trabajador);
+  }
+
+  //MockPrueba
+  trabajadorDePrueba = {
+    trabajadorId: 11111,
+    nombre: 'Robert Alonso Sandoval',
+    dni: '123456789',
+    tiendaId: 1,
+    lineaId: 2,
+    rol: 'ADMIN_TIENDA', // Por si quieres probar tus @if
+    username: 'rsandoval'
+  };
+
+
+
+
 }

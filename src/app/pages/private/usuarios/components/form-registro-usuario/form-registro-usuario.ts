@@ -1,13 +1,12 @@
 import { Component, inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { JsonPipe } from '@angular/common';
-import { TrabajadorRequest } from '../../models/request/trabajador-request';
+import { TrabajadorCreateRequest } from '../../models/request/trabajador-create-request';
 import { UserService } from '../../services/user.service';
 import { ToastService } from '../../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-form-registro-usuario',
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [ReactiveFormsModule],
   templateUrl: './form-registro-usuario.html',
   styleUrl: './form-registro-usuario.scss',
 })
@@ -57,7 +56,7 @@ export class FormRegistroUsuario implements OnInit{
 
   guardarUsuario() {
     if (this.registroForm.valid){
-      const requestParaSpringBoot: TrabajadorRequest = this.registroForm.value;
+      const requestParaSpringBoot: TrabajadorCreateRequest = this.registroForm.value;
       console.log('Datos enviados a SpringBoot', this.registroForm.value)
 
       this.usuariosService.registrarTrabajador(requestParaSpringBoot).subscribe({

@@ -1,4 +1,4 @@
-export interface TrabajadorRequest {
+export interface TrabajadorCreateRequest {
     nombre: string;
     dni: string;
     username: string;

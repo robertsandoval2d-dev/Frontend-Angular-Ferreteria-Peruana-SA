@@ -17,25 +17,64 @@
         <th scope="col" class="th-user">Usuario</th>
         <th scope="col" class="th-name">Nombre</th>
         <th scope="col" class="th-dni">DNI</th>
+        <th scope="col" class="th-options"></th>
       </tr>
     </thead>
     <tbody class="table-group-divider">
       @for (trabajador of listaTrabajadores; track trabajador.trabajadorId){
         <tr>
-          <td scope="row" class="">#{{trabajador.trabajadorId}}</td>
+          <td scope="row" class="th-id">#{{trabajador.trabajadorId}}</td>
           <td class="">{{trabajador.rol}}</td>
           <td class="">{{trabajador.username}}</td>
           <td class="">{{trabajador.nombre}}</td>
-          <td class="">{{trabajador.dni}}</td>
+          <td class="th-dni">{{trabajador.dni}}</td>
+          <td class="th-options">
+            <div class="dropdown align-items-center text-center">
+              <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <button class="dropdown-item text-center">
+                    <p class="m-0" (click)="modificarTrabajador(trabajador)">Modificar</p>
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item text-center ">
+                    <p class="m-0">Eliminar</p>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </td>
         </tr>
       }
       <tr>
-          <td scope="row" class="">11111</td>
-          <td class="">rol</td>
-          <td class="">username</td>
-          <td class="">nombre</td>
-          <td class="">123456789</td>
-        </tr>
+        <td scope="row" class="">11111</td>
+        <td class="">rol</td>
+        <td class="">username</td>
+        <td class="">nombre</td>
+        <td class="">123456789</td>
+        <td class="th-options">
+          <div class="dropdown align-items-center text-center">
+            <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button class="dropdown-item text-center">
+                  <p class="m-0" (click)="modificarTrabajador(trabajadorDePrueba)">Modificar</p>
+                </button>
+              </li>
+              <li>
+                <button class="dropdown-item text-center ">
+                  <p class="m-0">Eliminar</p>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

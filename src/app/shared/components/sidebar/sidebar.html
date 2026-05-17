@@ -19,11 +19,9 @@
             <a routerLink="/logistica/jefelinea/devoluciones" routerLinkActive="btn-router" class="btn text-start rounded">Devoluciones y Compensaciones</a>
         }
 
-
         @if (role === 'ADMIN') {
             <a routerLink="/logistica/admin/usuarios" routerLinkActive="btn-router" class="btn text-start rounded">Gestión de Usuarios</a>
-            }
-
+        }
 
         @if (role === 'ALMACENERO' || role === 'ADMINISTRADOR_DE_TIENDA') {
             <a routerLink="/logistica/almacenero/stock" routerLinkActive="btn-router" class="btn text-start rounded">Control de Stock</a>

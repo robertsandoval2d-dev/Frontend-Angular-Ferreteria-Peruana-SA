@@ -47,7 +47,6 @@
     width: 100%;
 
         .th-id{
-
             width: 35px;
             text-align: center;
         }
@@ -64,17 +63,38 @@
             width: 70px;
             text-align: center;
         }
+        .th-options{
+            width: 5px;
+            text-align: center;
+        }
 
         tbody tr td {
             vertical-align: middle;
             padding: 6px 12px;
-            
-            &:first-child, &:last-child {
-                text-align: center;
-            }
         }
     }
 
+    .btn-dots{
+        border: none;
+    }
+    .btn-dots:focus,
+    .btn-dots:active{
+        box-shadow: none;
+        border: none;
+    }
+    
+
+    .dropdown-menu{
+        width: auto;
+        min-width: unset;
+        padding: 0;
+        .dropdown-item{
+            padding: 4px 14px;
+            &:hover{
+            background-color: #1273d4;
+        }
+        }
+    }
     
 }
 

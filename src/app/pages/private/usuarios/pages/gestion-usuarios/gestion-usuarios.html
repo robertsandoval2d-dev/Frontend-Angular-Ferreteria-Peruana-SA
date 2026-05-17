@@ -1,10 +1,23 @@
 <div class="p-4 d-flex flex-column align-items-center">
-    <app-tabla-usuarios (onRegistrarClick)="mostrarFormulario = true"></app-tabla-usuarios>
+    <app-tabla-usuarios 
+        (onRegistrarClick)="mostrarFormulario = true" 
+        (onModificarClick)="abrirFormUpdate($event)">
+    </app-tabla-usuarios>
 
     @if (mostrarFormulario) {
         <div class="overlay-modal d-flex justify-content-center align-items-center">
-            <app-form-registro-usuario (onCancelar)="cerrarFormulario()"></app-form-registro-usuario>
+            <app-form-registro-usuario (onCerrar)="cerrarFormulario()"></app-form-registro-usuario>
         </div>
     }
+
+    @if (mostrarFormUpdate) {
+        <div class="overlay-modal d-flex justify-content-center align-items-center">
+            <app-form-update-usuario 
+                [trabajador] = "trabajadorSeleccionado"
+                (onCerrarUpdate)="cerrarFormUpdate()">
+            </app-form-update-usuario>
+        </div>
+    }
+    
 </div>
 
