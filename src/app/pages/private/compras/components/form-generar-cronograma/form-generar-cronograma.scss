@@ -1,0 +1,59 @@
+.header-principal{
+    .titulo-linea{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: var(--footer-color);
+        border-color: var(--footer-color);
+        color:white;
+    }
+}
+
+.header-columnas{
+    font-family: 'Courier New', Courier, monospace;
+
+    th{
+        background-color: #BC717E;
+        border-color: #BC717E;
+        color: white;
+    }
+    .th-producto{
+        width: 25%;
+    }
+    .th-proveedor{
+        width: 25%;
+    }
+    .th-cantidad{
+        width: 15%;
+    }
+    .th-fecha-ref{
+        width: 25%;
+    }
+    .th-accion{
+        width: 10%;
+    }
+}
+
+.form-generar-cronograma{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+
+    tr{
+        &:nth-of-type(odd) > * {
+            background-color: white;
+            border-color: white;
+        }
+        &:nth-of-type(even) > * {
+            background-color: #F5D1D7;
+            border-color: #F5D1D7;
+        }
+        .boton-generar{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--footer-color);
+            border-color: var(--footer-color);
+
+            &:hover{
+                background-color: var(--button-secondary-color);
+                border-color: var(--button-secondary-color);
+            }
+        }
+    }
+}

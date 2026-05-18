@@ -26,7 +26,8 @@ export class SessionService {
       username: decodedToken.sub,
       trabajadorId: decodedToken.trabajadorId,
       fullName: decodedToken.nombre,
-      rol: decodedToken.rol
+      rol: decodedToken.rol,
+      nombreLinea: decodedToken.linea,
     };
   }
 
@@ -38,5 +39,10 @@ export class SessionService {
   getFullname(): string{
     const session = this.getInfoSession();
     return session?.fullName??'';
+  }
+
+  getNombreLinea(): string{
+    const session = this.getInfoSession();
+    return session?.nombreLinea??'';
   }
 }

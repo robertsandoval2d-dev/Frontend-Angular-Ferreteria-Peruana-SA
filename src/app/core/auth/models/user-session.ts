@@ -3,4 +3,5 @@ export interface UserSession{
     trabajadorId?:number;
     fullName?:string;
     rol:string;
+    nombreLinea?:string;
 }
