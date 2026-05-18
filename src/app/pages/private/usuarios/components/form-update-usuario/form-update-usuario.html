@@ -12,14 +12,40 @@
             <label for="updatedni" class="form-label">Dni</label>
             <input type="text" class="form-control" id="updatedni" formControlName="dni">
         </div>
-        <div class="mb-3">
-            <label for="updateidtienda" class="form-label">ID de Tienda</label>
-            <input type="text" class="form-control" id="updateidtienda" formControlName="tiendaId">
-        </div>
-        <div class="mb-3">
-            <label for="updateidlinea" class="form-label">ID de Línea</label>
-            <input type="text" class="form-control" id="updateidlinea" formControlName="lineaId">
-        </div>
+        @if (trabajador?.rol !== 'ADMIN') {
+            <div class="mb-3">
+                <label for="updateidtienda" class="form-label">ID de Tienda</label>
+                <select id="updateidtienda" class="form-select" formControlName="tiendaId">
+                    @if (trabajador.tiendaId !== null) {
+                        <option [ngValue]="trabajador.tiendaId">{{ trabajador.nombreTienda }}</option>
+                    }@else {
+                        <option value="" disabled>Trabajador sin tienda...</option>
+                    }
+                    @for (sucursal of listaSucursales; track sucursal.tiendaId) {
+                        <option [ngValue]="sucursal.tiendaId">{{ sucursal.nombreTienda }}</option>
+                    }
+                </select>
+            </div>
+        }
+        
+        @if (trabajador?.rol === 'JEFE_DE_LINEA') {
+            <div class="mb-3">
+                <label for="updateidlinea" class="form-label">ID de Línea</label>
+                <select id="updateidlinea" class="form-select" formControlName="lineaId">
+                    @if (updateForm.get('tiendaId')?.value === trabajador?.tiendaId && trabajador?.lineaId !== null) {
+                        <option [ngValue]="trabajador.lineaId">{{ trabajador.lineaId }}</option>
+                    } @else {
+                        <option value="" disabled selected>Seleccione una línea...</option>
+                    }
+                    @for (linea of listaLineas; track linea.lineaId) {
+                        <option [ngValue]="linea.lineaId">{{ linea.nombreLinea }}</option>
+                    }
+                </select>        
+            </div>
+        }
+
+
+        
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

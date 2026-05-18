@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ChangeDetectorRef} from '@angular/core';
-import { Observable, interval, map, startWith } from 'rxjs';
+import { Observable, map, timer } from 'rxjs';
 import { InventarioService } from '../../services/inventario.service';
 import { ProductoStockResponse } from '../../models/response/producto-stock-response';
 import { ToastService } from '../../../../../core/services/toast.service';
@@ -28,8 +28,7 @@ export class TablaStock implements OnInit{
 
     const tiempoCarga = new Date();
 
-    this.textoActualizacion$ = interval(60000).pipe(
-      startWith(0), // Para que muestre el texto de inmediato y no espere 1 min
+    this.textoActualizacion$ = timer(0,60000).pipe(
       map(() => {
         const ahora = new Date();
         const minutos = Math.floor((ahora.getTime() - tiempoCarga.getTime()) / 60000);

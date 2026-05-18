@@ -2,7 +2,7 @@
     <p class="seccion fw-bold ms-4 mt-4 mb-3">SECCIÓN ABASTECIMIENTO DE LÍNEA</p>
     <div class="abastecimiento-content">
         <p class="seccion-name fw-bold ms-5 mb-0">Abastecimiento de Línea</p>
-        <p class="seccion-info fst-italic ms-5">{{tablaStock.textoActualizacion$ | async}}</p>
+        <p class="seccion-info fst-italic ms-5">{{tablaStock?.textoActualizacion$ | async}}</p>
         <app-tabla-stock #tablaStock></app-tabla-stock>
         <app-form-generar-cronograma></app-form-generar-cronograma>
     </div>
