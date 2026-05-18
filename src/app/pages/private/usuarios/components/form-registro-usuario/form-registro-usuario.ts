@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, Output, EventEmitter } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TrabajadorCreateRequest } from '../../models/request/trabajador-create-request';
+import { SucursalListResponse, LineasProducto } from '../../models/response/sucursal-list-response';
 import { UserService } from '../../services/user.service';
 import { ToastService } from '../../../../../core/services/toast.service';
 
@@ -14,6 +15,8 @@ export class FormRegistroUsuario implements OnInit{
   private toastService = inject(ToastService);
   private fb = inject(FormBuilder);
   private usuariosService = inject(UserService);
+  listaSucursales: SucursalListResponse[] = [];
+  listaLineas: LineasProducto[] = [];
 
   registroForm: FormGroup = this.fb.group({
     nombre: ['', Validators.required],
@@ -24,7 +27,7 @@ export class FormRegistroUsuario implements OnInit{
     tiendaId: [''],
     lineaId: ['']
   })
-
+  
   ngOnInit() {
     this.registroForm.get('rol')?.valueChanges.subscribe(rolSeleccionado => {
 
@@ -52,6 +55,26 @@ export class FormRegistroUsuario implements OnInit{
       storeControl?.updateValueAndValidity();
       lineControl?.updateValueAndValidity();
     });
+
+    this.usuariosService.listarSucursales().subscribe({
+      next:(ListResponse) => {
+        this.listaSucursales = ListResponse;
+        console.log('Llegaron las sucursales: ', ListResponse);
+      },
+      error: (ListError) => {
+        console.log('No llegaron PIPIPI, mensaje: ', ListError);
+      }
+    });
+
+    this.registroForm.get('tiendaId')?.valueChanges.subscribe(tiendaIdSeleccionada => {
+      const sucursalEncontrada = this.listaSucursales.find(sucursal => sucursal.tiendaId === Number(tiendaIdSeleccionada));
+
+      this.listaLineas = sucursalEncontrada?.lineasProducto ?? [];
+
+      this.registroForm.get('lineaId')?.setValue('');
+    });
+
+    
   }
 
   guardarUsuario() {

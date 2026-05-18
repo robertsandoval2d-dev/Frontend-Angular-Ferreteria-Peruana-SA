@@ -1,14 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ToastService, ToastType } from '../../../core/services/toast.service';
 import { CommonModule } from '@angular/common';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-toast-container',
-  imports: [NgbToastModule,CommonModule],
+  imports: [NgbToastModule, CommonModule],
   templateUrl: './toast-container.html',
-  styleUrl: './toast-container.scss',
+  styleUrls: ['./toast-container.scss']
 })
+
 export class ToastContainer{
   toastService = inject(ToastService);
 

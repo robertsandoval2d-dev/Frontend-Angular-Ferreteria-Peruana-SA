@@ -23,7 +23,9 @@ export class ToastService {
     };
 
     console.log('adding this toast', toast);
-    this.toasts.push(toast);
+    Promise.resolve().then(() => {
+      this.toasts = [...this.toasts, toast];
+    });
   }
 
   success(message: string, delay?: number) {

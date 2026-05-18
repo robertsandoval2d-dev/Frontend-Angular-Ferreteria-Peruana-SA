@@ -9,6 +9,7 @@ import { TrabajadorCreateRequest } from '../models/request/trabajador-create-req
 import { TrabajadorCreateResponse } from '../models/response/trabajador-create-response';
 
 import { TrabajadorListResponse } from '../models/response/trabajador-list-response';
+import { SucursalListResponse } from '../models/response/sucursal-list-response';
 
 import { TrabajadorUpdateRequest } from '../models/request/trabajador-update-request';
 import { TrabajadorUpdateResponse } from '../models/response/trabajador-update-response';
@@ -29,12 +30,22 @@ export class UserService {
   listarTrabajadores(): Observable<TrabajadorListResponse[]> {
     return this.http.get<TrabajadorListResponse[]>(`${environment.url}/trabajadores`);
   }
+  
+  //GET-SUCURSALES
+  listarSucursales(): Observable<SucursalListResponse[]> {
+    return this.http.get<SucursalListResponse[]>(`${environment.url}/trabajadores/sucursales`);
+  }
+
 
   //PATCH-MODIFICAR_TRABAJADORES
   modificarTrabajador(id: number, datos: TrabajadorUpdateRequest): Observable<TrabajadorUpdateResponse> {
     return this.http.patch<TrabajadorUpdateResponse>(`${environment.url}/trabajadores/${id}`, datos);
   }
 
+  //DELETE
+  deshabilitarTrabajador(id:number){
+    return this.http.delete(`${environment.url}/trabajadores/${id}`);
+  }
 
 
   get refresh$() {

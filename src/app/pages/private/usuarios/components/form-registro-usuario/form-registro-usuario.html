@@ -33,17 +33,29 @@
         </div>
         @if (registroForm.get('rol')?.value !== 'ADMIN' && registroForm.get('rol')?.value !== '') {
             <div class="col-md-4">
-                <label for="store" class="form-label">ID de Tienda</label>
-                <input type="text" class="form-control" id="store" formControlName="tiendaId">
+                <label for="store" class="form-label">Tienda</label>
+                <select id="store" class="form-select" formControlName="tiendaId">
+                    <option value="" disabled selected>Seleccione...</option>
+                    @for (sucursal of listaSucursales; track sucursal.tiendaId) {
+                        <option [value]="sucursal.tiendaId">{{sucursal.nombreTienda}}⠀</option>
+                    }
+
+                </select>
             </div>
         }
 
         @if (registroForm.get('rol')?.value === 'JEFE_DE_LINEA') {
             <div class="col-md-4">
-                <label for="line" class="form-label">ID de Línea</label>
-                <input type="text" class="form-control" id="line" formControlName="lineaId">
+                <label for="line" class="form-label">Línea</label>
+                <select id="line" class="form-select was" formControlName="lineaId">
+                    <option value="" disabled selected>Seleccione...</option>
+                        @for (linea of listaLineas; track linea.lineaId) {
+                            <option [value]="linea.lineaId">{{linea.nombreLinea}}⠀</option>
+                        }
+                </select>
             </div>
         }
+
         <div class="col-12">
             <button type="submit" class="btn-registrar btn">Registrar</button>
         </div>
