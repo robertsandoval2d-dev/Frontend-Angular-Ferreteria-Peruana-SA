@@ -10,6 +10,7 @@ import { Login } from './pages/public/login/login';
 import { PrivateLayout } from './layouts/private-layout/private-layout';
 import { Dashboard } from './pages/private/dashboard/dashboard';
 import { Abastecimiento } from './pages/private/compras/pages/abastecimiento/abastecimiento';
+import { GestionCompras } from './pages/private/compras/pages/gestion-compras/gestion-compras';
 import { GestionUsuarios } from './pages/private/usuarios/pages/gestion-usuarios/gestion-usuarios';
 
 export const routes: Routes = [
@@ -47,6 +48,7 @@ export const routes: Routes = [
             children: [
                 {path: '', redirectTo: 'dashboard',pathMatch: 'full'},
                 {path: 'dashboard', component: Dashboard},
+                {path: 'compras', component: GestionCompras},
             ]},
 
             // 3. ZONA: ALMACENERO

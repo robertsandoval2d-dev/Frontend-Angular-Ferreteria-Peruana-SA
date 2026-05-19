@@ -23,7 +23,11 @@
             <a routerLink="/logistica/admin/usuarios" routerLinkActive="btn-router" class="btn text-start rounded">Gestión de Usuarios</a>
         }
 
-        @if (role === 'ALMACENERO' || role === 'ADMINISTRADOR_DE_TIENDA') {
+        @if (role === 'ADMINISTRADOR_DE_TIENDA') {
+            <a routerLink="/logistica/admin-tienda/compras" routerLinkActive="btn-router" class="btn text-start rounded">Gestión de compras</a>
+        }
+
+        @if(role === 'ALMACENERO'){
             <a routerLink="/logistica/almacenero/stock" routerLinkActive="btn-router" class="btn text-start rounded">Control de Stock</a>
         }
     </div>
