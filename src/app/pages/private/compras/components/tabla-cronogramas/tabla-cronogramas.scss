@@ -1,0 +1,49 @@
+.header-principal{
+    background-color: #FDDA6C;
+    border-color: #FDDA6C;
+
+    .titulo-linea{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: inherit;
+    }
+    .barra-busqueda{
+        background-color: inherit;
+        input::placeholder{
+            color:#B3B3B3;
+        }
+        button{
+            background-color: white;
+            color: rgb(108,117,125);
+            &:hover{
+                background-color: rgb(108,117,125);
+                color: white;
+            }
+        }
+    }
+}
+
+.header-columnas{
+    font-family: 'Courier New', Courier, monospace;
+
+    th{
+        background-color: #F6E8BC;
+        border-color: #F6E8BC;
+    }
+}
+
+.cronograma-columnas{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+
+    tr{
+
+        &:nth-of-type(odd) > * {
+            background-color: white;
+            border-color: white;
+        }
+        &:nth-of-type(even) > * {
+            background-color: #FEF7E2;
+            border-color: #FEF7E2;
+        }
+    }
+}

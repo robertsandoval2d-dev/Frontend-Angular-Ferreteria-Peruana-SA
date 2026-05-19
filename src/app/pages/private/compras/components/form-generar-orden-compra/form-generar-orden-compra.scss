@@ -1,0 +1,85 @@
+thead{
+    background-color: var(--footer-color);
+    border-color: var(--footer-color);
+    
+    .header-principal{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: var(--footer-color);
+        border-color: var(--footer-color);
+        
+        .titulo-linea{
+            font-family: inherit;
+            background-color:inherit;
+            border-color: inherit;
+            color:white;
+        }
+        .seleccion-proveedor{
+            font-family: inherit;
+            background-color: inherit;
+            border-color: inherit;
+        }
+    }
+    
+    .info-general{
+        th{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color:inherit;
+            border-color: inherit;
+            color: white;
+        }
+    }
+
+    .header-columnas{
+        font-family: 'Courier New', Courier, monospace;
+
+        th{
+            background-color: #BC717E;
+            border-color: #BC717E;
+            color: white;
+        }
+        .th-linea{
+            width: 20%;
+        }
+        .th-producto{
+            width: 20%;
+        }
+        .th-cantidad{
+            width: 15%;
+        }
+        .th-precio{
+            width: 15%;
+        }
+        .th-subtotal{
+            width: 15%;
+        }
+        .th-fecha-ref{
+            width: 15%;
+        }
+    }
+}
+
+.form-generar-oc{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+
+    tr{
+        &:nth-of-type(odd) > * {
+            background-color: white;
+            border-color: white;
+        }
+        &:nth-of-type(even) > * {
+            background-color: #F5D1D7;
+            border-color: #F5D1D7;
+        }
+        .boton-generar{
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--footer-color);
+            border-color: var(--footer-color);
+
+            &:hover{
+                background-color: var(--button-secondary-color);
+                border-color: var(--button-secondary-color);
+            }
+        }
+    }
+}

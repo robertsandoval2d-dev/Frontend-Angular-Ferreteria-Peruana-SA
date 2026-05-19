@@ -1,7 +1,7 @@
 import { DetalleCronograma } from "./detalle-cronograma";
 
 export interface CronogramaResponse{
-    cronogromaId: number;
+    cronogramaId: number;
     nombreLineaProductos: string;
     detallesCronograma: DetalleCronograma[]; 
 }
