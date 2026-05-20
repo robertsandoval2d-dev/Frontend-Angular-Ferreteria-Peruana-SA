@@ -9,23 +9,76 @@
     </div>
   </div>
   
-  <table class="table table-striped m-0">
-    <thead>
-      <tr class="">
-        <th scope="col" class="th-id">ID</th>
-        <th scope="col" class="th-rol">Rol</th>
-        <th scope="col" class="th-user">Usuario</th>
-        <th scope="col" class="th-name">Nombre</th>
-        <th scope="col" class="th-dni">DNI</th>
-        <th scope="col" class="th-options"></th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      @for (trabajador of listaTrabajadores; track trabajador.trabajadorId){
-        <tr>
-          <td scope="row" class="th-id">#{{trabajador.trabajadorId}}</td>
+  <div class="overflow-x-auto">
+    <table class="table table-striped m-0">
+      <thead>
+        <tr class="">
+          <th scope="col" class="th-id">ID</th>
+          <th scope="col" class="th-rol">Rol</th>
+          <th scope="col" class="th-user">Usuario</th>
+          <th scope="col" class="th-name">Nombre</th>
+          <th scope="col" class="th-dni">DNI</th>
+          <th scope="col" class="th-options"></th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        @for (trabajador of listaTrabajadores; track trabajador.trabajadorId){
+          <tr>
+            <td scope="row" class="th-id">#{{trabajador.trabajadorId}}</td>
 
-          @switch (trabajador.rol) {
+            @switch (trabajador.rol) {
+              @case ('ADMIN') {
+                <td class="">Administrador</td>
+              }
+              @case ('ADMINISTRADOR_DE_TIENDA') {
+                <td class="">Administrador de tienda</td>
+              }
+              @case ('JEFE_DE_LINEA') {
+                <td class="">Jefe de Linea</td>
+              }
+              @case ('ALMACENERO') {
+                <td class="">Almacenero</td>
+              }
+              @default {
+                <td class="">{{trabajador.rol}}</td>
+              }
+            }
+          
+            <td class="">{{trabajador.username}}</td>
+            <td class="">{{trabajador.nombre}}</td>
+            <td class="th-dni">{{trabajador.dni}}</td>
+            <td class="th-options">
+              <div class="dropdown align-items-center text-center">
+                <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <button class="dropdown-item text-center">
+                      <p class="m-0" (click)="modificarTrabajador(trabajador)">Modificar</p>
+                    </button>
+                  </li>
+                  <li>
+
+                    @if (trabajador.cuentaActiva) {
+                      <button class="dropdown-item text-danger text-center" (click)="confirmarBaja(trabajador)">
+                        <p class="m-0"><i class="bi bi-trash"></i> Dar de Baja</p>
+                      </button>
+                    }@else {
+                      <span class="badge bg-secondary">Inactivo</span>  
+                    }
+
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        }
+
+        <tr>
+          <td scope="row" class="">{{trabajadorDePrueba.trabajadorId}}</td>
+
+          @switch (trabajadorDePrueba.rol) {
             @case ('ADMIN') {
               <td class="">Administrador</td>
             }
@@ -39,13 +92,13 @@
               <td class="">Almacenero</td>
             }
             @default {
-              <td class="">{{trabajador.rol}}</td>
+              <td class="">{{trabajadorDePrueba.rol}}</td>
             }
           }
-    
-          <td class="">{{trabajador.username}}</td>
-          <td class="">{{trabajador.nombre}}</td>
-          <td class="th-dni">{{trabajador.dni}}</td>
+
+          <td class="">{{trabajadorDePrueba.username}}</td>
+          <td class="">{{trabajadorDePrueba.nombre}}</td>
+          <td class="th-dni">{{trabajadorDePrueba.dni}}</td>
           <td class="th-options">
             <div class="dropdown align-items-center text-center">
               <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,70 +107,19 @@
               <ul class="dropdown-menu">
                 <li>
                   <button class="dropdown-item text-center">
-                    <p class="m-0" (click)="modificarTrabajador(trabajador)">Modificar</p>
+                    <p class="m-0" (click)="modificarTrabajador(trabajadorDePrueba)">Modificar</p>
                   </button>
                 </li>
                 <li>
-
-                  @if (trabajador.cuentaActiva) {
-                    <button class="dropdown-item text-danger text-center" (click)="confirmarBaja(trabajador)">
-                      <p class="m-0"><i class="bi bi-trash"></i> Dar de Baja</p>
-                    </button>
-                  }@else {
-                    <span class="badge bg-secondary">Inactivo</span>  
-                  }
-                  
+                  <button class="dropdown-item text-center ">
+                    <p class="m-0">Dar de Baja</p>
+                  </button>
                 </li>
               </ul>
             </div>
           </td>
         </tr>
-      }
-
-      <tr>
-        <td scope="row" class="">{{trabajadorDePrueba.trabajadorId}}</td>
-
-        @switch (trabajadorDePrueba.rol) {
-          @case ('ADMIN') {
-            <td class="">Administrador</td>
-          }
-          @case ('ADMINISTRADOR_DE_TIENDA') {
-            <td class="">Administrador de tienda</td>
-          }
-          @case ('JEFE_DE_LINEA') {
-            <td class="">Jefe de Linea</td>
-          }
-          @case ('ALMACENERO') {
-            <td class="">Almacenero</td>
-          }
-          @default {
-            <td class="">{{trabajadorDePrueba.rol}}</td>
-          }
-        }
-        
-        <td class="">{{trabajadorDePrueba.username}}</td>
-        <td class="">{{trabajadorDePrueba.nombre}}</td>
-        <td class="th-dni">{{trabajadorDePrueba.dni}}</td>
-        <td class="th-options">
-          <div class="dropdown align-items-center text-center">
-            <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-three-dots-vertical"></i>
-            </button>
-            <ul class="dropdown-menu">
-              <li>
-                <button class="dropdown-item text-center">
-                  <p class="m-0" (click)="modificarTrabajador(trabajadorDePrueba)">Modificar</p>
-                </button>
-              </li>
-              <li>
-                <button class="dropdown-item text-center ">
-                  <p class="m-0">Dar de Baja</p>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>

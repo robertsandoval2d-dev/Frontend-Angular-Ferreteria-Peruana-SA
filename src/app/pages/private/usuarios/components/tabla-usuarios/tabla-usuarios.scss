@@ -43,9 +43,21 @@
     }
 
     .table {
-    table-layout: fixed;
-    width: 100%;
+        table-layout: fixed;
+        width: 100%;
+        min-width: 900px;
+        white-space: nowrap;
 
+        @media (min-width: 992px) {
+            table-layout: auto;
+            white-space: normal;
+            min-width: 100%;
+        }
+        @media (min-width: 1200px) {
+            table-layout: fixed;
+            width: 100%;
+        }
+        
         .th-id{
             width: 35px;
             text-align: center;
