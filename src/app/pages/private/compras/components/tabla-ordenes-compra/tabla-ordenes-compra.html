@@ -1,0 +1,121 @@
+<!-- <div class="input-contenedor m-5 mt-4 mb-0">
+    <div class="barra-busqueda input-group input-group-sm">
+        <input type="text" [formControl]="buscadorControl" (keyup.enter)="ejecutarBusqueda()" class="form-control rounded-start-5 ps-3" aria-label="Text input" placeholder="Buscar órden de compra por ID">
+        <button (click)="ejecutarBusqueda()" class="btn btn-outline-secondary rounded-end-5" type="submit">
+            <i class="bi bi-search icono-buscar"></i>
+        </button>
+    </div>
+    @if(ordenesFiltradas.length !== 0){
+        @for(ordenCompra of ordenesFiltradas; track ordenCompra.proveedorId){
+            <label class="id-label ms-2 mt-2">#{{ordenCompra.proveedorId}}</label>
+        }
+    }
+</div>
+
+<div class="tabla-ordenes-container shadow-sm m-5 mt-1 rounded-4 overflow-x-auto">
+    @if(ordenesFiltradas.length !== 0){
+    <table class="table mb-0" [formGroup]="formularioInventario" (ngSubmit)="actualizarInventario()">
+    <thead class="custom-thead">
+        @for(ordenCompra of ordenesFiltradas; track ordenCompra.proveedorId){
+            <tr class="header-principal">
+                <th colspan="4" class="titulo-linea align-middle fw-bold ps-4 pt-3">
+                    {{ordenCompra.nombreProveedor}}
+                </th>
+            </tr>
+            <tr class="header-principal">
+                <th colspan="4" class="subtitulo-linea align-middle fw-bold ps-4 pb-3">
+                    Fecha máxima de entrega: {{ordenCompra.plazoFechaMaximo}}
+                </th>
+            </tr>
+        }
+        <tr class="header-columnas text-center align-middle">
+            <th scope="col">Nombre de productos</th>
+            <th scope="col">Cantidad registrada</th>
+            <th scope="col">Cantidad de unidades</th>
+            <th scope="col">Nombre de línea de productos</th>
+        </tr>
+    </thead>
+    <tbody class="ordenes-columnas text-center align-middle">
+        @for(ordenCompra of ordenesFiltradas; track ordenCompra.proveedorId){
+            @for(producto of ordenCompra.productos; track producto.productoId){
+                <tr>
+                    <td scope="row">{{producto.nombreProducto}}</td>
+                    <td></td>
+                    <td>{{producto.cantidad}}</td>
+                    <td>{{producto.nombreLinea}}</td>
+                </tr>
+            }
+        }
+        <tr>
+            <th colspan="4" class="text-end">
+                <button type="button" class="boton-generar btn btn-primary px-4">
+                    Actualizar inventario
+                </button>
+            </th>
+        </tr>
+    </tbody>
+    </table>
+    }
+</div> -->
+
+<div class="input-contenedor m-5 mt-4 mb-0">
+    <div class="barra-busqueda input-group input-group-sm">
+        <input type="text" [formControl]="buscadorControl" (keyup.enter)="ejecutarBusqueda()" class="form-control rounded-start-5 ps-3" aria-label="Text input" placeholder="Buscar órden de compra por ID">
+        <button (click)="ejecutarBusqueda()" class="btn btn-outline-secondary rounded-end-5" type="button">
+            <i class="bi bi-search icono-buscar"></i>
+        </button>
+    </div>
+    @if(ordenEncontrada){
+        <label class="id-label ms-2 mt-2">#{{ordenEncontrada.ordenCompraId}}</label>
+    }
+</div>
+
+<div class="tabla-ordenes-container shadow-sm m-5 mt-1 rounded-4 overflow-x-auto">
+    @if(ordenEncontrada){
+        
+    <form [formGroup]="formularioInventario" (ngSubmit)="actualizarInventario()">
+        <table class="table mb-0">
+            <thead class="custom-thead">
+                <tr class="header-principal">
+                    <th colspan="4" class="titulo-linea align-middle fw-bold ps-4 pt-3">
+                        {{ ordenEncontrada.nombreProveedor }}
+                    </th>
+                </tr>
+                <tr class="header-principal">
+                    <th colspan="4" class="subtitulo-linea align-middle fw-bold ps-4 pb-3">
+                        Fecha máxima de entrega: {{ ordenEncontrada.plazoFechaMaximo }}
+                    </th>
+                </tr>
+                <tr class="header-columnas text-center align-middle">
+                    <th scope="col">Nombre de productos</th>
+                    <th scope="col">Cantidad registrada</th>
+                    <th scope="col">Cantidad de unidades</th>
+                    <th scope="col">Nombre de línea de productos</th>
+                </tr>
+            </thead>
+            
+            <tbody class="ordenes-columnas text-center align-middle" formArrayName="productos">
+                @for(prodCtrl of productosFormArray.controls; track $index; let i = $index){
+                    <tr [formGroupName]="i">
+                        <td scope="row">{{ prodCtrl.value.nombreProducto }}</td>
+                        
+                        <td>
+                            <input type="number" class="form-control form-control-sm text-center mx-auto" style="max-width: 80px;" placeholder="0">
+                        </td>
+                        
+                        <td>{{ prodCtrl.value.cantidad }}</td>
+                        <td>{{ prodCtrl.value.nombreLinea }}</td>
+                    </tr>
+                }
+                <tr>
+                    <th colspan="4" class="text-end">
+                        <button type="submit" class="boton-generar btn btn-primary px-4">
+                            Actualizar inventario
+                        </button>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    }
+</div>

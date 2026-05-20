@@ -16,6 +16,8 @@ import { VistaPreviaOCResponse } from '../models/response/vista-previa-oc-respon
 import { OrdenCompraRequest } from '../models/request/orden-compra-request';
 import { OrdenCompraResponse } from '../models/response/orden-compra-response';
 
+import { OrdenCompraListResponse } from '../models/response/orden-compra-list-response';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -47,4 +49,8 @@ export class CompraService {
     return this.http.post<OrdenCompraResponse>(`${environment.url}/compras/ordenes-compra`,request);
   }
   
+  //GET-LISTAR_ORDENES_COMPRA
+  listarOrdenesCompra(): Observable<OrdenCompraListResponse[]> {
+    return this.http.get<OrdenCompraListResponse[]>(`${environment.url}/compras/ordenes-compra`);
+  }
 }

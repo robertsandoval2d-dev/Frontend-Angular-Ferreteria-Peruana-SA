@@ -1,0 +1,8 @@
+<div class="inventario-main">
+    <p class="seccion fw-bold ms-4 mt-4 mb-3">SECCIÓN GESTIÓN DE INVENTARIO</p>
+    <div class="inventario-content">
+        <p class="seccion-name fw-bold ms-5 mb-0">Órdenes de compra</p>
+        <p class="seccion-info fst-italic ms-5">{{tablaOrdenes.textoActualizacion$ | async}}</p>
+        <app-tabla-ordenes-compra #tablaOrdenes></app-tabla-ordenes-compra>
+    </div>
+</div>
