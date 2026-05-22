@@ -59,6 +59,14 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "test":{
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.test.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -71,6 +79,9 @@
             },
             "development": {
               "buildTarget": "dswG2AngularFerreteriaPeruanaSA:build:development"
+            },
+            "test": {
+              "buildTarget": "dswG2AngularFerreteriaPeruanaSA:build:test"
             }
           },
           "defaultConfiguration": "development"

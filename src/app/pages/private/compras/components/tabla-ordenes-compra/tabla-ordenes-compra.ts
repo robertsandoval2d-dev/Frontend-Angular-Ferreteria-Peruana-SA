@@ -98,7 +98,6 @@ export class TablaOrdenesCompra implements OnInit{
   }
 
   ejecutarBusqueda() {
-    // Obtenemos el valor actual del input (o un string vacío si es null)
     const valor = this.buscadorControl.value || '';
     this.terminoBuscado = valor.trim();
     this.ordenEncontrada = null;
@@ -107,13 +106,11 @@ export class TablaOrdenesCompra implements OnInit{
     this.productosFormArray.clear();
     this.formularioInventario.get('ordenCompraId')?.setValue(null);
 
-    // Si el usuario le dio clic pero el input está vacío
     if (!this.terminoBuscado) {
       this.ordenEncontrada = null;
       return;
     }
 
-    // Filtramos usando el valor capturado
     this.ordenEncontrada = this.listaOrdenesCompra.find(orden => 
       orden.ordenCompraId.toString() === this.terminoBuscado
     );

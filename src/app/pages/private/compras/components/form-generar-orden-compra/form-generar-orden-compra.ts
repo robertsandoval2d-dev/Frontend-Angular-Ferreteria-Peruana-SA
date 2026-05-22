@@ -42,14 +42,12 @@ export class FormGenerarOrdenCompra implements OnInit {
       this.detallesArray.clear();
 
       if (orden && orden.detalles) {
-        // LLENAMOS EL FORMULARIO SÍNCRONAMENTE
         orden.detalles.forEach(detalle => {
           this.detallesArray.push(this.fb.group({
             cantidad: [detalle.cantidad, [Validators.required, Validators.min(1)]]
           }));
         });
 
-        // ENCENDEMOS LA TABLA (Ahora sí, los controles '0', '1'... ya existen)
         this.ordenSeleccionada = orden;
         this.cdr.detectChanges();
       }
@@ -77,11 +75,10 @@ export class FormGenerarOrdenCompra implements OnInit {
   }
 
   construirFormArray(orden: VistaPreviaOCResponse | null) {
-    this.detallesArray.clear(); // Limpiamos la tabla anterior
+    this.detallesArray.clear();
 
     if (orden && orden.detalles) {
       orden.detalles.forEach(detalle => {
-        // Por cada fila, creamos un grupo con el control "cantidad"
         const filaForm = this.fb.group({
           cantidad: [detalle.cantidad, [Validators.required, Validators.min(1)]]
         });
@@ -102,7 +99,6 @@ export class FormGenerarOrdenCompra implements OnInit {
   }
 
   generarOrden() {
-    // 1. Validamos que el formulario esté correcto y haya una orden
     if (this.formularioCompra.invalid || !this.ordenSeleccionada) {
       this.toastService.error('Revisa las cantidades ingresadas.');
       return;
@@ -110,9 +106,7 @@ export class FormGenerarOrdenCompra implements OnInit {
     const fechaRaw = this.formularioCompra.get('plazoFechaMaximo')?.value;
     const plazoFechaMaximoLocalDateTime = fechaRaw ? `${fechaRaw}T23:59:59` : '';
 
-    // 2. Construimos el array de detalles combinando la data original y el formulario
     const detallesPayload: DetalleOrdenCompra[] = this.ordenSeleccionada.detalles.map((detalleOrig, index) => {
-      // Obtenemos la cantidad actualizada directamente de nuestro FormArray
       const cantidadActualizada = this.detallesArray.at(index).get('cantidad')?.value;
       
       return {
@@ -124,9 +118,7 @@ export class FormGenerarOrdenCompra implements OnInit {
       };
     });
 
-    // 3. Construimos el Request Final
     const payload: OrdenCompraRequest = {
-      // Nota: Ajusta esta fecha según tu lógica. Aquí uso la fecha actual como ejemplo
       plazoFechaMaximo: plazoFechaMaximoLocalDateTime,
       proveedorId: this.ordenSeleccionada.proveedorId,
       montoTotalCalculado: this.ordenSeleccionada.montoTotalCalculado,
@@ -135,7 +127,6 @@ export class FormGenerarOrdenCompra implements OnInit {
 
     console.log('Payload listo para el backend:', payload);
 
-    // 4. llamada al servicio POST
     this.compraService.generarOrdenCompra(payload).subscribe({
       next: (respuestaBackend) => {
         console.log('Orden de compra generado:', respuestaBackend);
@@ -155,10 +146,8 @@ export class FormGenerarOrdenCompra implements OnInit {
   }
 
   resetearVista() {
-    // Vaciamos el FormArray
     this.detallesArray.clear();
     
-    // Reseteamos el formulario completo (esto devuelve el select a su estado null)
     this.formularioCompra.reset({
       proveedorSeleccionado: null,
       plazoFechaMaximo: ''

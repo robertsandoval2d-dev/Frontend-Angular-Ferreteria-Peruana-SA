@@ -3,7 +3,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from "@angula
 import { TrabajadorUpdateRequest } from '../../models/request/trabajador-update-request';
 import { UserService } from '../../services/user.service';
 import { SucursalListResponse, LineasProducto } from '../../models/response/sucursal-list-response';
-
+import { ToastService } from '../../../../../core/services/toast.service';
 
 @Component({
   selector: 'app-form-update-usuario',
@@ -11,11 +11,12 @@ import { SucursalListResponse, LineasProducto } from '../../models/response/sucu
   templateUrl: './form-update-usuario.html',
   styleUrl: './form-update-usuario.scss',
 })
-export class FormUpdateUsuario implements OnInit{
+export class FormUpdateUsuario implements OnInit, OnChanges{
 
   private fb = inject(FormBuilder);
   private usuariosService = inject(UserService);
   private cdr = inject(ChangeDetectorRef);
+  private toastService = inject(ToastService);
 
   listaSucursalesCompleta: SucursalListResponse[] = [];
   listaSucursales: SucursalListResponse[] = [];
@@ -39,7 +40,6 @@ export class FormUpdateUsuario implements OnInit{
         tiendaId: this.trabajador.tiendaId ?? '',
         lineaId: this.trabajador.lineaId ?? ''
       }, { emitEvent: false });
-      console.log('Llego trabajador: ', this.trabajador);
     }
 
     const storeControl = this.updateForm.get('tiendaId'); 
@@ -57,8 +57,8 @@ export class FormUpdateUsuario implements OnInit{
     else if(this.trabajador.rol === 'ADMIN'){
       storeControl?.clearValidators();
       lineControl?.clearValidators();
-      storeControl?.setValue('');
-      lineControl?.setValue('');
+      storeControl?.setValue(null);
+      lineControl?.setValue(null);
     }
     storeControl?.updateValueAndValidity();
     lineControl?.updateValueAndValidity();  
@@ -66,24 +66,23 @@ export class FormUpdateUsuario implements OnInit{
 
 
   ngOnInit(){
-
-    this.usuariosService.listarSucursales().subscribe({
-      next:(ListResponse) => {
-        this.listaSucursalesCompleta = ListResponse;
-        if(this.trabajador?.tiendaId){
-          const sucursalEncontrada = this.listaSucursalesCompleta.find(s => s.tiendaId === this.trabajador.tiendaId);
-          this.listaLineas = sucursalEncontrada?.lineasProducto.filter(l => l.lineaId !== this.trabajador.lineaId) ?? [];
+    if(this.trabajador.rol !== 'ADMIN'){
+      this.usuariosService.listarSucursales().subscribe({
+        next:(ListResponse) => {
+          this.listaSucursalesCompleta = ListResponse;
+          if(this.trabajador?.tiendaId){
+            const sucursalEncontrada = this.listaSucursalesCompleta.find(s => s.tiendaId === this.trabajador.tiendaId);
+            this.listaLineas = sucursalEncontrada?.lineasProducto.filter(l => l.lineaId !== this.trabajador.lineaId) ?? [];
+          }
+          this.listaSucursales = this.listaSucursalesCompleta.filter(s => s.tiendaId !== this.trabajador.tiendaId);
+          console.log('Sucursales cargadas correctamente');
+          this.cdr.detectChanges();
+        },
+        error: (ListError) => {
+          console.log('No cargaron las sucursales correctamente: ', ListError);
         }
-        this.listaSucursales = this.listaSucursalesCompleta.filter(s => s.tiendaId !== this.trabajador.tiendaId);
-        console.log('Mira la lista:', this.listaSucursales);
-
-        console.log('Llegaron las sucursales: ', ListResponse);
-        this.cdr.detectChanges();
-      },
-      error: (ListError) => {
-        console.log('No llegaron PIPIPI, mensaje: ', ListError);
-      }
-    });
+      });
+    }
 
     this.updateForm.get('tiendaId')?.valueChanges.subscribe(tiendaSeleccionada => {
       const tiendaIdNumero = Number(tiendaSeleccionada);
@@ -99,29 +98,25 @@ export class FormUpdateUsuario implements OnInit{
     });
   }
 
-  
   updateUsuario() {
     if(this.updateForm.valid){
 
       const requestUpdateTrabajador : TrabajadorUpdateRequest = this.updateForm.value;
-      console.log('Datos enviados: Id', this.trabajador.trabajadorId, 'y el form: ',this.updateForm.value)
 
       this.usuariosService.modificarTrabajador(this.trabajador.trabajadorId, requestUpdateTrabajador).subscribe({
-        next: (Response) => {
-          console.log('Update realizado con Éxito', Response);
+        next: (respuestaBackend) => {
           this.usuariosService.notifyRefresh();
           this.onCerrarUpdate.emit();
+          this.toastService.success('Actualización correctamente', 2000);
         },
-        error: (ResponseError) => {
-          console.error('El backend rechazó la petición:', ResponseError);
+        error: (errorBackend) => {
+          console.error('El backend rechazó la petición:', errorBackend);
+          this.toastService.error(errorBackend.error.message, 3000);
+          this.cdr.markForCheck();
         }
       })
-
     }
-
   }
-
-
 
   @Output() onCerrarUpdate = new EventEmitter<void>();
 

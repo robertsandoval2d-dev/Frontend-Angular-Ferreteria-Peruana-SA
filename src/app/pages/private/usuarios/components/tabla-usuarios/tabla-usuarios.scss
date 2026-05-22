@@ -1,43 +1,31 @@
-.tabla-usuarios{
-    border: 1px solid #000000;
-    background-color: #ffffff;
-    
+.tabla-usuarios{    
     .table-usuarios-head{
-            background-color: #cccec7;
-            border-bottom: 2px solid #dee2e6;
+        background-color: #094854;
+        color: white;
+        border: none;
 
         @media (min-width: 992px){
-            .btn-filtrar{
-                max-width: 100px;
-            }
-            .btn-registrar{
-                max-width: 200px;
-            }
+            .btn-filtrar{ max-width: 100px; }
+            .btn-registrar{ max-width: 200px; }
         }
         @media (min-width: 1200px){
-            .btn-registrar{
-                max-width: 275px;
-            }
+            .btn-registrar{ max-width: 275px; }
         }
         
-
-        .table-name{
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-
         .btn-filtrar{
-            background-color: rgb(40, 130, 209);
+            background-color: #c4e5eb;
             border: none;
+            color: #000000;
             &:hover{
-                background-color: rgb(85, 119, 151);
+                background-color: #7fb0b8;
             }
         }
         .btn-registrar{
-            background-color: rgb(40, 135, 218);
+            background-color: #c4e5eb;
             border: none;
+            color: #000000;
             &:hover{
-                background-color: rgb(184, 216, 245);
+                background-color: #7fb0b8;
             }
         }
     }
@@ -58,6 +46,12 @@
             width: 100%;
         }
         
+        .table-head{
+            th{
+                background-color: #1a353a;
+                color: white;
+            }
+        }
         .th-id{
             width: 35px;
             text-align: center;
@@ -83,6 +77,18 @@
         tbody tr td {
             vertical-align: middle;
             padding: 6px 12px;
+            border: none;
+        }
+
+        .table-group-divider{
+            tr{
+                &:nth-of-type(odd) > * {
+                    background-color: #cae4e9;
+                }
+                &:nth-of-type(even) > * {
+                    background-color: #99c2c9;
+                }
+            }
         }
     }
 
@@ -97,13 +103,17 @@
     
 
     .dropdown-menu{
+        background-color: #c4e5eb;
+        border: 1px solid #7fb0b8;
+        
         width: auto;
         min-width: unset;
         padding: 0;
         .dropdown-item{
             padding: 4px 14px;
             &:hover{
-            background-color: #1273d4;
+            background-color: #7fb0b8;
+            color: rgb(255, 255, 255);
         }
         }
     }

@@ -1,10 +1,11 @@
 .form-registro-usuario {
+    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     max-width: 600px;
-    background-color: #ffffff;
-    border: 1px solid rgba(245, 218, 98, 0.4);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
-    animation: zoomIn 0.3s ease-out;
+    background-color: rgb(253, 253, 253);
+    border: 1px solid rgb#094854;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25); 
+    animation: zoomIn 0.2s ease-out;
 
     .btn-close:focus,
     .btn-close:active {
@@ -13,13 +14,12 @@
     }
 
     .btn-registrar {
-        background-color: #f16359;
-        color: white;
-        border: none;
+        background-color: #b7d4da;
+        border: 1px solid #b7d4da;
         transition: 0.2s;
         
         &:hover {
-            background-color: #f19891;
+            background-color: #7fb0b8;
         }
     }
 }

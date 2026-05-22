@@ -37,23 +37,19 @@ export class Login {
 
     const{username,password} = this.form.value;
     if(!username || !password) return;
-    //console.log('Enviando al backend:', this.loginRequest);
 
     this.loginRequest.username=username;
     this.loginRequest.password=password;
 
     this.authService.login(this.loginRequest).subscribe({
       next: (respuesta: LoginResponse) => {
-        // Si el backend dice "Todo OK"
         this.loginResponse = respuesta;
         console.log('¡Login exitoso!', this.loginResponse);
         
-        // Guardamos la "llave" en el navegador
         this.authService.setToken(this.loginResponse.token);
         console.log(this.sessionService.getInfoSession());
         this.toastService.success('Ingreso exitoso');
 
-        // Obtenemos rol
         const rol = this.sessionService.getRole();
 
         switch(rol){
@@ -79,7 +75,6 @@ export class Login {
         }
       },
       error: (err) => {
-        // Si el backend dice "Contraseña incorrecta" o hay error
         console.error('Error al iniciar sesión', err);
         this.toastService.error('Usuario o contraseña incorrectos');
       }

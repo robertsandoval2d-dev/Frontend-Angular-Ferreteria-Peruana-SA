@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../../environments/environment';
 
 import { TrabajadorCreateRequest } from '../models/request/trabajador-create-request';
 import { TrabajadorCreateResponse } from '../models/response/trabajador-create-response';

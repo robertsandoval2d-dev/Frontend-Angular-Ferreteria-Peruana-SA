@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, inject, OnInit, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TrabajadorCreateRequest } from '../../models/request/trabajador-create-request';
 import { SucursalListResponse, LineasProducto } from '../../models/response/sucursal-list-response';
@@ -15,6 +15,7 @@ export class FormRegistroUsuario implements OnInit{
   private toastService = inject(ToastService);
   private fb = inject(FormBuilder);
   private usuariosService = inject(UserService);
+  private cdr = inject(ChangeDetectorRef);
   listaSucursales: SucursalListResponse[] = [];
   listaLineas: LineasProducto[] = [];
 
@@ -84,21 +85,16 @@ export class FormRegistroUsuario implements OnInit{
 
       this.usuariosService.registrarTrabajador(requestParaSpringBoot).subscribe({
         next: (respuestaBackend) => {
-          console.log('¡Éxito total! Spring Boot dice:', respuestaBackend);
+          console.log('Respuesta Backend: ', respuestaBackend);
           this.toastService.success('¡Trabajador registrado correctamente!');
-          // alert('¡Trabajador registrado correctamente!');
           this.registroForm.reset();
-          // Aquí podrías mostrar un Toast de éxito o cerrar el Modal
-          
           this.usuariosService.notifyRefresh();
-
           this.onCerrar.emit();
-
         },
         error: (errorBackend) => {
           console.error('El backend rechazó la petición:', errorBackend);
-          alert('Hubo un error al registrar. Revisa la consola.');
-          // Aquí mostrarías un Toast de error ("El DNI ya existe", etc.)
+          this.toastService.error(errorBackend.error.message);
+          this.cdr.markForCheck();
         }
       });
 

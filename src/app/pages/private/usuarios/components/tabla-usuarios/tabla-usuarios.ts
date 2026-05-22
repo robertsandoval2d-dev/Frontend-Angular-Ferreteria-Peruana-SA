@@ -18,17 +18,13 @@ export class TablaUsuarios implements OnInit{
   private toastService = inject(ToastService);
   private destroyRef = inject(DestroyRef);
   private ngZone = inject(NgZone);
-  private appRef = inject(ApplicationRef);
 
   listaTrabajadores: TrabajadorListResponse[] = [];
   
   ngOnInit() {
-    // 1. Cargamos la lista por primera vez
     this.cargarTrabajadores();
-    // 2. ¡NOS QUEDAMOS ESCUCHANDO LA RADIO!
     this.usuariosService.refresh$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-      console.log('La radio avisó: ¡A recargar la tabla!');
-      this.cargarTrabajadores(); // Ejecutamos TU método de siempre
+      this.cargarTrabajadores();
     });
   }
   
@@ -36,11 +32,7 @@ export class TablaUsuarios implements OnInit{
     this.usuariosService.listarTrabajadores().subscribe({
       next: (respuestaBackend) => {
         this.listaTrabajadores = respuestaBackend;
-        console.log('trabajadores llegaron:', this.listaTrabajadores)
-
         this.cdr.detectChanges();
-      console.log('Datos cargados correctamente')
-
       },
       error: (errorBackend) => {
         console.error('Error del Backend, revisar consola!!', errorBackend)
@@ -63,16 +55,13 @@ export class TablaUsuarios implements OnInit{
       
       if (result.isConfirmed) {
         
-        // 🔥 MAGIA PURA: Volvemos a meter el hilo a Angular ANTES de hacer la petición
         this.ngZone.run(() => {
           
           this.usuariosService.deshabilitarTrabajador(trabajador.trabajadorId).subscribe({
             next: () => { 
-              // 1. Refrescamos la tabla
               this.usuariosService.notifyRefresh(); 
-              
-              // 2. Disparamos el Toast limpiamente (Usa los backticks ` para el nombre)
-              this.toastService.success(`El trabajador ${trabajador.nombre} ha sido dado de baja exitosamente.`, 3000);
+              this.toastService.success(`El trabajador ${trabajador.nombre} ha sido dado de baja exitosamente.`, 4000);
+              this.cdr.markForCheck();
             },
             error: (err) => {
               console.error('Error al dar de baja:', err);
@@ -80,7 +69,7 @@ export class TablaUsuarios implements OnInit{
             }
           });
 
-        }); // 🔥 Fin de NgZone
+        });
 
       }
     });

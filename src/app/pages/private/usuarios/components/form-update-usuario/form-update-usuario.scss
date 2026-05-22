@@ -2,11 +2,22 @@
     width: 100%;
     max-width: 550px;
 
-    background-color: rgb(255, 255, 255);
-    border: 1px solid aquamarine;
+    background-color: rgb(253, 253, 253);
+    border: 1px solid #094854;
 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
     animation: zoomIn 0.3s ease-out;
+
+
+
+    .btn-submit{
+        border: 1px solid #b7d4da;
+        background-color: #c4e5eb;
+        transition: 0.2s;
+        &:hover{
+            background-color: #7fb0b8;
+        }
+    }
 }
 
 @keyframes zoomIn {

@@ -1,10 +1,9 @@
-<div class="form-registro-usuario rounded-3 overflow-hidden px-4 py-3">
-    <div class="d-flex flex-row w-100 justify-content-between mt-0 mb-3 align-items-center">
-        <p class="fs-5 fw-bold m-0">Registrar Nuevo Trabajador</p>
+<div class="form-registro-usuario rounded-3 overflow-hidden px-4 py-4">
+    <div class="form-header d-flex flex-row w-100 justify-content-between mt-0 mb-3 align-items-center px-2">
+        <p class="fs-4 fw-bold m-0">Registrar Nuevo Trabajador</p>
         <button type="button" class="btn-close" style="font-size: 14px;" aria-label="Close" (click)="cancelarRegistro()"></button>
-        <!-- <i class="btn p-0 bi bi-x fs-4" (click)="cancelarRegistro()"></i> -->
     </div>
-    <form [formGroup]="registroForm" (ngSubmit)="guardarUsuario()" class="row g-3">
+    <form [formGroup]="registroForm" (ngSubmit)="guardarUsuario()" class="row g-3 px-1 py-1">
         <div class="col-12">
             <label for="name" class="form-label">Nombre</label>
             <input type="text" class="form-control" id="name" formControlName="nombre">
@@ -24,7 +23,7 @@
         <div class="col-md-4">
             <label for="rol" class="form-label">Rol</label>
             <select id="rol" class="form-select" formControlName="rol">
-                <option value="" disabled selected>Seleccione un rol...</option>
+                <option value="" disabled selected>Selecciona un rol...</option>
                 <option value="JEFE_DE_LINEA">Jefe de Línea</option>
                 <option value="ALMACENERO">Almacenero</option>
                 <option value="ADMINISTRADOR_DE_TIENDA">Administrador de Tienda</option>
@@ -56,8 +55,8 @@
             </div>
         }
 
-        <div class="col-12">
-            <button type="submit" class="btn-registrar btn">Registrar</button>
+        <div class="col-12 mt-4">
+            <button type="submit" class="btn-registrar btn fw-bolder">Registrar</button>
         </div>
     </form>
 </div>

@@ -56,7 +56,6 @@ export class FormGenerarCronograma implements OnInit{
       fechaRequerida: ['', Validators.required]
     });
 
-    // 3. LA MAGIA: Escuchamos los cambios de producto de ESTA FILA en específico
     fila.get('producto')?.valueChanges.subscribe((productoSeleccionado) => {
       const controlProveedor = fila.get('proveedorId');
       controlProveedor?.setValue(null);
@@ -84,7 +83,6 @@ export class FormGenerarCronograma implements OnInit{
   }
 
   guardarCronograma(){
-    // Si faltan datos o hay errores, detenemos el proceso y marcamos los campos en rojo
     if (this.formularioCronograma.invalid) {
       this.formularioCronograma.markAllAsTouched();
       return;
