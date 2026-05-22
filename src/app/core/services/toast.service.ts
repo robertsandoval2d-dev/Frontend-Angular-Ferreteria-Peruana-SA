@@ -5,7 +5,6 @@ export type ToastType = 'success' | 'danger' | 'warning' | 'info';
 export interface Toast {
   message: string;
   type: ToastType;
-  className: string;
   delay?: number;
 }
 
@@ -17,18 +16,9 @@ export class ToastService {
   toasts: Toast[] = [];
 
   show(message: string, type: ToastType = 'info', delay: number = 2000) {
-
-    const classMap = {
-      success: 'bg-success text-light',
-      danger: 'bg-danger text-light',
-      warning: 'bg-warning text-light',
-      info: 'bg-info text-light'
-    };
-
     const toast: Toast = {
       message,
       type,
-      className: classMap[type],
       delay
     };
 
