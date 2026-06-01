@@ -143,6 +143,7 @@ export class TarjetaOrdenCompra implements OnInit{
     // Formateamos las fechas para que se vean limpias en el PDF
     const fechaEntregaFmt = this.datePipe.transform(this.ordenCompraSeleccionada.fechaEntrega, 'dd/MM/yyyy') || 'N/A';
     const plazoMaximoFmt = this.datePipe.transform(this.ordenCompraSeleccionada.plazoFechaMaximo, 'dd/MM/yyyy') || 'N/A';
+    const fechaActualFmt = this.datePipe.transform(new Date(), 'dd/MM/yyyy') || 'N/A';
 
     const definicionDocumento: any = {
       pageSize: 'A4',
@@ -172,7 +173,8 @@ export class TarjetaOrdenCompra implements OnInit{
             { text: 'DATOS DEL PROVEEDOR\n', bold: true, fontSize: 11 },
             `Razón Social: ${this.ordenCompraSeleccionada.nombreProveedor}\n`,
             `Fecha de Entrega: ${fechaEntregaFmt}\n`,
-            `Plazo Máximo de Entrega: ${plazoMaximoFmt}`
+            `Plazo Máximo de Entrega: ${plazoMaximoFmt}\n`,
+            `Fecha de Generación del Reporte: ${fechaActualFmt}`
           ],
           margin: [0, 0, 0, 20]
         },

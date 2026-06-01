@@ -20,7 +20,7 @@
                     Proveedor - {{ordenSeleccionada.nombreProveedor}}
                 </th>
                 <th colspan="2" class="align-middle fw-bold ps-4">
-                    Monto total calculado: {{ordenSeleccionada.montoTotalCalculado | currency:'PEN'}}
+                    Monto total (IGV): {{ordenSeleccionada.montoTotalCalculado*1.18 | currency:'PEN':'S/ '}}
                 </th>
                 <th colspan="2" class="align-middle fw-bold ps-4">
                     <div class="d-flex flex-column">
@@ -57,8 +57,8 @@
                            style="max-width: 80px;"
                            formControlName="cantidad">
                 </td>
-                <td>{{ordenSeleccionada.detalles[i].precioUnidad | currency:'PEN'}}</td>
-                <td>{{(detalle.get('cantidad')?.value * ordenSeleccionada.detalles[i].precioUnidad) | currency:'PEN'}}</td>
+                <td>{{ordenSeleccionada.detalles[i].precioUnidad | currency:'PEN':'S/ '}}</td>
+                <td>{{(detalle.get('cantidad')?.value * ordenSeleccionada.detalles[i].precioUnidad) | currency:'PEN':'S/ '}}</td>
                 <td>{{ordenSeleccionada.detalles[i].fechaRequerida}}</td>
             </tr>
             }
