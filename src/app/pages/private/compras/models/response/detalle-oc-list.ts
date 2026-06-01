@@ -3,4 +3,5 @@ export interface DetalleOCList{
     nombreProducto: string;
     nombreLinea: string;
     cantidad: number;
+    precioUnidad: number;
 }

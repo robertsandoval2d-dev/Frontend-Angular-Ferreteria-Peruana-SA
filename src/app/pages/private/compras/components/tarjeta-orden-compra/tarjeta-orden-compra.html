@@ -1,0 +1,82 @@
+<div class="contenedor-select d-flex flex-row gap-4 m-5 mt-4 mb-0">
+    <select class="form-select w-25" (change)="onProveedorSeleccionado($event)">
+        <option value="" disabled selected>Seleccione un proveedor</option>
+        @for(proveedor of proveedoresUnicos; track proveedor){
+            <option [value]="proveedor">{{proveedor}}</option>
+        }
+    </select>
+    <select class="form-select w-25" 
+        [disabled]="ordenesFiltradas.length === 0" 
+        [value]="ordenSeleccionadaId === null ? '' : ordenSeleccionadaId" 
+        (change)="onOrdenSeleccionada($event)">
+        <option value="" disabled selected>Seleccione orden de compra</option>
+        
+        @for(orden of ordenesFiltradas; track orden.ordenCompraId){
+            <option [value]="orden.ordenCompraId">
+                {{generarEtiquetaOrden(orden)}}
+            </option>
+        }
+    </select>
+</div>
+
+@if(ordenSeleccionadaId!=null){
+<div class="card shadow-sm border-3 rounded-3 overflow-hidden m-5 mt-4 mb-4">
+  
+  <div class="orden-info card-header p-4 pb-3 border-0" >
+    <h2 class="h5 mb-1">ORDEN DE COMPRA #{{ordenCompraSeleccionada?.ordenCompraId}}</h2>
+    <p class="mb-0 fw-bold">Proveedor: {{ordenCompraSeleccionada?.nombreProveedor}}</p>
+  </div>
+
+  <div class="row g-0 bg-light border m-4 mt-0 mb-0 border-1 rounded-3">
+    <div class="fecha-content col-md-6 p-3 border-end d-flex align-items-center justify-content-center">
+      <i class="bi bi-calendar-event me-2"></i>
+      <span class="fw-bold">FECHA PLAZO MÁXIMO: {{ordenCompraSeleccionada?.plazoFechaMaximo | date:'yyyy-MM-dd'}}</span>
+    </div>
+    <div class="fecha-content col-md-6 p-3 d-flex align-items-center justify-content-center">
+      <i class="bi bi-box-seam me-2"></i>
+      @if(ordenCompraSeleccionada?.fechaEntrega != null){
+        <span class="fw-bold">FECHA ENTREGA: {{ordenCompraSeleccionada?.fechaEntrega| date:'yyyy-MM-dd'}}</span>
+      } @else {
+        <span class="fw-bold">FECHA ENTREGA: NO RECIBIDO </span>    
+      }
+    </div>
+  </div>
+
+  <div class="card-body p-4 pt-3">
+    <h3 class="h6 fw-bold mb-3">Detalle de Ítems</h3>
+    
+    <!-- CSS Grid responsivo de Bootstrap: 1 col en móvil, 2 en tablet, 3 en escritorio -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+      @for(detOrden of ordenCompraSeleccionada?.productos; track detOrden.productoId){
+        <div class="col">
+            <div class="detalle-orden card h-100 border-2 rounded-3 shadow-none">
+            <div class="card-body d-flex flex-column justify-content-between p-3">
+                <div>
+                <h4 class="h6 fw-bold text-dark mb-0">{{detOrden.nombreProducto}}</h4>
+                <span class="text-muted small d-block mb-2">{{detOrden.nombreLinea}}</span>
+                <span class="fw-bold small text-dark">Cantidad: {{detOrden.cantidad}}</span>
+                </div>
+                <div class="precio-total text-end fw-bold mt-3 fs-5">
+                {{(detOrden.precioUnidad * detOrden.cantidad) | currency:'PEN':'S/ '}}
+                </div>
+            </div>
+            </div>
+        </div>
+        }
+    </div>
+  </div>
+
+  <div class="total-estimado card-footer p-4 text-end border-0">
+    <h3 class="h5 fw-bold mb-0">SUBTOTAL: {{ totalEstimado | currency:'PEN':'S/ ' }}</h3>
+    <h3 class="h5 fw-bold mb-0">TOTAL ESTIMADO (IGV): {{ totalEstimado*1.18 | currency:'PEN':'S/ ' }}</h3>
+  </div>
+
+</div>
+<div class="me-5 mb-4 text-end">
+    <button class="btn btn-outline-primary" 
+            [disabled]="!ordenCompraSeleccionada" 
+            (click)="generarDocumentoFormalPDF()">
+    <i class="bi bi-file-earmark-pdf me-2"></i> Descargar Orden (PDF)
+    </button>
+</div>
+}

@@ -1,0 +1,33 @@
+.orden-info{
+    background-color: white;
+
+    h2{
+        font-size: 2rem;
+        font-weight: 500;
+    }
+    p{
+        font-size: 1.125rem;
+    }
+}
+
+.fecha-content{
+    color: var(--footer-color);
+    font-size: 1.125rem;
+}
+
+.card-body{
+    h3{
+        font-size: 1.125rem;
+    }
+}
+
+.detalle-orden{
+    .precio-total{
+        color: var(--footer-color);
+    }
+}
+
+.total-estimado{
+    background-color: #f5e6e6;
+    color: var(--footer-color);
+}

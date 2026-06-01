@@ -13,6 +13,7 @@ import { Abastecimiento } from './pages/private/compras/pages/abastecimiento/aba
 import { GestionCompras } from './pages/private/compras/pages/gestion-compras/gestion-compras';
 import { GestionUsuarios } from './pages/private/usuarios/pages/gestion-usuarios/gestion-usuarios';
 import { GestionInventario } from './pages/private/inventario/pages/gestion-inventario/gestion-inventario';
+import { SeguimientoOrdenes } from './pages/private/compras/pages/seguimiento-ordenes/seguimiento-ordenes';
 
 export const routes: Routes = [
     
@@ -38,6 +39,7 @@ export const routes: Routes = [
                 {path: '', redirectTo: 'dashboard',pathMatch: 'full'},
                 {path: 'dashboard', component: Dashboard},
                 {path: 'abastecimiento', component: Abastecimiento},
+                {path: 'seguimiento', component: SeguimientoOrdenes},
             ]},
 
             // 2. ZONA: ADMINISTRADOR DE TIENDA                

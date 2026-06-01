@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -17,6 +17,8 @@ import { OrdenCompraRequest } from '../models/request/orden-compra-request';
 import { OrdenCompraResponse } from '../models/response/orden-compra-response';
 
 import { OrdenCompraListResponse } from '../models/response/orden-compra-list-response';
+
+import { OrdenCompraSimpleListResponse } from '../models/response/orden-compra-simple-list-response';
 
 @Injectable({
   providedIn: 'root',
@@ -50,7 +52,18 @@ export class CompraService {
   }
   
   //GET-LISTAR_ORDENES_COMPRA
-  listarOrdenesCompra(): Observable<OrdenCompraListResponse[]> {
-    return this.http.get<OrdenCompraListResponse[]>(`${environment.url}/compras/ordenes-compra`);
+  listarOrdenesCompra(ordenId?: number): Observable<OrdenCompraListResponse[]> {
+    let params = new HttpParams();
+
+    if(ordenId != null){
+      params = params.set('ordenId',ordenId);
+    }
+
+    return this.http.get<OrdenCompraListResponse[]>(`${environment.url}/compras/ordenes-compra`,{params});
+  }
+
+  //GET-LISTAR_ORDENES_COMPRA_SIMPLE
+  listarOrdenesCompraSimple(): Observable<OrdenCompraSimpleListResponse[]> {
+    return this.http.get<OrdenCompraSimpleListResponse[]>(`${environment.url}/compras/ordenes-compra/simple`);
   }
 }
