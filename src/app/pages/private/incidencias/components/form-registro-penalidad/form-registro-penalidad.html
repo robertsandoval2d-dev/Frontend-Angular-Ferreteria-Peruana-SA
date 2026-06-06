@@ -1,0 +1,66 @@
+<div class="form-penalidad rounded-4 px-4 pt-4 pb-3 shadow position-relative overflow-y-auto">
+    <button type="button" class="btn-close" style="font-size: 14px;" aria-label="Close"></button>
+    <div class="flex-grow-1 d-flex flex-column align-items-center">
+        <p class="fs-3 fw-bolder m-0">Asignar Penalidad</p>
+        <p class="fs-5">Cerámicas Sandoval -> OC-001</p>
+    </div>
+    <div class="px-5">
+        <table class="form-penalidad-table w-100 align-middle text-center mb-3">
+            <tbody>
+                <tr>
+                    <td>
+                        <p class="m-0 fw-bolder">Fecha de Entregra</p>
+                        <p class="m-0">11/06/23</p>
+                    </td>
+                    <td>
+                        <p class="m-0 fw-bolder">Fecha de Entregra</p>
+                        <p class="m-0">11/06/23</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="m-0 fw-bolder">Estado</p></td>
+                    <td><p class="m-0">VENCIDA</p></td>
+                </tr>
+                <tr>
+                    <td><p class="m-0 fw-bolder">Días de Retraso</p></td>
+                    <td><p class="m-0">15</p></td>
+                </tr>
+                <tr> 
+                    <td><p class="m-0 fw-bolder">Monto</p></td>
+                    <td><p class="m-0">12,000.00</p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <form class="row g-3">
+        <div class="col-md-12 px-4 mb-1">
+            <label for="inputState" class="form-label px-1">Penalidad a Aplicar</label>
+            <select id="inputState" class="form-select">
+            <option selected>Choose...</option>
+            <option>Penalidad P01 (5% - OC)</option>
+            <option>Penalidad P02 (10% - OC)</option>
+            <option>Penalidad P03 (15% - OC)</option>
+            </select>
+        </div>
+        <div class="d-flex flex-row justify-content-between col-md-12 px-4 mb-1">
+            <p class="m-0 px-2">Monto de Penalidad (P03 -> OC-001)</p>
+            <P class="m-0 px-2">1,800.00</P>
+        </div>
+        <div class="form-group px-4 mb-1">
+            <label for="exampleFormControlTextarea1" class="px-1">Motivo</label>
+            <textarea class="mt-1 form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+        </div>
+        <div class="col-12 mb-1">
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck">
+            <label class="form-check-label" for="gridCheck">
+                Declaro que la presente penalidad se aplica conforme a las condiciones comerciales y cláusulas acordadas con el proveedor.
+            </label>
+            <p class="m-0">Read términos de Penalidades Ferreteria Peruana S.A.</p>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn w-100">Registrar Penalidad</button>
+        </div>
+    </form>
+</div>

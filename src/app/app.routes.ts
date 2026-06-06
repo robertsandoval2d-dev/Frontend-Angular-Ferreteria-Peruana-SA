@@ -14,6 +14,7 @@ import { GestionCompras } from './pages/private/compras/pages/gestion-compras/ge
 import { GestionUsuarios } from './pages/private/usuarios/pages/gestion-usuarios/gestion-usuarios';
 import { GestionInventario } from './pages/private/inventario/pages/gestion-inventario/gestion-inventario';
 import { SeguimientoOrdenes } from './pages/private/compras/pages/seguimiento-ordenes/seguimiento-ordenes';
+import { Penalidades } from './pages/private/incidencias/pages/penalidades/penalidades';
 
 export const routes: Routes = [
     
@@ -52,6 +53,7 @@ export const routes: Routes = [
                 {path: '', redirectTo: 'dashboard',pathMatch: 'full'},
                 {path: 'dashboard', component: Dashboard},
                 {path: 'compras', component: GestionCompras},
+                {path: 'penalidades', component: Penalidades}
             ]},
 
             // 3. ZONA: ALMACENERO
