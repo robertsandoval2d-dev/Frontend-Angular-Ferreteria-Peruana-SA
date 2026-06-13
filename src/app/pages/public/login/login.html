@@ -5,13 +5,49 @@
         <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
         <div class="mb-3">
             <label for="username" class="form-label">Usario</label>
-            <input type="text" name="username" class="form-control"  id="username" placeholder="Escribe tu nombre de usuario" formControlName="username">
+            <input 
+                type="text" 
+                class="form-control"
+                [class.is-invalid]="form.get('username')?.invalid && (form.get('username')?.touched || form.get('username')?.dirty)"  
+                id="username" 
+                placeholder="Escribe tu nombre de usuario" 
+                formControlName="username">
+
+            @if (form.get('username')?.invalid && (form.get('username')?.touched || form.get('username')?.dirty)) {
+            <div class="invalid-feedback">
+                {{ getErrorMessage('username') }}
+            </div>
+            }
         </div>
+
         <div class="mb-4">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" name="password" class="form-control" id="password" placeholder="Escribe tu contraseña" formControlName="password">
+            <div class="input-group">
+                <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                class="form-control" 
+                [class.is-invalid]="form.get('password')?.invalid && (form.get('password')?.touched || form.get('password')?.dirty)"
+                id="password" 
+                formControlName="password"
+                placeholder="Escribe tu contraseña">
+                
+                <button 
+                class="pwd-visibility btn btn-outline-secondary" 
+                type="button" 
+                (mousedown)="showPassword = true"
+                (mouseup)="showPassword = false"
+                (mouseleave)="showPassword = false">
+                <i class="bi" [class.bi-eye-slash]="showPassword" [class.bi-eye]="!showPassword"></i>
+                </button>
+            </div>
+            @if (form.get('password')?.invalid && (form.get('password')?.touched || form.get('password')?.dirty)) {
+            <div class="invalid-feedback d-block">
+                {{ getErrorMessage('password') }}
+            </div>
+            }
         </div>
-        <button type="submit" class="btn btn-primary mb-3">Iniciar Sesión</button>
+
+        <button type="submit" class="btn-iniciar-sesion btn btn-primary mb-3" [disabled]="form.invalid">Iniciar Sesión</button>
         <label class="form-label-recover-pwd">¿Olvidaste tu contraseña?</label>
         </form>
   </div>

@@ -26,6 +26,7 @@ export class Login {
 
   loginRequest: LoginRequest = {} as LoginRequest;
   loginResponse: LoginResponse = {} as LoginResponse; 
+  showPassword = false;
 
   form = new FormGroup({
     username: new FormControl('',[Validators.required]),
@@ -79,5 +80,20 @@ export class Login {
         this.toastService.error('Usuario o contraseña incorrectos');
       }
     });
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.form.get(controlName);
+    if (control?.hasError('required')){
+      switch(controlName){
+        case 'username':
+          return 'El username es obligatorio';
+        case 'password':
+          return 'La contraseña es obligatoria';
+        default:
+          return 'Formato inválido';
+      }
+    };
+    return '';
   }
 }
