@@ -10,7 +10,7 @@
   </ngb-toast>
 
 } -->
-@for (toast of toastService.toasts; track toast) {
+@for (toast of toastService.toasts(); track toast) {
   <ngb-toast
     [class]="getToastClass(toast.type)"
     [autohide]="true"

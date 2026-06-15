@@ -52,28 +52,28 @@ export class TablaUsuarios implements OnInit{
       confirmButtonText: 'Sí, dar de baja',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-      
+
+    this.ngZone.run(() => {
+
       if (result.isConfirmed) {
-        
-        this.ngZone.run(() => {
-          
-          this.usuariosService.deshabilitarTrabajador(trabajador.trabajadorId).subscribe({
-            next: () => { 
-              this.usuariosService.notifyRefresh(); 
-              this.toastService.success(`El trabajador ${trabajador.nombre} ha sido dado de baja exitosamente.`, 4000);
-              this.cdr.markForCheck();
-            },
-            error: (err) => {
-              console.error('Error al dar de baja:', err);
-              this.toastService.error('Ocurrió un error al intentar comunicar con el servidor.', 4000);
-            }
-          });
-
+        this.usuariosService.deshabilitarTrabajador(trabajador.trabajadorId).subscribe({
+          next: () => {
+            this.usuariosService.notifyRefresh();
+            this.toastService.success(
+              `El trabajador ${trabajador.nombre} ha sido dado de baja exitosamente.`,
+              4000
+            );
+          },
+          error: (err) => {
+            console.error('Error al dar de baja:', err);
+            this.toastService.error('Ocurrió un error al intentar comunicar con el servidor.', 4000);
+          }
         });
-
       }
+
     });
-  }
+  });
+}
 
 
 
@@ -93,6 +93,7 @@ export class TablaUsuarios implements OnInit{
     trabajadorId: 11111,
     nombre: 'Robert Alonso Sandoval',
     dni: '123456789',
+    cuentaActiva: true,
     tiendaId: 1,
     lineaId: 2,
     rol: 'ADMINISTRADOR_DE_TIENDA',

@@ -18,6 +18,7 @@
           <th scope="col" class="th-user">Usuario</th>
           <th scope="col" class="th-name">Nombre</th>
           <th scope="col" class="th-dni">DNI</th>
+          <th scope="col" class="th-estado">Estado</th>
           <th scope="col" class="th-options"></th>
         </tr>
       </thead>
@@ -47,6 +48,13 @@
             <td class="">{{trabajador.username}}</td>
             <td class="">{{trabajador.nombre}}</td>
             <td class="th-dni">{{trabajador.dni}}</td>
+            <td class="th-estado">
+              @if (trabajador.cuentaActiva) {
+                <span class="badge bg-success">Activo</span>
+              } @else {
+                <span class="badge bg-secondary">Inactivo</span>
+              }
+            </td>
             <td class="th-options">
               <div class="dropdown align-items-center text-center">
                 <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,7 +73,9 @@
                         <p class="m-0"><i class="bi bi-trash"></i> Dar de Baja</p>
                       </button>
                     }@else {
-                      <span class="badge bg-secondary">Inactivo</span>  
+                      <button disabled class="dropdown-item text-center">
+                        <p class="m-0"><i class="bi bi-lock"></i> Inactivo</p>
+                      </button>
                     }
 
                   </li>
@@ -99,6 +109,13 @@
           <td class="">{{trabajadorDePrueba.username}}</td>
           <td class="">{{trabajadorDePrueba.nombre}}</td>
           <td class="th-dni">{{trabajadorDePrueba.dni}}</td>
+          <td class="th-estado">
+            @if (trabajadorDePrueba.cuentaActiva) {
+              <span class="badge bg-success">Activo</span>
+            } @else {
+              <span class="badge bg-secondary">Inactivo</span>
+            }
+          </td>
           <td class="th-options">
             <div class="dropdown align-items-center text-center">
               <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">

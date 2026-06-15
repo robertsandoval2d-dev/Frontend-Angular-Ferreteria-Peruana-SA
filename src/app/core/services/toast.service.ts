@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal  } from '@angular/core';
 
 export type ToastType = 'success' | 'danger' | 'warning' | 'info';
 
@@ -13,7 +13,7 @@ export interface Toast {
 })
 export class ToastService {
 
-  toasts: Toast[] = [];
+  toasts = signal<Toast[]>([]);
 
   show(message: string, type: ToastType = 'info', delay: number = 2000) {
     const toast: Toast = {
@@ -23,7 +23,7 @@ export class ToastService {
     };
 
     console.log('adding this toast', toast);
-    this.toasts.push(toast);
+    this.toasts.update(current => [...current, toast]);
   }
 
   success(message: string, delay?: number) {
@@ -43,10 +43,10 @@ export class ToastService {
   }
 
   remove(toast: Toast) {
-    this.toasts = this.toasts.filter(t => t !== toast);
+    this.toasts.update(current => current.filter(t => t !== toast));
   }
 
   clear() {
-    this.toasts = [];
+    this.toasts.set([]);
   }
 }
