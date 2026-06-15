@@ -3,6 +3,7 @@ export interface TrabajadorCreateRequest {
     dni: string;
     username: string;
     password?: string;
+    mail: string;
     rol: string;
     tiendaId?: number;
     lineaId?: number;

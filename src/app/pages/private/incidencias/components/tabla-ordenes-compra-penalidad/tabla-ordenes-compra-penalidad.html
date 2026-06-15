@@ -16,37 +16,30 @@
                 </tr>
             </thead>
             <tbody class="table-oc-penalidad-body text-center">
-                <tr>
-                    <td>OC-100</td>
-                    <td class="text-start">Ceramicas SANDOVAL SAC</td>
-                    <td>30/05/26</td>
-                    <td>30/05/26</td>
-                    <td>21</td>
-                    <td>2,500.00</td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn p-0" data-bs-toggle="dropdown">
-                                <i class="bi bi-three-dots-vertical"></i>
-                            </button>
-                            <ul class="dropdown-menu rounded-3 overflow-hidden p-0 border-0">
-                                <li>
-                                    <button class="dropdown-item text-center">
-                                        <p class="m-0 fw-bolder">Asignar Penalidad</p>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>12</td>
-                    <td></td>
-                    <td>21</td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @for (ordenVencida of listaOrdenes; track $index) {
+                    <tr>
+                        <td>OC-{{ordenVencida.ordenCompraId.toString().padStart(3, '0')}}</td>
+                        <td>{{ordenVencida.proveedor}}</td>
+                        <td>{{ordenVencida.fechaEntrega | date:'dd/MM/yyyy'}}</td>
+                        <td>{{ordenVencida.fechaLimite | date:'dd/MM/yyyy'}}</td>
+                        <td>{{ordenVencida.diasRetraso}}</td>
+                        <td>{{ordenVencida.monto | currency:'USD'}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn p-0" data-bs-toggle="dropdown">
+                                    <i class="bi bi-three-dots-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu rounded-3 overflow-hidden p-0 border-0">
+                                    <li>
+                                        <button class="dropdown-item text-center">
+                                            <p class="m-0 fw-bolder" (click)="registroPenalidad(ordenVencida)">Asignar Penalidad</p>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>    
+                }
             </tbody>
         </table>
     </div>

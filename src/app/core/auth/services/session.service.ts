@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
 })
 export class SessionService {
 
-  private testerUserIndex = 3; // 0 , 1, 2, 3
+  private testerUserIndex = 0; // 0 , 1, 2, 3
   private fakeUsers = ['ADMIN', 'JEFE_DE_LINEA', 'ALMACENERO', 'ADMINISTRADOR_DE_TIENDA'];
 
 

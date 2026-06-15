@@ -6,54 +6,136 @@
     <form [formGroup]="registroForm" (ngSubmit)="guardarUsuario()" class="row g-3 px-1 py-1">
         <div class="col-12">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="name" formControlName="nombre">
+            <input type="text" class="form-control" id="name" formControlName="nombre"
+                placement="right" triggers="manual"
+                [autoClose]="false" #tNombre="ngbTooltip"
+                [ngbTooltip]="errorNombre" tooltipClass="tooltip-rojo"
+                [ngClass]="{'is-invalid': (registroForm.get('nombre')?.hasError('required') && (registroForm.get('nombre')?.touched || formEnviado)) || tNombre.isOpen()}"
+                (blur)="registroForm.get('nombre')?.invalid ? tNombre.open() : null"
+            >
+            <ng-template #errorNombre>
+                @if ((registroForm.get('nombre')?.touched || tooltipNombre) && (registroForm.get('nombre')?.hasError('required'))) {<span>Campo obligatorio</span>}
+            </ng-template>
         </div>
         <div class="col-12">
             <label for="dni" class="form-label">Dni</label>
-            <input type="text" class="form-control" id="dni" formControlName="dni">
+            <input 
+                type="text" class="form-control" id="dni" formControlName="dni"
+                placement="right" triggers="manual"
+                [autoClose]="false" #tDni="ngbTooltip"
+                [ngbTooltip]="errorDni" tooltipClass="tooltip-rojo"
+                [ngClass]="{'is-invalid': (registroForm.get('dni')?.hasError('required') && (registroForm.get('dni')?.touched || formEnviado)) || tDni.isOpen()}"
+                (blur)="registroForm.get('dni')?.invalid ? tDni.open() : null"
+            >
+            <ng-template #errorDni>
+                @if ((registroForm.get('dni')?.touched || tooltipDni) && (registroForm.get('dni')?.hasError('required'))) {<span>Campo obligatorio</span>}
+                @if ((registroForm.get('dni')?.hasError('pattern')) && this.tooltipDni) {<span>El DNI debe contener exactamente 8 dígitos numéricos</span>}
+            </ng-template>
         </div>
         <div class="col-12">
             <label for="username" class="form-label">Usuario</label>
-            <input type="text" class="form-control" id="username" formControlName="username">
+            <input type="text" class="form-control" id="username" formControlName="username"
+                placement="right" triggers="manual"
+                [autoClose]="false" #tUsername="ngbTooltip"
+                [ngbTooltip]="errorUsername" tooltipClass="tooltip-rojo"
+                [ngClass]="{'is-invalid': (registroForm.get('username')?.hasError('required') && (registroForm.get('username')?.touched || formEnviado)) || tUsername.isOpen()}"
+                (blur)="registroForm.get('username')?.invalid ? tUsername.open() : null"
+            >
+            <ng-template #errorUsername>
+                @if ((registroForm.get('username')?.touched || tooltipUsername) && (registroForm.get('username')?.hasError('required'))) {<span>Campo obligatorio</span>}
+            </ng-template>
         </div>
         <div class="col-12">
             <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="password" formControlName="password">
+            <input type="password" class="form-control" id="password" formControlName="password"
+                placement="right" triggers="manual"
+                [autoClose]="false" #tPassword="ngbTooltip"
+                [ngbTooltip]="errorPassword" tooltipClass="tooltip-rojo" 
+                [ngClass]="{'is-invalid': (registroForm.get('password')?.hasError('required') && (registroForm.get('password')?.touched || formEnviado)) || tPassword.isOpen()}"
+                (blur)="registroForm.get('password')?.invalid ? tPassword.open() : null" 
+            >
+            <ng-template #errorPassword>
+                @if ((registroForm.get('password')?.touched || tooltipPassword) && (registroForm.get('password')?.hasError('required'))) {<span>Campo obligatorio</span>}
+                @if ((registroForm.get('password')?.hasError('minlength')) && this.tooltipPassword) {<span>La contraseña es muy corta</span>}
+                @if (!registroForm.get('password')?.hasError('minlength') && (registroForm.get('password')?.hasError('pattern')) && this.tooltipPassword) {<span>La contraseña debe contener mayúsculas, minúsculas y números</span>}
+            </ng-template>
         </div>
+        <div class="col-12">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input 
+                type="email" class="form-control" id="email" formControlName="mail"
+                placement="right" triggers="manual"
+                [autoClose]="false" #tEmail="ngbTooltip"
+                [ngbTooltip]="errorEmail" tooltipClass="tooltip-rojo" 
+                [ngClass]="{'is-invalid': (registroForm.get('mail')?.hasError('required') && (registroForm.get('mail')?.touched || formEnviado)) || tEmail.isOpen()}"
+                (blur)="registroForm.get('mail')?.invalid ? tEmail.open() : null" 
+            >
+            <ng-template #errorEmail>
+                @if ((registroForm.get('mail')?.touched || tooltipEmail) && (registroForm.get('mail')?.hasError('required'))) {<span>Campo obligatorio</span>}
+                @if ((registroForm.get('mail')?.hasError('email')) && this.tooltipEmail) {<span>Correo ejemplo: usuario@home.com</span>}
+            </ng-template>
+        </div>
+
         <div class="col-md-4">
             <label for="rol" class="form-label">Rol</label>
-            <select id="rol" class="form-select" formControlName="rol">
+            <select id="rol" class="form-select" formControlName="rol"
+                placement="right" triggers="manual"
+                [autoClose]="false" #tRol="ngbTooltip"
+                [ngbTooltip]="errorRol" tooltipClass="tooltip-rojo"
+                [ngClass]="{'is-invalid': (registroForm.get('rol')?.hasError('required') && (registroForm.get('rol')?.touched || formEnviado)) || tRol.isOpen()}"
+                (blur)="registroForm.get('rol')?.invalid ? tRol.open() : null" 
+            >
                 <option value="" disabled selected>Selecciona un rol...</option>
                 <option value="JEFE_DE_LINEA">Jefe de Línea</option>
                 <option value="ALMACENERO">Almacenero</option>
                 <option value="ADMINISTRADOR_DE_TIENDA">Administrador de Tienda</option>
                 <option value="ADMIN">ADMIN</option>
             </select>
+            <ng-template #errorRol>
+                @if ((registroForm.get('rol')?.touched || tooltipRol) && registroForm.get('rol')?.hasError('required')) {<span>Debe seleccionar un rol</span>}
+            </ng-template>
         </div>
         @if (registroForm.get('rol')?.value !== 'ADMIN' && registroForm.get('rol')?.value !== '') {
             <div class="col-md-4">
                 <label for="store" class="form-label">Tienda</label>
-                <select id="store" class="form-select" formControlName="tiendaId">
+                <select id="store" class="form-select" formControlName="tiendaId"
+                    placement="right" triggers="manual"
+                    [autoClose]="false" #tTienda="ngbTooltip"
+                    [ngbTooltip]="errorTienda" tooltipClass="tooltip-rojo"
+                    [ngClass]="{'is-invalid': (registroForm.get('tiendaId')?.hasError('required') && (registroForm.get('tiendaId')?.touched || formEnviado)) || tTienda?.isOpen()}"
+                    (blur)="registroForm.get('tiendaId')?.invalid ? tTienda.open() : null" 
+                >
                     <option value="" disabled selected>Seleccione...</option>
                     @for (sucursal of listaSucursales; track sucursal.tiendaId) {
                         <option [value]="sucursal.tiendaId">{{sucursal.nombreTienda}}⠀</option>
                     }
-
                 </select>
+                <ng-template #errorTienda>
+                    @if ((registroForm.get('tiendaId')?.touched || tooltipTienda) && registroForm.get('tiendaId')?.hasError('required')) {<span>Debe seleccionar una Tienda</span>}
+                </ng-template>
             </div>
         }
-
         @if (registroForm.get('rol')?.value === 'JEFE_DE_LINEA') {
             <div class="col-md-4">
                 <label for="line" class="form-label">Línea</label>
-                <select id="line" class="form-select was" formControlName="lineaId">
+                <select id="line" class="form-select was" formControlName="lineaId"
+                    placement="right" triggers="manual"
+                    [autoClose]="false" #tLinea="ngbTooltip"
+                    [ngbTooltip]="errorLinea" tooltipClass="tooltip-rojo"
+                    [ngClass]="{'is-invalid': (registroForm.get('lineaId')?.hasError('required') && (registroForm.get('lineaId')?.touched || formEnviado)) || tLinea?.isOpen()}"
+                    (blur)="registroForm.get('lineaId')?.invalid ? tLinea.open() : null" 
+                >
                     <option value="" disabled selected>Seleccione...</option>
                         @for (linea of listaLineas; track linea.lineaId) {
                             <option [value]="linea.lineaId">{{linea.nombreLinea}}⠀</option>
                         }
                 </select>
+                <ng-template #errorLinea>
+                    @if ((registroForm.get('lineaId')?.touched || tooltipLinea) && registroForm.get('lineaId')?.hasError('required')) {<span>Debe seleccionar una Línea</span>}
+                </ng-template>
             </div>
         }
+
 
         <div class="col-12 mt-4">
             <button type="submit" class="btn-registrar btn fw-bolder">Registrar</button>

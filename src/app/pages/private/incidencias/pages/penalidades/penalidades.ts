@@ -6,6 +6,22 @@ import { TablaOrdenesCompraPenalidad } from '../../components/tabla-ordenes-comp
   selector: 'app-penalidades',
   imports: [FormRegistroPenalidad, TablaOrdenesCompraPenalidad],
   templateUrl: './penalidades.html',
+  standalone: true,
   styleUrl: './penalidades.scss',
 })
-export class Penalidades {}
+export class Penalidades {
+
+  mostrarFormulario: boolean = false;
+  ordenSeleccionada: any = null;
+
+
+  cerrarFormulario(){
+    this.mostrarFormulario = false;
+  }
+
+  abrirFormulario(ordenVencida: any){
+    this.mostrarFormulario = true;
+    this.ordenSeleccionada = ordenVencida;
+  }
+
+}

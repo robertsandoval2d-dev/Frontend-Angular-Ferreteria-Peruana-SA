@@ -22,6 +22,19 @@
             background-color: #7fb0b8;
         }
     }
+
+    ::ng-deep .tooltip-rojo {
+        --bs-tooltip-bg: #dc3545; 
+        .tooltip-arrow::before {
+            border-right-color: #dc3545 !important;
+        }
+        
+        .tooltip-inner {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+    }
+    
 }
 
 @keyframes zoomIn {
