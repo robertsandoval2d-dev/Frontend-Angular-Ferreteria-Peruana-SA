@@ -3,9 +3,44 @@
     <div class="w-100">
       <p class="fs-3 fw-bolder m-0 text-center text-lg-start">Lista de Trabajadores</p>
     </div>
-    <div class="d-flex flex-column flex-md-row flex-end gap-2 gap-md-3 justify-content-end w-100">
-      <button class="btn-filtrar btn w-100 fw-bolder">Filtrar</button>
-      <button class="btn-registrar btn w-100 w-md-auto fw-bolder" (click)="abrirRegistro()">Registrar Nuevo Trabajador</button>
+    <div class="tu-buttons d-flex flex-column flex-md-row justify-content-lg-end gap-2 gap-md-3 w-100 align-items-md-center">
+      <div class="dropdown btn-filtrar rounded-3">
+        <button class="btn btn-filtrar d-flex flex-row align-items-md-center gap-md-2 flex-lg-column gap-lg-0 flex-xl-column flex-xxl-row justify-content-between" 
+                type="button" 
+                data-bs-toggle="dropdown" 
+                aria-expanded="false">
+            <span class="fw-bolder text-center w-100">Filtrar por</span>
+            <i class="bi bi-filter" style="-webkit-text-stroke-width: 0.5px;"></i>
+        </button>
+
+        <ul class="dropdown-menu">
+            <li>
+                <label class="dropdown-item">
+                    <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Rol')" checked>
+                    Default
+                </label>
+            </li>
+            <li>
+                <label class="dropdown-item">
+                    <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Id')">
+                    ID
+                </label>
+            </li>
+            <li>
+                <label class="dropdown-item">
+                    <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Nombre')">
+                    Nombre
+                </label>
+            </li>
+            <li>
+                <label class="dropdown-item">
+                    <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Estado')">
+                    Estado
+                </label>
+            </li>
+        </ul>
+      </div>
+      <button class="btn btn-registrar fw-bolder" (click)="abrirRegistro()">Registrar Nuevo Trabajador</button>
     </div>
   </div>
   
@@ -23,9 +58,9 @@
         </tr>
       </thead>
       <tbody class="table-group-divider">
-        @for (trabajador of listaTrabajadores; track trabajador.trabajadorId){
+        @for (trabajador of listaFiltrada; track trabajador.trabajadorId){
           <tr>
-            <td scope="row" class="th-id">#{{trabajador.trabajadorId}}</td>
+            <td scope="row" class="th-id">U-{{trabajador.trabajadorId.toString().padStart(2, '0')}}</td>
 
             @switch (trabajador.rol) {
               @case ('ADMIN') {
@@ -60,7 +95,7 @@
                 <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="bi bi-three-dots-vertical"></i>
                 </button>
-                <ul class="dropdown-menu ">
+                <ul class="dropdown-menu">
                   <li>
                     <button class="dropdown-item text-center">
                       <p class="m-0" (click)="modificarTrabajador(trabajador)">Modificar</p>
