@@ -1,15 +1,16 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { CurrencyPipe } from '@angular/common';
 import { CompraService } from '../../services/compra.service';
 import { VistaPreviaOCResponse } from '../../models/response/vista-previa-oc-response';
 import { ToastService } from '../../../../../core/services/toast.service';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 import { OrdenCompraRequest } from '../../models/request/orden-compra-request';
 import { DetalleOrdenCompra } from '../../models/request/detalle-orden-compra';
 
 @Component({
   selector: 'app-form-generar-orden-compra',
-  imports: [ReactiveFormsModule, CurrencyPipe],
+  imports: [ReactiveFormsModule, CurrencyPipe, NgbTooltip],
   templateUrl: './form-generar-orden-compra.html',
   styleUrl: './form-generar-orden-compra.scss',
 })
@@ -24,12 +25,16 @@ export class FormGenerarOrdenCompra implements OnInit {
 
   formularioCompra = this.fb.group({
     proveedorSeleccionado: new FormControl<VistaPreviaOCResponse | null>(null),
-    plazoFechaMaximo: ['', [Validators.required]],
+    plazoFechaMaximo: ['', [Validators.required, this.fechaRangoValidator(4)]],
     detallesArray: this.fb.array([]) // cantidades
   });
 
   get detallesArray(): FormArray {
     return this.formularioCompra.get('detallesArray') as FormArray;
+  }
+
+  get plazoFechaMaximo(): FormControl{
+    return this.formularioCompra.get('plazoFechaMaximo') as FormControl;
   }
 
   ngOnInit() {
@@ -44,7 +49,7 @@ export class FormGenerarOrdenCompra implements OnInit {
       if (orden && orden.detalles) {
         orden.detalles.forEach(detalle => {
           this.detallesArray.push(this.fb.group({
-            cantidad: [detalle.cantidad, [Validators.required, Validators.min(1)]]
+            cantidad: [detalle.cantidad, [Validators.required,Validators.pattern(/^-?[0-9]+$/), Validators.min(1)]]
           }));
         });
 
@@ -72,19 +77,6 @@ export class FormGenerarOrdenCompra implements OnInit {
         this.toastService.error(mensaje);
       }
     })
-  }
-
-  construirFormArray(orden: VistaPreviaOCResponse | null) {
-    this.detallesArray.clear();
-
-    if (orden && orden.detalles) {
-      orden.detalles.forEach(detalle => {
-        const filaForm = this.fb.group({
-          cantidad: [detalle.cantidad, [Validators.required, Validators.min(1)]]
-        });
-        this.detallesArray.push(filaForm);
-      });
-    }
   }
 
   recalcularTotalReactivo(valoresFilas: any[]) {
@@ -156,5 +148,92 @@ export class FormGenerarOrdenCompra implements OnInit {
     this.ordenSeleccionada = null;
     this.cargarVistaPreviaOrdenCompra();
     this.cdr.detectChanges();
+  }
+
+  getErrorMessageArray(index: number, controlName: string): string {
+    const control = this.detallesArray.at(index).get(controlName);
+
+    if (control?.hasError('required')) {
+      switch(controlName) {
+        case 'cantidad':
+          return 'La cantidad es obligatoria';
+        default:
+          return 'Este campo es obligatorio';
+      }
+    }
+
+    if (control?.hasError('pattern') && controlName === 'cantidad') {
+      return 'Solo se aceptan números';
+    }
+
+    if (control?.hasError('min') && controlName === 'cantidad') {
+      const valorMinimo = control.errors?.['min'].min;
+      return `La cantidad debe ser al menos ${valorMinimo}`;
+    }
+
+    return '';
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.formularioCompra.get(controlName);
+
+    if (control?.hasError('required')) {
+      switch(controlName) {
+        case 'plazoFechaMaximo':
+          return 'La fecha es obligatoria';
+        default:
+          return 'Este campo es obligatorio';
+      }
+    }
+
+    if (control?.hasError('fechaPasada') && controlName === 'plazoFechaMaximo') {
+      return 'La fecha no puede ser anterior al día de hoy';
+    }
+
+    if (control?.hasError('fechaMuyFutura') && controlName === 'plazoFechaMaximo') {
+      const meses = control.errors?.['fechaMuyFutura'].meses;
+      return `La fecha no puede exceder los ${meses} meses a futuro`;
+    }
+
+    return '';
+  }
+
+  private fechaRangoValidator(mesesMaximo: number = 4): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+
+      let fechaInput: Date;
+      if (typeof control.value === 'string') {
+        const partes = control.value.split('-');
+        if (partes.length !== 3) return null; 
+        
+        fechaInput = new Date(
+          parseInt(partes[0], 10),
+          parseInt(partes[1], 10) - 1,
+          parseInt(partes[2], 10)
+        );
+      } else {
+        fechaInput = new Date(control.value);
+      }
+      fechaInput.setHours(0, 0, 0, 0);
+
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
+
+      const limiteFuturo = new Date(hoy);
+      limiteFuturo.setMonth(limiteFuturo.getMonth() + mesesMaximo);
+
+      if (fechaInput < hoy) {
+        return { fechaPasada: true };
+      }
+
+      if (fechaInput > limiteFuturo) {
+        return { fechaMuyFutura: { meses: mesesMaximo } };
+      }
+
+      return null;
+    };
   }
 }

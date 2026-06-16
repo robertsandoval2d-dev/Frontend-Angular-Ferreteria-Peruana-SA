@@ -58,3 +58,8 @@ body {
   padding: 0;
   width: 100%;
 }
+
+.red-tooltip {
+  --bs-tooltip-bg: var(--bs-danger); /* El rojo predeterminado de Bootstrap */
+  --bs-tooltip-color: #fff;          /* Texto blanco */
+}
