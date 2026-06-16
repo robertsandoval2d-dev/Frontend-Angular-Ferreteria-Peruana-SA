@@ -30,7 +30,16 @@
                         <div class="input-group">
                             <input type="date" 
                                    class="form-control rounded" 
-                                   formControlName="plazoFechaMaximo">
+                                   [class.is-invalid]="formularioCompra.get('plazoFechaMaximo')?.invalid && (formularioCompra.get('plazoFechaMaximo')?.touched || formularioCompra.get('plazoFechaMaximo')?.dirty)"
+                                   formControlName="plazoFechaMaximo"
+                                   #fechaTooltip="ngbTooltip"
+                                   [ngbTooltip]="getErrorMessage('plazoFechaMaximo')"
+                                   triggers="manual"
+                                   (input)="getErrorMessage('plazoFechaMaximo') ? fechaTooltip.open() : fechaTooltip.close()"
+                                   (focus)="getErrorMessage('plazoFechaMaximo') ? fechaTooltip.open() : fechaTooltip.close()"
+                                   (blur)="fechaTooltip.close()"
+                                   tooltipClass="red-tooltip"
+                                   placement="bottom">
                         </div>   
                     </div>
                 </th>
@@ -54,8 +63,17 @@
                 <td>
                     <input type="text" 
                            class="form-control form-control-sm text-center mx-auto" 
+                           [class.is-invalid]="detalle.get('cantidad')?.invalid && (detalle.get('cantidad')?.touched || detalle.get('cantidad')?.dirty)"
                            style="max-width: 80px;"
-                           formControlName="cantidad">
+                           #cantidadTooltip="ngbTooltip"
+                           [ngbTooltip]="getErrorMessageArray(i,'cantidad')" 
+                           formControlName="cantidad"                             
+                           triggers="manual"
+                           (input)="getErrorMessageArray(i,'cantidad') ? cantidadTooltip.open() : cantidadTooltip.close()"
+                           (focus)="getErrorMessageArray(i,'cantidad') ? cantidadTooltip.open() : cantidadTooltip.close()"
+                           (blur)="cantidadTooltip.close()"
+                           tooltipClass="red-tooltip"
+                           placement="bottom">
                 </td>
                 <td>{{ordenSeleccionada.detalles[i].precioUnidad | currency:'PEN':'S/ '}}</td>
                 <td>{{(detalle.get('cantidad')?.value * ordenSeleccionada.detalles[i].precioUnidad) | currency:'PEN':'S/ '}}</td>

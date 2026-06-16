@@ -1,14 +1,15 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { CompraService } from '../../services/compra.service';
 import { ProductoCatalogoResponse } from '../../models/response/producto-catalogo-response';
 import { ToastService } from '../../../../../core/services/toast.service';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
 
 import { CronogramaCreateRequest } from '../../models/request/cronograma-create-request';
 
 @Component({
   selector: 'app-form-generar-cronograma',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,NgbTooltip],
   templateUrl: './form-generar-cronograma.html',
   styleUrl: './form-generar-cronograma.scss',
 })
@@ -52,8 +53,8 @@ export class FormGenerarCronograma implements OnInit{
     const fila = this.fb.group({
       producto: [null, Validators.required],
       proveedorId: [{ value: null, disabled: true }, Validators.required],
-      cantidad: [null, [Validators.required, Validators.min(1)]],
-      fechaRequerida: ['', Validators.required]
+      cantidad: [null, [Validators.required,Validators.pattern(/^-?[0-9]+$/), Validators.min(1)]],
+      fechaRequerida: ['', [Validators.required, this.fechaRangoValidator(4)]]
     });
 
     fila.get('producto')?.valueChanges.subscribe((productoSeleccionado) => {
@@ -115,4 +116,80 @@ export class FormGenerarCronograma implements OnInit{
       }
     })
   }
+
+  getErrorMessage(index: number, controlName: string): string {
+    const control = this.lineas.at(index).get(controlName);
+
+    if (control?.hasError('required')) {
+      switch(controlName) {
+        case 'cantidad':
+          return 'La cantidad es obligatoria';
+        case 'fechaRequerida':
+          return 'La fecha es obligatoria';
+        default:
+          return 'Este campo es obligatorio';
+      }
+    }
+
+    if (control?.hasError('pattern') && controlName === 'cantidad') {
+      return 'Solo se aceptan números';
+    }
+
+    if (control?.hasError('min') && controlName === 'cantidad') {
+      const valorMinimo = control.errors?.['min'].min;
+      return `La cantidad debe ser al menos ${valorMinimo}`;
+    }
+
+    if (control?.hasError('fechaPasada') && controlName === 'fechaRequerida') {
+      return 'La fecha no puede ser anterior al día de hoy';
+    }
+
+    if (control?.hasError('fechaMuyFutura') && controlName === 'fechaRequerida') {
+      const meses = control.errors?.['fechaMuyFutura'].meses;
+      return `La fecha no puede exceder los ${meses} meses a futuro`;
+    }
+
+    return '';
+  }
+
+  private fechaRangoValidator(mesesMaximo: number = 4): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+
+      let fechaInput: Date;
+      if (typeof control.value === 'string') {
+        const partes = control.value.split('-');
+        if (partes.length !== 3) return null; 
+        
+        fechaInput = new Date(
+          parseInt(partes[0], 10),
+          parseInt(partes[1], 10) - 1,
+          parseInt(partes[2], 10)
+        );
+      } else {
+        fechaInput = new Date(control.value);
+      }
+      fechaInput.setHours(0, 0, 0, 0);
+
+      const hoy = new Date();
+      hoy.setHours(0, 0, 0, 0);
+
+      const limiteFuturo = new Date(hoy);
+      limiteFuturo.setMonth(limiteFuturo.getMonth() + mesesMaximo);
+
+      if (fechaInput < hoy) {
+        return { fechaPasada: true };
+      }
+
+      if (fechaInput > limiteFuturo) {
+        return { fechaMuyFutura: { meses: mesesMaximo } };
+      }
+
+      return null;
+    };
+  }
+
+
 }

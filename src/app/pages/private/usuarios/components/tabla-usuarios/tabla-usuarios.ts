@@ -84,7 +84,6 @@ export class TablaUsuarios implements OnInit{
               `El trabajador ${trabajador.nombre} ha sido dado de baja exitosamente.`,
               4000
             );
-            this.cdr.detectChanges();
           },
           error: (err) => {
             console.error('Error al dar de baja:', err);

@@ -43,12 +43,37 @@
                 </td>
                 <td>
                     <div class="input-group">
-                        <input type="number" class="form-control" placeholder="Cantidad" formControlName="cantidad" min="1">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            [class.is-invalid]="linea.get('cantidad')?.invalid && (linea.get('cantidad')?.touched || linea.get('cantidad')?.dirty)"  
+                            placeholder="Cantidad" 
+                            #cantidadTooltip="ngbTooltip"
+                            [ngbTooltip]="getErrorMessage(i,'cantidad')"
+                            formControlName="cantidad"
+                            triggers="manual"
+                            (input)="getErrorMessage(i,'cantidad') ? cantidadTooltip.open() : cantidadTooltip.close()"
+                            (focus)="getErrorMessage(i,'cantidad') ? cantidadTooltip.open() : cantidadTooltip.close()"
+                            (blur)="cantidadTooltip.close()"
+                            tooltipClass="red-tooltip"
+                            placement="bottom">
                     </div>
                 </td>
                 <td>
                     <div class="input-group">
-                        <input type="date" class="form-control" formControlName="fechaRequerida">
+                        <input 
+                            type="date" 
+                            class="form-control" 
+                            [class.is-invalid]="linea.get('fechaRequerida')?.invalid && (linea.get('fechaRequerida')?.touched || linea.get('fechaRequerida')?.dirty)" 
+                            #fechaTooltip="ngbTooltip"
+                            [ngbTooltip]="getErrorMessage(i,'fechaRequerida')"
+                            formControlName="fechaRequerida"
+                            triggers="manual"
+                            (input)="getErrorMessage(i,'fechaRequerida') ? fechaTooltip.open() : fechaTooltip.close()"
+                            (focus)="getErrorMessage(i,'fechaRequerida') ? fechaTooltip.open() : fechaTooltip.close()"
+                            (blur)="fechaTooltip.close()"
+                            tooltipClass="red-tooltip"
+                            placement="bottom">
                     </div>
                 </td>
                 <td>
@@ -68,7 +93,7 @@
         </tr>
         <tr>    
             <th colspan="5" class="text-center">
-                <button type="submit" class="boton-generar btn btn-primary fw-bold px-4">
+                <button type="submit" class="boton-generar btn btn-primary fw-bold px-4" [disabled]="lineas.invalid">
                     Generar cronograma
                 </button>
             </th>
