@@ -1,0 +1,59 @@
+.mensajes{
+
+    .m-seccion{
+        font-size: 13px;
+        color: #017287;
+    }
+
+    .btn-filtrar{
+        background-color: white;
+    }
+
+    .btn-mensaje{
+        background-color: #FDDA6C;
+    }
+
+
+    .table-mensajes-head{
+        background-color: #FDDA6C;
+    }
+
+    .table{
+        width: 900px;
+
+
+
+        .mensajes-header{
+            .m-title{
+                width: 40%;
+            }
+            .m-address{
+                width: 30%;
+            }
+            .m-date{
+                width: 15%;
+            }
+            .m-state{
+                width: 14%;
+            }
+            .m-option{
+                width: 1%;
+            }
+        }
+
+        .mensajes-body{
+            tr td {
+                border: none;
+            }
+            tr{
+                &:nth-of-type(odd) > * {
+                    background-color: #FEF7E2;
+                }
+                &:nth-of-type(even) > * {
+                    background-color: #fdfcf8;
+                }
+            }
+        }
+    }
+
+}
