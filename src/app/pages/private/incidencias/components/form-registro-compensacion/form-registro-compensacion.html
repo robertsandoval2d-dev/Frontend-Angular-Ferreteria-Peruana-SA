@@ -1,0 +1,72 @@
+<div class="form-compensacion rounded-4 px-4 pt-4 pb-3 shadow position-relative overflow-y-auto">
+    <button type="button" class="btn-close" style="font-size: 14px;" aria-label="Close" (click)="cancelarRegistro()"></button>
+    <div class="flex-grow-1 d-flex flex-column align-items-center">
+        <p class="fs-3 fw-bolder m-0">Asignar Compensación</p>
+        <p class="fs-5">{{pedidoVencido.nombreCliente}} -> P-{{pedidoVencido?.pedidoId?.toString().padStart(3, '0')}}</p>
+    </div>
+    <div class="px-5">
+        <table class="form-compensacion-table w-100 align-middle text-center mb-3">
+            <tbody>
+                <tr>
+                    <td>
+                        <p class="m-0 fw-bolder">Fecha de Entrega</p>
+                        <p class="m-0">{{pedidoVencido.fechaEntrega | date: 'dd/MM/yyyy'}}</p>
+                    </td>
+                    <td>
+                        <p class="m-0 fw-bolder">Fecha Límite</p>
+                        <p class="m-0">{{pedidoVencido.fechaMaximaEntrega | date: 'dd/MM/yyyy'}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><p class="m-0 fw-bolder">Estado</p></td>
+                    <td><p class="m-0 text-danger fw-bolder">{{pedidoVencido.estado}}</p></td>
+                </tr>
+                <tr>
+                    <td><p class="m-0 fw-bolder">Días de Retraso</p></td>
+                    <td><p class="m-0 text-danger fw-bolder">{{pedidoVencido.diasRetraso}}</p></td>
+                </tr>
+                <tr> 
+                    <td><p class="m-0 fw-bolder">Monto</p></td>
+                    <td><p class="m-0">{{pedidoVencido.montoTotalPedido | currency:'PEN':'S/ '}}</p></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="registrarCompensacion()" class="row g-3">
+        <div class="col-md-12 px-4 mb-1">
+            <label for="inputState" class="form-label px-1">Penalidad a Aplicar</label>
+            <select id="inputState" class="form-select" formControlName="tipoCompensacion">
+            <option disabled selected>Choose...</option>
+            <option value="10">Compensación C01 (10% - P)</option>
+            <option value="15">Compensación C02 (15% - P)</option>
+            <option value="25">Compensación C03 (25% - P)</option>
+            </select>
+        </div>
+        <div class="d-flex flex-row justify-content-between col-md-12 px-4 mb-1">
+            @switch (registerForm.get('tipoCompensacion')?.value) {
+                @case ('10') {<p class="m-0 px-2">Monto de Compensación (C01 -> P-{{pedidoVencido.pedidoId}})</p>}
+                @case ('15') {<p class="m-0 px-2">Monto de Compensación (C02 -> p-{{pedidoVencido.pedidoId}})</p>}
+                @case ('25') {<p class="m-0 px-2">Monto de Compensación (C03 -> p-{{pedidoVencido.pedidoId}})</p>}
+                @default {<p class="m-0 px-2">Seleccione una Compensación</p>}
+            }
+            
+            <P class="m-0 px-2">{{montoCalculado | currency:'PEN':'S/ '}}</P>
+        </div>
+        <div class="form-group px-4 mb-1">
+            <label for="exampleFormControlTextarea1" class="px-1">Motivo</label>
+            <textarea class="mt-1 form-control" id="exampleFormControlTextarea1" rows="1" formControlName="motivo"></textarea>
+        </div>
+        <div class="col-12 mb-1">
+            <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck" formControlName="terminosAceptados">
+            <label class="form-check-label" for="gridCheck">
+                Declaro que la presente compensación se aplica conforme a las condiciones comerciales y cláusulas acordadas con el proveedor.
+            </label>
+            <p class="m-0" >Read términos de Compensaciones Ferreteria Peruana S.A.</p>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn w-100" [disabled]="registerForm.invalid">Registrar Penalidad</button>
+        </div>
+    </form>
+</div>

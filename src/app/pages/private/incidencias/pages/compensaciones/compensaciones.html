@@ -1,1 +1,16 @@
-<p>compensaciones works!</p>
+<div class="compensacion-main">
+    <p class="seccion fw-bold ms-4 mt-4 mb-3">SECCIÓN GESTIÓN DE COMPENSACIONES</p>
+    <div class="compensacion-content">
+        <p class="seccion-name fw-bold ms-5 mb-0">Asignar Compensación a Pedido</p>
+        <p class="seccion-info fst-italic ms-5">{{tablaPedidos?.textoActualizacion$ | async}}</p>
+        <app-tabla-pedidos-compensacion #tablaPedidos (onAbrir)="abrirFormulario($event)"></app-tabla-pedidos-compensacion>
+        @if(mostrarFormulario){
+            <div class="overlay-modal d-flex justify-content-center align-items-center">
+                <app-form-registro-compensacion 
+                    [pedidoVencido]="pedidoSeleccionado" 
+                    (onCerrar)="cerrarFormulario()">
+                </app-form-registro-compensacion>
+            </div>
+        }
+    </div>
+</div>

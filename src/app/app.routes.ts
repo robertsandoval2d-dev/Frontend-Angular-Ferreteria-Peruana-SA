@@ -15,6 +15,7 @@ import { GestionUsuarios } from './pages/private/usuarios/pages/gestion-usuarios
 import { GestionInventario } from './pages/private/inventario/pages/gestion-inventario/gestion-inventario';
 import { SeguimientoOrdenes } from './pages/private/compras/pages/seguimiento-ordenes/seguimiento-ordenes';
 import { Penalidades } from './pages/private/incidencias/pages/penalidades/penalidades';
+import { Compensaciones } from './pages/private/incidencias/pages/compensaciones/compensaciones';
 
 export const routes: Routes = [
     
@@ -41,6 +42,7 @@ export const routes: Routes = [
                 {path: 'dashboard', component: Dashboard},
                 {path: 'abastecimiento', component: Abastecimiento},
                 {path: 'seguimiento', component: SeguimientoOrdenes},
+                {path: 'compensaciones', component: Compensaciones},
             ]},
 
             // 2. ZONA: ADMINISTRADOR DE TIENDA                
