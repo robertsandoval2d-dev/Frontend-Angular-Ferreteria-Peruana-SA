@@ -16,6 +16,7 @@ import { GestionInventario } from './pages/private/inventario/pages/gestion-inve
 import { SeguimientoOrdenes } from './pages/private/compras/pages/seguimiento-ordenes/seguimiento-ordenes';
 import { Penalidades } from './pages/private/incidencias/pages/penalidades/penalidades';
 import { Compensaciones } from './pages/private/incidencias/pages/compensaciones/compensaciones';
+import { Mensajeria } from './pages/private/mensajeria/pages/mensajeria/mensajeria';
 
 export const routes: Routes = [
     
@@ -31,6 +32,14 @@ export const routes: Routes = [
     {
         path: 'logistica', component: PrivateLayout, 
         children: [
+            {
+                path: 'mensajeria',
+                component: Mensajeria,
+                canActivate: [authGuard,roleGuard],
+                data:{
+                    roles:['ADMIN', 'ADMINISTRADOR_DE_TIENDA', 'JEFE_DE_LINEA', 'ALMACENERO']
+                }
+            },
             // 1. ZONA: JEFE DE LÍNEA
             {path: 'jefelinea',
             canActivate:[authGuard,roleGuard],

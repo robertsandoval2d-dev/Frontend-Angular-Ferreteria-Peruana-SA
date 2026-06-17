@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { SessionService } from '../../../core/auth/services/session.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../../core/auth/services/auth.service';
 
 @Component({
   selector: 'app-header-private',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './header-private.html',
   styleUrl: './header-private.scss',
 })

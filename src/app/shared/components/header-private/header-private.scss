@@ -29,6 +29,24 @@ $color-secundario: #DF5551;
         color: $color-secundario;
         }
     }
+    
+    .nav-link-selected{
+        color: $color-secundario;
+        position: relative;
+        padding-bottom: 1px;
+        display: inline-block;
+    }
+
+    .nav-link-selected::after{
+        content:"";
+        position:absolute;
+        bottom:0;
+        left:12.5%;
+        width:75%;
+        border-bottom:1px solid $color-secundario;
+    }
+
+    
 
     .navbar-toggler {
         border: none;

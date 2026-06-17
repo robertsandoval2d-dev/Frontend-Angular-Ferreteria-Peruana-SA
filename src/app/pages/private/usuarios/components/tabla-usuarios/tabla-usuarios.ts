@@ -1,9 +1,11 @@
 import Swal from 'sweetalert2';
-import { Component, inject, OnInit, ChangeDetectorRef, EventEmitter, Output, DestroyRef, NgZone, ApplicationRef } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { TrabajadorListResponse } from '../../models/response/trabajador-list-response';
+import { Component, inject, OnInit, ChangeDetectorRef, EventEmitter, Output, DestroyRef } from '@angular/core';
 import { ToastService } from '../../../../../core/services/toast.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { UserService } from '../../services/user.service';
+import { TrabajadorListResponse } from '../../models/response/trabajador-list-response';
+import { TrabajadorUpdateRequest } from '../../models/request/trabajador-update-request';
 
 @Component({
   selector: 'app-tabla-usuarios',
@@ -17,9 +19,10 @@ export class TablaUsuarios implements OnInit{
   private cdr = inject(ChangeDetectorRef);
   private toastService = inject(ToastService);
   private destroyRef = inject(DestroyRef);
-  private ngZone = inject(NgZone);
 
   listaTrabajadores: TrabajadorListResponse[] = [];
+  listaFiltrada: TrabajadorListResponse[] = [];
+  filtroActual: string = 'rol';
   
   ngOnInit() {
     this.cargarTrabajadores();
@@ -32,6 +35,7 @@ export class TablaUsuarios implements OnInit{
     this.usuariosService.listarTrabajadores().subscribe({
       next: (respuestaBackend) => {
         this.listaTrabajadores = respuestaBackend;
+        this.listaFiltrada = respuestaBackend;
         this.cdr.detectChanges();
       },
       error: (errorBackend) => {
@@ -41,7 +45,26 @@ export class TablaUsuarios implements OnInit{
     });
   }
 
-  confirmarBaja(trabajador: any) {
+  cambiarFiltro(filtro: string){
+    this.filtroActual = filtro;
+    switch(filtro){
+      case 'Rol':
+        this.listaFiltrada = [...this.listaFiltrada].sort((a, b) => a.rol.localeCompare(b.rol));
+        break;
+      case 'Id':
+        this.listaFiltrada = [...this.listaFiltrada].sort((a,b)=> a.trabajadorId - b.trabajadorId);
+        break;
+      case 'Nombre':
+        this.listaFiltrada = [...this.listaFiltrada].sort((a,b)=> a.nombre.localeCompare(b.nombre));
+        break;
+      case 'Estado':
+        this.listaFiltrada = [...this.listaFiltrada].sort((a,b)=> (b.cuentaActiva ? 1 : 0) - (a.cuentaActiva ? 1 : 0));
+        break;
+    }
+    this.cdr.detectChanges();
+  }
+
+  confirmarBaja(trabajador: TrabajadorListResponse) {
     Swal.fire({
       title: '¿Dar de baja?',
       text: `¿Estás seguro de que deseas deshabilitar a ${trabajador.nombre}? Esta acción restringirá su acceso al sistema.`,
@@ -52,8 +75,6 @@ export class TablaUsuarios implements OnInit{
       confirmButtonText: 'Sí, dar de baja',
       cancelButtonText: 'Cancelar'
     }).then((result) => {
-
-    this.ngZone.run(() => {
 
       if (result.isConfirmed) {
         this.usuariosService.deshabilitarTrabajador(trabajador.trabajadorId).subscribe({
@@ -70,12 +91,8 @@ export class TablaUsuarios implements OnInit{
           }
         });
       }
-
-    });
   });
 }
-
-
 
   @Output() onRegistrarClick = new EventEmitter<void>();
   @Output() onModificarClick = new EventEmitter<any>();
@@ -84,7 +101,7 @@ export class TablaUsuarios implements OnInit{
     this.onRegistrarClick.emit();
   }
 
-  modificarTrabajador(trabajador: any){
+  modificarTrabajador(trabajador: TrabajadorUpdateRequest){
     this.onModificarClick.emit(trabajador);
   }
 
@@ -99,8 +116,6 @@ export class TablaUsuarios implements OnInit{
     rol: 'ADMINISTRADOR_DE_TIENDA',
     username: 'rsandoval'
   };
-
-
 
 
 }

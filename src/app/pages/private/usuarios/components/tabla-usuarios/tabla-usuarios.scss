@@ -4,12 +4,22 @@
         color: white;
         border: none;
 
-        @media (min-width: 992px){
-            .btn-filtrar{ max-width: 100px; }
-            .btn-registrar{ max-width: 200px; }
-        }
-        @media (min-width: 1200px){
-            .btn-registrar{ max-width: 275px; }
+        .tu-buttons{
+            .btn-registrar{ width: 100%; }
+            .btn-filtrar{ width: 100%; }
+            @media (min-width: 768px){
+                .btn-registrar{ max-width: 50%; }
+            }
+            @media (min-width: 992px){
+                .btn-filtrar{ max-width: 90px; }
+                .btn-registrar{ max-width: 120px; }
+            }
+            @media (min-width: 1084px){
+                .btn-registrar{  max-width: 160px; }
+                .btn-filtrar{ max-width: 130px; }
+            }
+            @media (min-width: 1400px){ .btn-registrar{  max-width: 260px; }
+            }
         }
         
         .btn-filtrar{
@@ -31,7 +41,6 @@
     }
 
     .table {
-        table-layout: fixed;
         width: 100%;
         min-width: 900px;
         white-space: nowrap;
@@ -42,7 +51,6 @@
             min-width: 100%;
         }
         @media (min-width: 1200px) {
-            table-layout: fixed;
             width: 100%;
         }
         
@@ -53,11 +61,11 @@
             }
         }
         .th-id{
-            width: 35px;
+            width: 45px;
             text-align: center;
         }
         .th-rol{
-            width: 26%;
+            width: 20%;
         }
         .th-user{
             width: 20%;
