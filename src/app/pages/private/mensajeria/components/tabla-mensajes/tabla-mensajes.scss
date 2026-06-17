@@ -5,12 +5,33 @@
         color: #017287;
     }
 
+    .m-title{
+        h1{
+            font-size: 40px;
+            @media (width:992px) {
+                font-size: 40px;
+            }
+        }
+    }
+
     .btn-filtrar{
         background-color: white;
+        width: 50%;
+        height: 62px;
+        @media (min-width: 420px) {
+            height: auto;
+        }
+        @media (min-width: 1200px) {
+            width: auto;
+        }
     }
 
     .btn-mensaje{
         background-color: #FDDA6C;
+        width: 50%;
+        @media (min-width: 1200px) {
+            width: auto;
+        }
     }
 
 
@@ -19,9 +40,10 @@
     }
 
     .table{
-        width: 900px;
-
-
+        min-width: 900px;
+        @media (min-width:992px) {
+            min-width: 0;
+        }
 
         .mensajes-header{
             .m-title{
@@ -52,6 +74,30 @@
                 &:nth-of-type(even) > * {
                     background-color: #fdfcf8;
                 }
+            }
+
+            .mensaje-view{
+                cursor: pointer;
+                
+                &:hover td{
+                    background-color: #fff2c8;
+                }
+
+                .dropdown{
+                    .dropdown-menu{
+                        min-width: auto;
+                        background-color: white;
+                        .dropdown-item{
+                            &:hover, &:active{
+                                background-color: #FDDA6C !important;
+                                color: black;
+                            }
+
+                        }
+                    }
+                }
+
+
             }
         }
     }
