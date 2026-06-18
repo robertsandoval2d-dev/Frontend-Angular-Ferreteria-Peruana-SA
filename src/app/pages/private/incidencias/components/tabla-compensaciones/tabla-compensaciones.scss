@@ -1,0 +1,92 @@
+.compensacion{
+    .compensacion-head{
+        background: #7F3744;
+        color: white;
+    }
+
+    .table{
+        width: 100%;
+        min-width: 900px;
+        white-space: nowrap;
+
+        @media (min-width: 992px) {
+            white-space: normal;
+            min-width: 100%;
+        }
+
+        .table-compensacion-head{
+            th{
+                background: #BC717E;
+                color: white;
+                border-bottom-width: 0;
+            }
+
+            .th-id{
+                width: 20%;            
+            }
+            .th-diasr{
+                width: 16%;
+            }
+            .th-monto-c{
+                width: 20%;
+
+            }
+            .th-monto-p{
+                width: 20%;
+
+            }
+            .th-opciones{
+                width: 24%;
+            }
+        }
+
+        .table-compensacion-body{
+            tr{
+                &:nth-of-type(odd) > * {
+                    background-color: #f8eef0;
+                }
+                &:nth-of-type(even) > * {
+                    background-color: #F5D1D7;
+                }
+                td{
+                    border-bottom-width: 0;
+                }
+            }
+
+            .btn{
+                border: none;
+                &:focus,
+                &:active{
+                    box-shadow: none;
+                    border: none;
+                }
+            }
+
+            .etiqueta-procesado {
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 0.85rem;
+                font-weight: bold;
+                display: inline-block;
+                background-color: transparent;
+
+                &.aprobado {
+                    color: #155724;
+                    background-color: #c3e6cb;
+                    border: 1px solid #c3e6cb;
+                }
+
+                &.rechazado {
+                    color: #721c24;
+                    background-color: #ff7684;
+                    border: 1px solid #ff7684;
+                }
+            }
+
+        }
+    }   
+
+
+
+
+}

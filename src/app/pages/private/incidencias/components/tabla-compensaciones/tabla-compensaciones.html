@@ -1,0 +1,45 @@
+<div class="compensacion rounded-4 overflow-hidden shadow mx-5 mt-4">
+    <div class="compensacion-head d-flex align-items-center py-2 px-4">
+        <p class="m-0 fw-bolder fs-5 py-1">Compensaciones pendientes</p>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="table m-0 align-middle">
+            <thead>
+                <tr class="table-compensacion-head text-center align-middle">
+                    <th scope="col" class="th-id">ID Compensación</th>
+                    <th scope="col" class="th-diasr">Días de Retraso</th>
+                    <th scope="col" class="th-monto-c">Monto Compensación</th>
+                    <th scope="col" class="th-monto-p">Monto Pedido</th>
+                    <th scope="col" class="th-opciones"></th>
+                </tr>
+            </thead>
+            <tbody class="table-compensacion-body text-center">
+                @for (compensacion of listaCompensaciones; track $index) {
+                    <tr>
+                        <td>C-{{compensacion.compensacionId.toString().padStart(3, '0')}}</td>
+                        <td>{{compensacion.diasRetraso}}</td>
+                        <td>{{compensacion.montoCompensacion | currency:'PEN':'S/ '}}</td>
+                        <td>{{compensacion.montoTotalPedido | currency:'PEN':'S/ '}}</td>
+                        @if(compensacion.estado === 'PENDIENTE'){
+                            <td class="d-flex gap-3">
+                                <button type="button" class="btn btn-success btn-sm fw-bold" (click)="aprobarCompensacion(compensacion.compensacionId)">
+                                    Aprobar
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm fw-bold" (click)="rechazarCompensacion(compensacion.compensacionId)">
+                                    Rechazar
+                                </button>   
+                            </td>
+                        }
+                        @else{
+                            <td class="d-flex gap-3">
+                                <span class="etiqueta-procesado" [class.aprobado]="compensacion.estado === 'APROBADO'" [class.rechazado]="compensacion.estado === 'RECHAZADO'">
+                                    Ya se procesó ({{ compensacion.estado | titlecase }})
+                                </span>
+                            </td>
+                        }
+                    </tr>    
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

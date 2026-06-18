@@ -17,6 +17,7 @@ import { SeguimientoOrdenes } from './pages/private/compras/pages/seguimiento-or
 import { Penalidades } from './pages/private/incidencias/pages/penalidades/penalidades';
 import { Compensaciones } from './pages/private/incidencias/pages/compensaciones/compensaciones';
 import { Mensajeria } from './pages/private/mensajeria/pages/mensajeria/mensajeria';
+import { CompensacionesAprobacion } from './pages/private/incidencias/pages/compensaciones-aprobacion/compensaciones-aprobacion';
 
 export const routes: Routes = [
     
@@ -64,7 +65,8 @@ export const routes: Routes = [
                 {path: '', redirectTo: 'dashboard',pathMatch: 'full'},
                 {path: 'dashboard', component: Dashboard},
                 {path: 'compras', component: GestionCompras},
-                {path: 'penalidades', component: Penalidades}
+                {path: 'penalidades', component: Penalidades},
+                {path: 'compensaciones', component: CompensacionesAprobacion}
             ]},
 
             // 3. ZONA: ALMACENERO
