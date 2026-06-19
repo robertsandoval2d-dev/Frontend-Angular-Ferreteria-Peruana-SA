@@ -14,65 +14,81 @@
         }
     }
 
-    .btn-filtrar{
+    .btn-tipomensaje{
         background-color: white;
         width: 50%;
         height: 62px;
+        transition: all 0.5s;         
         @media (min-width: 420px) {
             height: auto;
         }
         @media (min-width: 1200px) {
             width: auto;
         }
-    }
-
-    .btn-mensaje{
-        background-color: #FDDA6C;
-        width: 50%;
-        @media (min-width: 1200px) {
-            width: auto;
+        &:hover{
+            background-color: #F16359;
+            color: white;
+            transform: scale(1.05);
         }
     }
 
-
-    .table-mensajes-head{
-        background-color: #FDDA6C;
+    .btn-mensaje{
+        background-color: #7F3744;
+        width: 50%;
+        transition: all 0.5s;         
+        @media (min-width: 1200px) {
+            width: auto;
+        }
+        &:hover{
+            background-color: #F16359;
+            color: white;    
+            transform: scale(1.05);
+        }
     }
 
     .table{
+        table-layout: fixed;
         min-width: 900px;
+
         @media (min-width:992px) {
             min-width: 0;
         }
 
-        .mensajes-header{
-            .m-title{
-                width: 40%;
+        .mensajes-body{
+            .m-logo{
+                width: 9%;
             }
             .m-address{
-                width: 30%;
+                width: 26%;
+            }
+            .m-description{
+                width: 38%;   
+                p {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    max-width: 100%;
+                }
             }
             .m-date{
-                width: 15%;
+                width: 20%;
             }
             .m-state{
-                width: 14%;
+                width: 5%;
             }
             .m-option{
-                width: 1%;
+                width: 3%;
             }
-        }
-
-        .mensajes-body{
             tr td {
                 border: none;
             }
             tr{
+                width: 100%;
                 &:nth-of-type(odd) > * {
-                    background-color: #FEF7E2;
+                    background-color: rgb(255, 245, 245);
                 }
                 &:nth-of-type(even) > * {
-                    background-color: #fdfcf8;
+                    background-color: rgb(255, 254, 254);
                 }
             }
 
@@ -80,7 +96,7 @@
                 cursor: pointer;
                 
                 &:hover td{
-                    background-color: #fff2c8;
+                    background-color: #eebfc8;
                 }
 
                 .dropdown{
@@ -89,8 +105,8 @@
                         background-color: white;
                         .dropdown-item{
                             &:hover, &:active{
-                                background-color: #FDDA6C !important;
-                                color: black;
+                                background-color: #7f3744 !important;
+                                color: rgb(255, 255, 255);
                             }
 
                         }

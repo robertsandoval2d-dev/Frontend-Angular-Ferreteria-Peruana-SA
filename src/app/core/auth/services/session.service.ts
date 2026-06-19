@@ -53,4 +53,9 @@ export class SessionService {
     const session = this.getInfoSession();
     return session?.nombreLinea??'';
   }
+
+  getUsername(): string{
+    const session = this.getInfoSession();
+    return session?.username??'';
+  }
 }

@@ -15,7 +15,7 @@ export class MensajeriaService {
 
   //GET
   listarMensajes(): Observable<MensajeListResponse[]> {
-    return this.http.get<MensajeListResponse[]>(`${environment.url}/trabajadores/sucursales`);
+    return this.http.get<MensajeListResponse[]>(`${environment.url}/mensajeria/mensajes`);
   }
 
 }
