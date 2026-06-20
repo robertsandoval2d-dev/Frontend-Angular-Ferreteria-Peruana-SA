@@ -1,1 +1,27 @@
-<p>form-mensaje works!</p>
+<div class="form-message d-flex flex-column shadow rounded-3 overflow-hidden mx-auto h-100">
+    <div class="form-message-t py-2 px-4 d-flex flex-row align-items-center">
+        <div class="w-100">
+            <i class="bi bi-chat-text fs-3 px-2" style="-webkit-text-stroke-width: 1px;"></i>
+            <span class="fs-3 fw-bolder">Nuevo Mensaje</span>
+        </div>
+        <button type="button" class="btn-close p-0 m-0" aria-label="Close" (click)="closeNewMessage()"></button>
+    </div>
+    <form [formGroup]="formMensaje" (ngSubmit)="enviarMensaje()" class="d-flex flex-column form-message-f px-3 py-1 ">
+        <div class="input-group ip">
+            <div class="col-12 ">
+                <input type="text" class="form-control px-0" placeholder="Para: " formControlName="usernameDestino">
+            </div>
+        </div>
+        <div class="input-group ip">
+            <div class="col-12">
+                <input type="text" class="form-control px-0" placeholder="Asunto: " formControlName="titulo">
+            </div>
+        </div>
+        <div class="input-group flex-grow-1">
+            <div class="col-12 h-100">
+                <textarea class="form-control px-0 h-100" placeholder="Mensaje..." formControlName="mensaje"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-enviar mb-2">Enviar</button>
+    </form>
+</div>

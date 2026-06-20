@@ -1,1 +1,22 @@
-<p>view-mensaje works!</p>
+<div class="view-mensaje rounded-3 shadow overflow-hidden">
+    <div class="view-mensaje-t d-flex flex-row justify-content-center align-items-center px-3 py-2">
+        <div class="w-100">
+            <i class="bi bi-person-circle fs-4 m-0 p-0" style="-webkit-text-stroke-width: 1px;"></i>
+            <span class="fs-4 px-3 fw-bolder">{{message?.titulo}}</span>
+        </div>
+        <div>
+            <span class="" style="font-size: 16px;">{{message?.fechaEnvio | date: 'dd/MM/yy'}}</span>
+            <span class="px-3" style="font-size: 16px;">{{message?.fechaEnvio | date: 'hh:mm'}}</span>
+        </div>
+        <button type="button" class="btn-close m-0 p-0" aria-label="Close" (click)="cerrarViewMessage()"></button>
+    </div>
+    <div class="px-4">
+        <div class="view-mensaje-user text-center py-2">
+            <span class="py-1">Enviado por: <strong>{{message?.emisorUsername}}</strong></span>
+        </div>
+        <div class="text-start">
+            <span>{{message?.mensaje}}</span>
+        </div>
+    </div>
+
+</div>

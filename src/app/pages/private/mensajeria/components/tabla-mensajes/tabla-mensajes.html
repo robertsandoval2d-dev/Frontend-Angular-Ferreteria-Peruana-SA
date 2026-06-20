@@ -1,4 +1,4 @@
-<div class="mensajes mt-3 mx-4">
+<div class="mensajes mt-3 mx-4 mb-3">
     <div class="mb-2 m-seccion">
         <span class=" fw-bold">SECCIÓN DE MENSAJERÍA</span>
     </div>
@@ -19,7 +19,7 @@
                     <i class="bi bi-envelope-arrow-down px-2" style="-webkit-text-stroke-width: 0.25px;"></i>
                 </button>
             }
-            <button class="btn btn-mensaje border border border-light-subtle d-flex flex-row justify-content-center align-items-center " >
+            <button class="btn btn-mensaje border border border-light-subtle d-flex flex-row justify-content-center align-items-center" (click)="newMessage()">
                 <i class="bi bi-send-plus px-2" style="-webkit-text-stroke-width: 0.18px; color: #ffffff;"></i>
                 <span class = "fw-medium" style="color: #ffffff;">Nuevo Mensaje</span>
             </button>
@@ -29,26 +29,17 @@
         <div class="px-3 py-3 table-mensajes-head">
             @if (tipoMensaje === 'recibidos') {
                 <i class="bi bi-inbox-fill px-3 fs-3" style="-webkit-text-stroke-width: 1px;"></i>
-                <span class="fw-bolder fs-3">Bandeja de Entrada ({{listaFiltrada.filter(mensaje => mensaje.leido === false).length}} no leídos)</span>
+                <span class="fw-bolder fs-3">Bandeja de Entrada ({{mensajesNoLeidos}} no leídos)</span>
             }@else {
                 <i class="bi bi-send px-3 fs-3" style="-webkit-text-stroke-width: 1px;"></i>
-                <span class="fw-bolder fs-3">Enviados ({{listaFiltrada.filter(mensaje => mensaje.leido === false).length}} no leídos)</span>
+                <span class="fw-bolder fs-3">Enviados</span>
             }
         </div>
         <div class="overflow-x-auto">
             <table class="table m-0">
-                <!-- <thead>
-                    <tr class="mensajes-header text-center align-middle m-0 p-0 b-0">
-                        <th scope="col" class="m-title"></th>
-                        <th scope="col" class="m-address"></th>
-                        <th scope="col" class="m-date"></th>
-                        <th scope="col" class="m-state"></th>
-                        <th scope="col" class="m-option"></th>
-                    </tr>
-                </thead> -->
                     <tbody class="mensajes-body text-start align-middle">
-                        @for (mensaje of listaFiltrada; track mensaje.mensajeId) {    
-                            <tr class="mensaje-view">
+                        @for (mensaje of mensajesPaginados; track mensaje.mensajeId) {    
+                            <tr class="mensaje-view" (click)="openMessage(mensaje)">
                                 <td class="m-logo text-center py-1">
                                     <span class="m-0 fw-medium">
                                         <i class="bi bi-person-circle" style="font-size: 45px;"></i>
@@ -91,5 +82,11 @@
                     </tbody>
             </table>
         </div>
+        <mat-paginator
+            [length]="listaFiltrada.length"
+            [pageSize]="6"
+            (page)="cambiarPagina($event)"
+            showFirstLastButtons>
+        </mat-paginator>
     </div>
 </div>

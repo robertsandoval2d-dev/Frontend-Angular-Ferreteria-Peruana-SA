@@ -1,3 +1,21 @@
-<app-tabla-mensajes></app-tabla-mensajes>
-<app-form-mensaje></app-form-mensaje>
-<app-view-mensaje></app-view-mensaje>
+<app-tabla-mensajes 
+    (onNewMessageClick)="newMessage()"
+    (onOpenMessageClick)="openViewMessage($event)"
+        ></app-tabla-mensajes>
+@if (formMessage) {
+    <div class="overlay d-flex justify-content-center align-items-center w-100">
+        <div class="form-wrapper">
+            <app-form-mensaje (OnCerrarNewMessage)="closeMessage()"></app-form-mensaje>
+        </div>
+    </div>
+}
+@if (viewMessage) {
+    <div class="overlay d-flex justify-content-center align-items-center w-100">
+        <div class="form-wrapper">
+            <app-view-mensaje 
+                [message]="mensajeSeleccionado"
+                    (OnCerrarViewMessage)="closeViewMessage()"
+                        ></app-view-mensaje>
+        </div>
+    </div>
+}

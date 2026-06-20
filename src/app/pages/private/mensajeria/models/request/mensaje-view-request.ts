@@ -1,4 +1,4 @@
-export interface MensajeListResponse{
+export interface MensajeViewRequest{
     mensajeId: number;
     titulo: string;
     mensaje: string;

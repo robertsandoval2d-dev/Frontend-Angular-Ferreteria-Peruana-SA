@@ -31,9 +31,9 @@
         .dynamic-content{
             flex-grow: 1;
             height: auto;
-            @media (min-width: 992px) {
-                height: auto;
-            }
+            // @media (min-width: 992px) {
+            //     height: auto;
+            // }
         }
     }
 

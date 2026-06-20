@@ -1,0 +1,13 @@
+.overlay{
+    background-color: hsla(0, 0%, 50%, 0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+
+    .form-wrapper{
+        width: 50%;
+        height: 70%;
+        max-width: 1800px;
+    }
+
+}
