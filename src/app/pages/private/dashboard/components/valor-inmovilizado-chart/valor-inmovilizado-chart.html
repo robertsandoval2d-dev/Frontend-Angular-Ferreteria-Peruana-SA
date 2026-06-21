@@ -1,0 +1,21 @@
+<div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 rounded-4">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-lg font-semibold text-gray-800">Top 10 Costo Financiero Inmovilizado</h3>
+    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Capital Retenido</span>
+  </div>
+
+  <div id="chart-bar-vertical" class="w-full">
+    <apx-chart
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [dataLabels]="chartOptions.dataLabels!"
+      [plotOptions]="chartOptions.plotOptions!"
+      [xaxis]="chartOptions.xaxis!"
+      [yaxis]="chartOptions.yaxis!"
+      [tooltip]="chartOptions.tooltip!"
+      [colors]="chartOptions.colors!"
+      [responsive]="chartOptions.responsive!"
+      [legend]="chartOptions.legend!">
+    </apx-chart>
+  </div>
+</div>

@@ -18,6 +18,7 @@ import { Penalidades } from './pages/private/incidencias/pages/penalidades/penal
 import { Compensaciones } from './pages/private/incidencias/pages/compensaciones/compensaciones';
 import { Mensajeria } from './pages/private/mensajeria/pages/mensajeria/mensajeria';
 import { CompensacionesAprobacion } from './pages/private/incidencias/pages/compensaciones-aprobacion/compensaciones-aprobacion';
+import { AnalisisLineas } from './pages/private/dashboard/pages/analisis-lineas/analisis-lineas';
 
 export const routes: Routes = [
     
@@ -53,6 +54,7 @@ export const routes: Routes = [
                 {path: 'abastecimiento', component: Abastecimiento},
                 {path: 'seguimiento', component: SeguimientoOrdenes},
                 {path: 'compensaciones', component: Compensaciones},
+                {path: 'analisis', component: AnalisisLineas},
             ]},
 
             // 2. ZONA: ADMINISTRADOR DE TIENDA                

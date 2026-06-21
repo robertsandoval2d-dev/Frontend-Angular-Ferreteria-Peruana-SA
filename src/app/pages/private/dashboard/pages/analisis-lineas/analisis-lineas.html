@@ -1,0 +1,24 @@
+<div class="analisis-main">
+    <p class="seccion fw-bold ms-4 mt-4 mb-3">SECCIÓN ANALISIS Y EVALUACIÓN DE INVENTARIO</p>
+    <div class="analisis-content">
+        <p class="seccion-name fw-bold ms-5 mb-0">Análisis de Línea Producto</p>
+        <p class="seccion-info fst-italic ms-5">{{textoActualizacion$ | async}}</p>
+        <div class="container-dashboard m-5 mt-4">
+            <div class="row g-4">
+                
+                <div class="col-12">
+                <app-saturacion-zona-chart></app-saturacion-zona-chart>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                <app-valor-inmovilizado-chart></app-valor-inmovilizado-chart>
+                </div>
+
+                <div class="col-12 col-lg-6">
+                <app-nventas-y-stock-xproducto-chart></app-nventas-y-stock-xproducto-chart>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

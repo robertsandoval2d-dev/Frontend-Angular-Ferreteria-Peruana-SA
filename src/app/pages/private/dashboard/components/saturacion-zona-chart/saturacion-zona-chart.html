@@ -1,0 +1,19 @@
+<div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 rounded-4">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-lg font-semibold text-gray-800">Saturación por Zona de Almacén</h3>
+    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Capacidad Física</span>
+  </div>
+
+  <div id="chart-bar-saturacion">
+      <apx-chart
+      [series]="chartOptions.series!"
+      [chart]="chartOptions.chart!"
+      [dataLabels]="chartOptions.dataLabels!"
+      [plotOptions]="chartOptions.plotOptions!"
+      [xaxis]="chartOptions.xaxis!"
+      [tooltip]="chartOptions.tooltip!"
+      [colors]="chartOptions.colors!">
+      </apx-chart>
+  </div>
+
+</div>
