@@ -1,7 +1,7 @@
 export const environment={
     production:false,
     url:'http://localhost:8080/logistica',
-    bypassAuth: false //true: permiso total  || false: autentificación
+    // bypassAuth: false //true: permiso total  || false: autentificación
 };
 // Para abrir en server local
 // export const environment={

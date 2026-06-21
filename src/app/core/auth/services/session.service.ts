@@ -37,9 +37,9 @@ export class SessionService {
   }
 
   getRole(): string{
-    if(environment.bypassAuth){
-        return this.fakeUsers[this.testerUserIndex];
-    }
+    // if(environment.bypassAuth){
+    //     return this.fakeUsers[this.testerUserIndex];
+    // }
     const session = this.getInfoSession();
     return session?.rol ??'';
   }

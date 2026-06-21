@@ -6,9 +6,9 @@ import { environment } from '../../../environments/environment';
 
 export const authGuard: CanActivateFn = () => {
 
-   if(environment.bypassAuth){
-    return true;
-  }
+  //  if(environment.bypassAuth){
+  //   return true;
+  // }
 
   const authService = inject(AuthService);
   const router = inject(Router);

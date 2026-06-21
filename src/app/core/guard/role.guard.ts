@@ -5,9 +5,9 @@ import { environment } from '../../../environments/environment';
 
 export const roleGuard: CanActivateFn = (route) => {
 
-   if(environment.bypassAuth){
-    return true;
-  }
+  //  if(environment.bypassAuth){
+  //   return true;
+  // }
 
   const sessionService = inject(SessionService);
   const router = inject(Router);
