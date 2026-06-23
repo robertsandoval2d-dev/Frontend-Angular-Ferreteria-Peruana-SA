@@ -4,10 +4,11 @@ import { AsyncPipe } from '@angular/common';
 import { SaturacionZonaChart } from "../../components/saturacion-zona-chart/saturacion-zona-chart";
 import { ValorInmovilizadoChart } from "../../components/valor-inmovilizado-chart/valor-inmovilizado-chart";
 import { NventasYStockXproductoChart } from "../../components/nventas-y-stock-xproducto-chart/nventas-y-stock-xproducto-chart";
+import { TablaProductos } from "../../../inventario/components/tabla-productos/tabla-productos";
 
 @Component({
   selector: 'app-analisis-lineas',
-  imports: [SaturacionZonaChart, ValorInmovilizadoChart, NventasYStockXproductoChart, AsyncPipe],
+  imports: [SaturacionZonaChart, ValorInmovilizadoChart, NventasYStockXproductoChart, AsyncPipe, TablaProductos],
   templateUrl: './analisis-lineas.html',
   styleUrl: './analisis-lineas.scss',
 })

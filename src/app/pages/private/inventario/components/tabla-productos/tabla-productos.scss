@@ -1,0 +1,76 @@
+.header-principal{
+    background-color: #7F3744;
+    border-color: #7F3744;
+    color: white;
+
+    .titulo-linea{
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: inherit;
+        color: inherit;
+    }
+    .barra-busqueda{
+        background-color: inherit;
+        input::placeholder{
+            color:#B3B3B3;
+        }
+        button{
+            background-color: white;
+            color: rgb(108,117,125);
+            &:hover{
+                background-color: rgb(108,117,125);
+                color: white;
+            }
+        }
+    }
+}
+
+.header-columnas{
+    font-family: 'Courier New', Courier, monospace;
+
+    th{
+        background-color: #BC717E;
+        border-color: #BC717E;
+        color: white;
+    }
+    .th-id{
+        width: 10%;
+    }
+    .th-nombre{
+        width: 30%;
+    }
+    .th-stock{
+        width: 10%;
+    }
+    .th-min-stock{
+        width: 10%;
+    }
+    .th-rotacion{
+        width: 10%;
+    }
+    .th-categoria{
+        width: 10%;
+    }
+    .th-update{
+        width: 20%;
+    }
+}
+
+.producto-columnas{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 500;
+
+    tr{
+
+        &:nth-of-type(odd) > * {
+            background-color: #f8eef0;
+            border-color: #f8eef0;
+        }
+        &:nth-of-type(even) > * {
+            background-color: #F5D1D7;
+            border-color: #F5D1D7;
+        }
+    }
+    .dropdown-item{
+        cursor: pointer;
+    }
+}

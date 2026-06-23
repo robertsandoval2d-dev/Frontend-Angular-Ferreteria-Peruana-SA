@@ -8,6 +8,8 @@ import { ProductoStockResponse } from '../models/response/producto-stock-respons
 
 import { ActualizacionInventarioRequest } from '../models/request/actualizacion-inventario-request';
 
+import { ActualizacionProductoRequest } from '../models/request/actualizacion-producto-request';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,5 +24,10 @@ export class InventarioService {
   //POST-ACTUALIZAR_INVENTARIO
   actualizarInventario(request: ActualizacionInventarioRequest): Observable<string> {
     return this.http.post<string>(`${environment.url}/inventario/ordenes-compra/recepcion`,request);
+  }
+
+  //PATCH-ACTUALIZAR_ROTACION
+  actualizarRotacion(id:number, request: ActualizacionProductoRequest): Observable<ActualizacionProductoRequest> {
+    return this.http.patch<ActualizacionProductoRequest>(`${environment.url}/inventario/productos/${id}`, request);
   }
 }
