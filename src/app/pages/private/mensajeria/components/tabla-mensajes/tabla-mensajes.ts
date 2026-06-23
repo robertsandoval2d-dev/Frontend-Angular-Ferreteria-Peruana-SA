@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, ChangeDetectorRef, EventEmitter, Output, DestroyRef, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable, map, timer } from 'rxjs';
 
 import { PageEvent, MatPaginatorModule, MatPaginator  } from '@angular/material/paginator';
 
@@ -24,6 +25,7 @@ export class TablaMensajes implements OnInit {
   mensajeriaService = inject(MensajeriaService);
   listaMensajes : MensajeListResponse[] = [];
   listaFiltrada: MensajeListResponse[] = [];
+  textoActualizacion$!: Observable<string>;
 
   tipoMensaje : string = 'recibidos';
   mensajesNoLeidos: number = 0;
@@ -55,6 +57,23 @@ export class TablaMensajes implements OnInit {
         this.mensajeriaService.$refresh.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.cargarMensajes();
     });
+    
+    const tiempoCarga = new Date();
+
+    this.textoActualizacion$ = timer(0,60000).pipe(
+      map(() => {
+        const ahora = new Date();
+        const minutos = Math.floor((ahora.getTime() - tiempoCarga.getTime()) / 60000);
+
+        if (minutos < 1) {
+          return 'Actualizado hace unos segundos';
+        } else if (minutos === 1) {
+          return 'Actualizado hace 1 min';
+        } else {
+          return `Actualizado hace ${minutos} min`;
+        }
+      })
+    );
   }
 
   cargarMensajes(){

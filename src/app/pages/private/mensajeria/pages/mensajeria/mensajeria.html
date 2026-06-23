@@ -1,4 +1,16 @@
+<div class="mx-4 mt-4 mb-4">
+    <div class="mb-2 m-seccion">
+        <span class=" fw-bold">SECCIÓN DE MENSAJERÍA</span>
+    </div>
+    <div class="m-title d-flex flex-column align-self-center w-100 flex-md-row justify-content-between">
+        <div class="d-flex flex-column ">
+            <h1 class="p-0 m-0 fw-bold">Panel de Mensajería</h1>
+            <h5 class="p-0 m-0 fs-6 fw-light f" style="color: #363636;">{{tablaStock?.textoActualizacion$ | async}}</h5>
+        </div>
+    </div>
+</div>
 <app-tabla-mensajes 
+    #tablaStock
     (onNewMessageClick)="newMessage()"
     (onOpenMessageClick)="openViewMessage($event)"
         ></app-tabla-mensajes>
