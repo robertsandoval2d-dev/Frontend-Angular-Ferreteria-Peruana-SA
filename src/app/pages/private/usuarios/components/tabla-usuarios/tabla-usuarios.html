@@ -1,68 +1,130 @@
-<div class="tabla-usuarios rounded-3 overflow-hidden shadow-sm mx-5 mt-4">
-  <div class="table-usuarios-head d-flex flex-column flex-lg-row align-items-md-center gap-2 px-3 px-lg-4 py-2 py-md-2 py-lg-0.5">
-    <div class="w-100">
-      <p class="fs-3 fw-bolder m-0 text-center text-lg-start">Lista de Trabajadores</p>
-    </div>
-    <div class="tu-buttons d-flex flex-column flex-md-row justify-content-lg-end gap-2 gap-md-3 w-100 align-items-md-center">
-      <div class="dropdown btn-filtrar rounded-3">
-        <button class="btn btn-filtrar d-flex flex-row align-items-md-center gap-md-2 flex-lg-column gap-lg-0 flex-xl-column flex-xxl-row justify-content-between" 
-                type="button" 
-                data-bs-toggle="dropdown" 
-                aria-expanded="false">
-            <span class="fw-bolder text-center w-100">Filtrar por</span>
-            <i class="bi bi-filter" style="-webkit-text-stroke-width: 0.5px;"></i>
-        </button>
-
-        <ul class="dropdown-menu">
-            <li>
-                <label class="dropdown-item">
-                    <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Rol')" checked>
-                    Rol
-                </label>
-            </li>
-            <li>
-                <label class="dropdown-item">
-                    <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Id')">
-                    ID
-                </label>
-            </li>
-            <li>
-                <label class="dropdown-item">
-                    <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Nombre')">
-                    Nombre
-                </label>
-            </li>
-            <li>
-                <label class="dropdown-item">
-                    <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Estado')">
-                    Estado
-                </label>
-            </li>
-        </ul>
+<div class="tabla-usuarios mx-4 mb-4">
+  <div class="rounded-3 overflow-hidden shadow-sm">
+    <div class="table-usuarios-head d-flex flex-column flex-lg-row align-items-md-center gap-2 px-3 px-lg-4 py-2 py-md-2 py-lg-0.5">
+      <div class="w-100">
+        <p class="fs-3 fw-bolder m-0 text-center text-lg-start">Lista de Trabajadores</p>
       </div>
-      <button class="btn btn-registrar fw-bolder" (click)="abrirRegistro()">Registrar Nuevo Trabajador</button>
-    </div>
-  </div>
-  
-  <div class="overflow-x-auto">
-    <table class="table table-striped m-0">
-      <thead>
-        <tr class="table-head">
-          <th scope="col" class="th-id">ID</th>
-          <th scope="col" class="th-rol">Rol</th>
-          <th scope="col" class="th-user">Usuario</th>
-          <th scope="col" class="th-name">Nombre</th>
-          <th scope="col" class="th-dni">DNI</th>
-          <th scope="col" class="th-estado">Estado</th>
-          <th scope="col" class="th-options"></th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
-        @for (trabajador of listaFiltrada; track trabajador.trabajadorId){
-          <tr>
-            <td scope="row" class="th-id">U-{{trabajador.trabajadorId.toString().padStart(2, '0')}}</td>
+      <div class="tu-buttons d-flex flex-column flex-md-row justify-content-lg-end gap-2 gap-md-3 w-100 align-items-md-center">
+        <div class="dropdown btn-filtrar rounded-3">
+          <button class="btn btn-filtrar d-flex flex-row align-items-md-center gap-md-2 flex-lg-column gap-lg-0 flex-xl-column flex-xxl-row justify-content-between" 
+                  type="button" 
+                  data-bs-toggle="dropdown" 
+                  aria-expanded="false">
+              <span class="fw-bolder text-center w-100">Filtrar por</span>
+              <i class="bi bi-filter" style="-webkit-text-stroke-width: 0.5px;"></i>
+          </button>
 
-            @switch (trabajador.rol) {
+          <ul class="dropdown-menu">
+              <li>
+                  <label class="dropdown-item">
+                      <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Rol')" checked>
+                      Rol
+                  </label>
+              </li>
+              <li>
+                  <label class="dropdown-item">
+                      <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Id')">
+                      ID
+                  </label>
+              </li>
+              <li>
+                  <label class="dropdown-item">
+                      <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Nombre')">
+                      Nombre
+                  </label>
+              </li>
+              <li>
+                  <label class="dropdown-item">
+                      <input class="form-check-input me-2" type="radio" name="filtroOrden" (change)="cambiarFiltro('Estado')">
+                      Estado
+                  </label>
+              </li>
+          </ul>
+        </div>
+        <button class="btn btn-registrar fw-bolder" (click)="abrirRegistro()">Registrar Nuevo Trabajador</button>
+      </div>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="table table-striped m-0">
+        <thead>
+          <tr class="table-head">
+            <th scope="col" class="th-id">ID</th>
+            <th scope="col" class="th-rol">Rol</th>
+            <th scope="col" class="th-user">Usuario</th>
+            <th scope="col" class="th-name">Nombre</th>
+            <th scope="col" class="th-dni">DNI</th>
+            <th scope="col" class="th-estado">Estado</th>
+            <th scope="col" class="th-options"></th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          @for (trabajador of listaFiltrada; track trabajador.trabajadorId){
+            <tr>
+              <td scope="row" class="th-id">U-{{trabajador.trabajadorId.toString().padStart(2, '0')}}</td>
+
+              @switch (trabajador.rol) {
+                @case ('ADMIN') {
+                  <td class="">Administrador</td>
+                }
+                @case ('ADMINISTRADOR_DE_TIENDA') {
+                  <td class="">Administrador de tienda</td>
+                }
+                @case ('JEFE_DE_LINEA') {
+                  <td class="">Jefe de Linea</td>
+                }
+                @case ('ALMACENERO') {
+                  <td class="">Almacenero</td>
+                }
+                @default {
+                  <td class="">{{trabajador.rol}}</td>
+                }
+              }
+            
+              <td class="">{{trabajador.username}}</td>
+              <td class="">{{trabajador.nombre}}</td>
+              <td class="th-dni">{{trabajador.dni}}</td>
+              <td class="th-estado">
+                @if (trabajador.cuentaActiva) {
+                  <span class="badge bg-success">Activo</span>
+                } @else {
+                  <span class="badge bg-secondary">Inactivo</span>
+                }
+              </td>
+              <td class="th-options">
+                <div class="dropdown align-items-center text-center">
+                  <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots-vertical"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <button class="dropdown-item text-center">
+                        <p class="m-0" (click)="modificarTrabajador(trabajador)">Modificar</p>
+                      </button>
+                    </li>
+                    <li>
+
+                      @if (trabajador.cuentaActiva) {
+                        <button class="dropdown-item text-center" (click)="confirmarBaja(trabajador)">
+                          <p class="m-0"><i class="bi bi-trash"></i> Dar de Baja</p>
+                        </button>
+                      }@else {
+                        <button disabled class="dropdown-item text-center">
+                          <p class="m-0"><i class="bi bi-lock"></i> Inactivo</p>
+                        </button>
+                      }
+
+                    </li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          }
+
+          <tr>
+            <td scope="row" class="">{{trabajadorDePrueba.trabajadorId}}</td>
+
+            @switch (trabajadorDePrueba.rol) {
               @case ('ADMIN') {
                 <td class="">Administrador</td>
               }
@@ -76,15 +138,15 @@
                 <td class="">Almacenero</td>
               }
               @default {
-                <td class="">{{trabajador.rol}}</td>
+                <td class="">{{trabajadorDePrueba.rol}}</td>
               }
             }
-          
-            <td class="">{{trabajador.username}}</td>
-            <td class="">{{trabajador.nombre}}</td>
-            <td class="th-dni">{{trabajador.dni}}</td>
+
+            <td class="">{{trabajadorDePrueba.username}}</td>
+            <td class="">{{trabajadorDePrueba.nombre}}</td>
+            <td class="th-dni">{{trabajadorDePrueba.dni}}</td>
             <td class="th-estado">
-              @if (trabajador.cuentaActiva) {
+              @if (trabajadorDePrueba.cuentaActiva) {
                 <span class="badge bg-success">Activo</span>
               } @else {
                 <span class="badge bg-secondary">Inactivo</span>
@@ -98,80 +160,20 @@
                 <ul class="dropdown-menu">
                   <li>
                     <button class="dropdown-item text-center">
-                      <p class="m-0" (click)="modificarTrabajador(trabajador)">Modificar</p>
+                      <p class="m-0" (click)="modificarTrabajador(trabajadorDePrueba)">Modificar</p>
                     </button>
                   </li>
                   <li>
-
-                    @if (trabajador.cuentaActiva) {
-                      <button class="dropdown-item text-center" (click)="confirmarBaja(trabajador)">
-                        <p class="m-0"><i class="bi bi-trash"></i> Dar de Baja</p>
-                      </button>
-                    }@else {
-                      <button disabled class="dropdown-item text-center">
-                        <p class="m-0"><i class="bi bi-lock"></i> Inactivo</p>
-                      </button>
-                    }
-
+                    <button class="dropdown-item text-center ">
+                      <p class="m-0">Dar de Baja</p>
+                    </button>
                   </li>
                 </ul>
               </div>
             </td>
           </tr>
-        }
-
-        <tr>
-          <td scope="row" class="">{{trabajadorDePrueba.trabajadorId}}</td>
-
-          @switch (trabajadorDePrueba.rol) {
-            @case ('ADMIN') {
-              <td class="">Administrador</td>
-            }
-            @case ('ADMINISTRADOR_DE_TIENDA') {
-              <td class="">Administrador de tienda</td>
-            }
-            @case ('JEFE_DE_LINEA') {
-              <td class="">Jefe de Linea</td>
-            }
-            @case ('ALMACENERO') {
-              <td class="">Almacenero</td>
-            }
-            @default {
-              <td class="">{{trabajadorDePrueba.rol}}</td>
-            }
-          }
-
-          <td class="">{{trabajadorDePrueba.username}}</td>
-          <td class="">{{trabajadorDePrueba.nombre}}</td>
-          <td class="th-dni">{{trabajadorDePrueba.dni}}</td>
-          <td class="th-estado">
-            @if (trabajadorDePrueba.cuentaActiva) {
-              <span class="badge bg-success">Activo</span>
-            } @else {
-              <span class="badge bg-secondary">Inactivo</span>
-            }
-          </td>
-          <td class="th-options">
-            <div class="dropdown align-items-center text-center">
-              <button class="btn-dots btn p-0" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-three-dots-vertical"></i>
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <button class="dropdown-item text-center">
-                    <p class="m-0" (click)="modificarTrabajador(trabajadorDePrueba)">Modificar</p>
-                  </button>
-                </li>
-                <li>
-                  <button class="dropdown-item text-center ">
-                    <p class="m-0">Dar de Baja</p>
-                  </button>
-                </li>
-              </ul>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

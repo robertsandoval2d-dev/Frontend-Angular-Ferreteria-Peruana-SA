@@ -1,3 +1,15 @@
+.m-seccion{
+    font-size: 13px;
+    color: #017287;
+}
+.m-title{
+    h1{
+        font-size: 40px;
+        @media (width:992px) {
+            font-size: 40px;
+        }
+    }
+}
 .overlay-modal{
     position: fixed;
     top: 0;

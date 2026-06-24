@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import { Component, inject, OnInit, ChangeDetectorRef, EventEmitter, Output, DestroyRef } from '@angular/core';
 import { ToastService } from '../../../../../core/services/toast.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable, map, timer } from 'rxjs';
 
 import { UserService } from '../../services/user.service';
 import { TrabajadorListResponse } from '../../models/response/trabajador-list-response';
@@ -23,12 +24,30 @@ export class TablaUsuarios implements OnInit{
   listaTrabajadores: TrabajadorListResponse[] = [];
   listaFiltrada: TrabajadorListResponse[] = [];
   filtroActual: string = 'rol';
+  textoActualizacion$!: Observable<string>;
   
   ngOnInit() {
     this.cargarTrabajadores();
     this.usuariosService.refresh$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
       this.cargarTrabajadores();
     });
+    const tiempoCarga = new Date();
+    
+        this.textoActualizacion$ = timer(0,60000).pipe(
+          map(() => {
+            const ahora = new Date();
+            const minutos = Math.floor((ahora.getTime() - tiempoCarga.getTime()) / 60000);
+    
+            if (minutos < 1) {
+              return 'Actualizado hace unos segundos';
+            } else if (minutos === 1) {
+              return 'Actualizado hace 1 min';
+            } else {
+              return `Actualizado hace ${minutos} min`;
+            }
+          })
+        );
+
   }
   
   cargarTrabajadores(){

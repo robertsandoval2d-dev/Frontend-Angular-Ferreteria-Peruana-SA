@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormRegistroPenalidad } from '../../components/form-registro-penalidad/form-registro-penalidad';
 import { TablaOrdenesCompraPenalidad } from '../../components/tabla-ordenes-compra-penalidad/tabla-ordenes-compra-penalidad';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-penalidades',
-  imports: [FormRegistroPenalidad, TablaOrdenesCompraPenalidad],
+  imports: [FormRegistroPenalidad, TablaOrdenesCompraPenalidad, AsyncPipe],
   templateUrl: './penalidades.html',
   standalone: true,
   styleUrl: './penalidades.scss',

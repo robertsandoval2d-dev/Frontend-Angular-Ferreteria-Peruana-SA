@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter, inject, OnInit, ChangeDetectorRef } fr
 import { DatePipe, CurrencyPipe } from '@angular/common';
 
 
+import { Observable, map, timer } from 'rxjs';
+
 
 import { OrdenCompraResponse } from '../../models/response/orden-compra-response';
 import { IncidenciasService } from '../../services/incidencias.service';
@@ -18,9 +20,27 @@ export class TablaOrdenesCompraPenalidad implements OnInit{
   private cdr = inject(ChangeDetectorRef);
 
   listaOrdenes: OrdenCompraResponse[] = [];
+  textoActualizacion$!: Observable<string>;
+  
 
   ngOnInit() {
     this.listarOrdenesCompraVencidas();
+    const tiempoCarga = new Date();
+
+    this.textoActualizacion$ = timer(0,60000).pipe(
+      map(() => {
+        const ahora = new Date();
+        const minutos = Math.floor((ahora.getTime() - tiempoCarga.getTime()) / 60000);
+
+        if (minutos < 1) {
+          return 'Actualizado hace unos segundos';
+        } else if (minutos === 1) {
+          return 'Actualizado hace 1 min';
+        } else {
+          return `Actualizado hace ${minutos} min`;
+        }
+      })
+    );
   }
 
 

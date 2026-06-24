@@ -1,4 +1,17 @@
-<app-tabla-ordenes-compra-penalidad (onAbrir)="abrirFormulario($event)"></app-tabla-ordenes-compra-penalidad>
+<div class="mx-4 mt-4 mb-4">
+    <div class="mb-2 m-seccion">
+        <span class=" fw-bold">SECCIÓN FESTIÓN DE PENALIDADES</span>
+    </div>
+    <div class="m-title d-flex flex-column align-self-center w-100 flex-md-row justify-content-between">
+        <div class="d-flex flex-column ">
+            <h1 class="p-0 m-0 fw-bold">Panel para Creación de Penalidades</h1>
+            <h5 class="p-0 m-0 fs-6 fw-light f" style="color: #363636;">{{tablaStock?.textoActualizacion$ | async}}</h5>
+        </div>
+    </div>
+</div>
+<app-tabla-ordenes-compra-penalidad 
+    #tablaStock
+    (onAbrir)="abrirFormulario($event)"></app-tabla-ordenes-compra-penalidad>
 @if(mostrarFormulario){
     <div class="overlay-modal d-flex justify-content-center align-items-center"> 
         <app-form-registro-penalidad 
