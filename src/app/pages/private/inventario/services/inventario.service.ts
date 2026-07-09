@@ -18,16 +18,16 @@ export class InventarioService {
 
   //GET-LISTAR_STOCK_PRODUCTOS
   listarStockProductos(): Observable<ProductoStockResponse[]> {
-    return this.http.get<ProductoStockResponse[]>(`${environment.url}/inventario/productos-linea`);
+    return this.http.get<ProductoStockResponse[]>(`${environment.url}/gestion-logistica/inventario/productos-linea`);
   }
 
   //POST-ACTUALIZAR_INVENTARIO
   actualizarInventario(request: ActualizacionInventarioRequest): Observable<string> {
-    return this.http.post<string>(`${environment.url}/inventario/ordenes-compra/recepcion`,request);
+    return this.http.post<string>(`${environment.url}/gestion-logistica/inventario/ordenes-compra/recepcion`,request);
   }
 
   //PATCH-ACTUALIZAR_ROTACION
   actualizarRotacion(id:number, request: ActualizacionProductoRequest): Observable<ActualizacionProductoRequest> {
-    return this.http.patch<ActualizacionProductoRequest>(`${environment.url}/inventario/productos/${id}`, request);
+    return this.http.patch<ActualizacionProductoRequest>(`${environment.url}/gestion-logistica/inventario/productos/${id}`, request);
   }
 }

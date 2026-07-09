@@ -28,27 +28,27 @@ export class CompraService {
   
   //GET-LISTAR_PRODUCTOS_PROVEEDOR
   listarProductosProveedor(): Observable<ProductoCatalogoResponse[]> {
-    return this.http.get<ProductoCatalogoResponse[]>(`${environment.url}/catalogo/productos-linea`);
+    return this.http.get<ProductoCatalogoResponse[]>(`${environment.url}/gestion-comercial/catalogo/productos-linea`);
   }
 
   //POST-GENERAR_CRONOGRAMA
   generarCronograma(request: CronogramaCreateRequest[]): Observable<CronogramaCreateResponse> {
-    return this.http.post<CronogramaCreateResponse>(`${environment.url}/planificacion/cronogramas`,request);
+    return this.http.post<CronogramaCreateResponse>(`${environment.url}/gestion-comercial/planificacion/cronogramas`,request);
   }
 
   //GET-LISTAR_CRONOGRAMAS
   listarCronogramas(): Observable<CronogramaResponse[]> {
-    return this.http.get<CronogramaResponse[]>(`${environment.url}/planificacion/cronogramas`);
+    return this.http.get<CronogramaResponse[]>(`${environment.url}/gestion-comercial/planificacion/cronogramas`);
   }
 
   //GET-LISTAR_VISTA_PREVIA_OC
   listarVistaPreviaOC(): Observable<VistaPreviaOCResponse[]> {
-    return this.http.get<VistaPreviaOCResponse[]>(`${environment.url}/planificacion/cronogramas-proveedor`);
+    return this.http.get<VistaPreviaOCResponse[]>(`${environment.url}/gestion-comercial/planificacion/cronogramas-proveedor`);
   }
 
   //POST-GENERAR_ORDEN_COMPRA
   generarOrdenCompra(request: OrdenCompraRequest): Observable<OrdenCompraResponse> {
-    return this.http.post<OrdenCompraResponse>(`${environment.url}/compras/ordenes-compra`,request);
+    return this.http.post<OrdenCompraResponse>(`${environment.url}/gestion-comercial/compras/ordenes-compra`,request);
   }
   
   //GET-LISTAR_ORDENES_COMPRA
@@ -59,11 +59,11 @@ export class CompraService {
       params = params.set('ordenId',ordenId);
     }
 
-    return this.http.get<OrdenCompraListResponse[]>(`${environment.url}/compras/ordenes-compra`,{params});
+    return this.http.get<OrdenCompraListResponse[]>(`${environment.url}/gestion-comercial/compras/ordenes-compra`,{params});
   }
 
   //GET-LISTAR_ORDENES_COMPRA_SIMPLE
   listarOrdenesCompraSimple(): Observable<OrdenCompraSimpleListResponse[]> {
-    return this.http.get<OrdenCompraSimpleListResponse[]>(`${environment.url}/compras/ordenes-compra/simple`);
+    return this.http.get<OrdenCompraSimpleListResponse[]>(`${environment.url}/gestion-comercial/compras/ordenes-compra/simple`);
   }
 }

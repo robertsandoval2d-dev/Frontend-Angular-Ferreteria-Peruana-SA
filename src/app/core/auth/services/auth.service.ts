@@ -18,15 +18,15 @@ export class AuthService {
   constructor(private http: HttpClient){}
 
   login(credenciales:LoginRequest): Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(`${environment.url}/auth/login`,credenciales,{withCredentials: true})
+    return this.http.post<LoginResponse>(`${environment.url}/seguridad/auth/login`,credenciales,{withCredentials: true})
   }
 
   refreshToken(): Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(`${environment.url}/auth/refresh`,{},{withCredentials: true})
+    return this.http.post<LoginResponse>(`${environment.url}/seguridad/auth/refresh`,{},{withCredentials: true})
   }
 
   logoutSession(): Observable<void> {
-    return this.http.post<void>(`${environment.url}/auth/logout`,{},{withCredentials: true});
+    return this.http.post<void>(`${environment.url}/seguridad/auth/logout`,{},{withCredentials: true});
   }
 
   private hasToken(): boolean{

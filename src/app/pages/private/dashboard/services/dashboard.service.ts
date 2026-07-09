@@ -18,16 +18,16 @@ export class DashboardService {
 
   //GET SATURACION X ZONA ALMACEN
   listarSaturacionXZonaAlmacen(): Observable<SaturacionXZonaAlmacenResponse[]>{
-    return this.http.get<SaturacionXZonaAlmacenResponse[]>(`${environment.url}/analisis/zonas-almacen/porcentaje-abastecimiento`);
+    return this.http.get<SaturacionXZonaAlmacenResponse[]>(`${environment.url}/gestion-logistica/analisis/zonas-almacen/porcentaje-abastecimiento`);
   }
 
   //GET VALOR INMOVILIZADO PRODUCTO
   listarValorInmovilizadoProductos(): Observable<ValorInmovilizadoResponse[]>{
-    return this.http.get<ValorInmovilizadoResponse[]>(`${environment.url}/analisis/productos-linea/valor-financiero`);
+    return this.http.get<ValorInmovilizadoResponse[]>(`${environment.url}/gestion-logistica/analisis/productos-linea/valor-financiero`);
   }
 
   //GET NVENTAS Y STOCK POR PRODUCTO
   listarNVentasYStockXProducto(): Observable<NVentasYStockXProducto[]>{
-    return this.http.get<NVentasYStockXProducto[]>(`${environment.url}/analisis/productos-linea/ventas-stock`);
+    return this.http.get<NVentasYStockXProducto[]>(`${environment.url}/gestion-logistica/analisis/productos-linea/ventas-stock`);
   }
 }

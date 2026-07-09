@@ -23,28 +23,28 @@ export class UserService {
 
   //POST-CREAR_TRABAJADOR
   registrarTrabajador(datos: TrabajadorCreateRequest): Observable<TrabajadorCreateResponse> {
-    return this.http.post<TrabajadorCreateResponse>(`${environment.url}/trabajadores`, datos);
+    return this.http.post<TrabajadorCreateResponse>(`${environment.url}/gestion-logistica/trabajadores`, datos);
   }
 
   //GET-LISTAR_TRABAJADORES
   listarTrabajadores(): Observable<TrabajadorListResponse[]> {
-    return this.http.get<TrabajadorListResponse[]>(`${environment.url}/trabajadores`);
+    return this.http.get<TrabajadorListResponse[]>(`${environment.url}/gestion-logistica/trabajadores`);
   }
   
   //GET-SUCURSALES
   listarSucursales(): Observable<SucursalListResponse[]> {
-    return this.http.get<SucursalListResponse[]>(`${environment.url}/trabajadores/sucursales`);
+    return this.http.get<SucursalListResponse[]>(`${environment.url}/gestion-logistica/trabajadores/sucursales`);
   }
 
 
   //PATCH-MODIFICAR_TRABAJADORES
   modificarTrabajador(id: number, datos: TrabajadorUpdateRequest): Observable<TrabajadorUpdateResponse> {
-    return this.http.patch<TrabajadorUpdateResponse>(`${environment.url}/trabajadores/${id}`, datos);
+    return this.http.patch<TrabajadorUpdateResponse>(`${environment.url}/gestion-logistica/trabajadores/${id}`, datos);
   }
 
   //DELETE
   deshabilitarTrabajador(id:number){
-    return this.http.delete(`${environment.url}/trabajadores/${id}`);
+    return this.http.delete(`${environment.url}/gestion-logistica/trabajadores/${id}`);
   }
 
 

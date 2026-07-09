@@ -19,17 +19,17 @@ export class MensajeriaService {
 
   //GET
   listarMensajes(): Observable<MensajeListResponse[]> {
-    return this.http.get<MensajeListResponse[]>(`${environment.url}/mensajeria/mensajes`);
+    return this.http.get<MensajeListResponse[]>(`${environment.url}/gestion-logistica/mensajeria/mensajes`);
   }
 
   //POST
   enviarMensaje(datos: MensajeRequest): Observable<MensajeRequest> {
-    return this.http.post<MensajeRequest>(`${environment.url}/mensajeria/mensajes`, datos);
+    return this.http.post<MensajeRequest>(`${environment.url}/gestion-logistica/mensajeria/mensajes`, datos);
   }
 
   //PATCH
   marcarLeido(id:number, datos: MensajeViewRequest): Observable<MensajeViewRequest> {
-    return this.http.patch<MensajeViewRequest>(`${environment.url}/mensajeria/mensajes/${id}`, datos);
+    return this.http.patch<MensajeViewRequest>(`${environment.url}/gestion-logistica/mensajeria/mensajes/${id}`, datos);
   }
 
   get $refresh(){

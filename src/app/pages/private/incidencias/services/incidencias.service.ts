@@ -22,37 +22,37 @@ export class IncidenciasService {
 
   //GET ORDENES COMPRA VENCIDAS
   listarOrdenesCompraVencidas(): Observable<OrdenCompraResponse[]>{
-    return this.http.get<OrdenCompraResponse[]>(`${environment.url}/penalidades/ordenes-compra/vencidas`);
+    return this.http.get<OrdenCompraResponse[]>(`${environment.url}/gestion-comercial/penalidades/ordenes-compra/vencidas`);
   }
 
  //POST CREAR PENALIDAD
   registrarPenalidad(datos: RegistrarPenalidadRequest): Observable<RegistrarPenalidadRequest> {
-      return this.http.post<RegistrarPenalidadRequest>(`${environment.url}/penalidades/ordenes-compra`, datos);
+      return this.http.post<RegistrarPenalidadRequest>(`${environment.url}/gestion-comercial/penalidades/ordenes-compra`, datos);
     }
 
   //GET CLIENTES PEDIDOS VENCIDOS
   listarClientesPedidosVencidos(): Observable<PedidoResponse[]>{
-    return this.http.get<PedidoResponse[]>(`${environment.url}/ventas/clientes/afectados-retraso`);
+    return this.http.get<PedidoResponse[]>(`${environment.url}/gestion-comercial/ventas/clientes/afectados-retraso`);
   }
 
   //POST REGISTRAR COMPENSACIÓN
   registrarCompensacion(request: RegistrarCompensacionRequest): Observable<string>{
-    return this.http.post<string>(`${environment.url}/compensacion`,request);
+    return this.http.post<string>(`${environment.url}/gestion-comercial/compensacion`,request);
   }
 
   //GET COMPENSACIONES PENDIENTES
   listarCompensacionesPendientes(): Observable<CompensacionResponse[]> {
-    return this.http.get<CompensacionResponse[]>(`${environment.url}/compensacion/pendientes`);
+    return this.http.get<CompensacionResponse[]>(`${environment.url}/gestion-comercial/compensacion/pendientes`);
   }
 
   //PATCH APROBAR COMPENSACION
   aprobarCompensacion(id:number): Observable<CompensacionResponse> {
-    return this.http.patch<CompensacionResponse>(`${environment.url}/compensacion/aprobar/${id}`,{});
+    return this.http.patch<CompensacionResponse>(`${environment.url}/gestion-comercial/compensacion/aprobar/${id}`,{});
   } 
 
   //PATCH RECHAZAR COMPENSACION
   rechazarCompensacion(id:number): Observable<CompensacionResponse> {
-    return this.http.patch<CompensacionResponse>(`${environment.url}/compensacion/rechazar/${id}`,{});
+    return this.http.patch<CompensacionResponse>(`${environment.url}/gestion-comercial/compensacion/rechazar/${id}`,{});
   } 
 
 
